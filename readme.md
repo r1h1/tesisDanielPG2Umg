@@ -1,5 +1,5 @@
 
-![Logo](https://umg.edu.gt/privacidad/img/logo.png)
+![Logo](https://umg.edu.gt/assets/umg.png)
 
 
 # BakeryGO, UMG 2023
