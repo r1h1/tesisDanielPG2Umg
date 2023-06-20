@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f3f3f3;
+}
+
+.contenedorTotalPagina .container-sm .loginBox {
+    width: 370px;
+    margin: 0 auto;
+    padding: 11% 0% 10% 0%;
+}
+
+@media only screen and (max-width: 600px) {
+    .contenedorTotalPagina .container-sm {
+        width: 370px;
+    }
+
+    .contenedorTotalPagina .container-sm .loginBox {
+        width: 100%;
+        padding: 25% 0% 10% 0%;
+    }
+}
+
+/* MODIFICACIONES AL CSS DE BOOTSTRAP */
+.btn-light{
+    background-color: #ffffff;
+}
+
+.btn-light:hover{
+    background-color: #e7e7e7;
+}
+
+.bg-warning{
+    background-color: #e7e7e7;
+}
+
+.quitDecorationAElement{
+    text-decoration: none;
+}
