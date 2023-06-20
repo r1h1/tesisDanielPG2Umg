@@ -9,10 +9,11 @@ body {
 }
 
 .contenedorTotalPagina .container-sm .loginBox {
-    width: 800px;
+    width: 80%;
     margin: 0 auto;
-    padding: 2% 0% 10% 0%;
+    padding: 5% 0% 10% 0%;
 }
+
 
 @media only screen and (max-width: 600px) {
     .contenedorTotalPagina .container-sm {
@@ -21,7 +22,12 @@ body {
 
     .contenedorTotalPagina .container-sm .loginBox {
         width: 100%;
-        padding: 25% 0% 10% 0%;
+        padding: 10% 0% 10% 0%;
+    }
+
+    .contenedorTotalPagina .container-sm .loginBox .authGoogle {
+        margin: 0 auto; /* Margen automático */
+        width: 60%; /* Ancho del div */
     }
 }
 
