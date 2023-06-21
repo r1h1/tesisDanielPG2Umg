@@ -4,30 +4,67 @@
     box-sizing: border-box;
 }
 
-.container-fluid .row #backgroundImage{
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+}
+
+.container-fluid .buttonsAndWelcomeText{
+    background-color: #F5F5F5;
+}
+
+.container-fluid .row .col .userActions{
+    height: 100vh;
+}
+
+.container-fluid .row .col .welcomeBanner {
+    margin-top: 27vh;
+}
+
+.contenedorTotalPagina .rightMenu .optionMenu ul li{
+    list-style: none;
+}
+
+.contenedorTotalPagina .rightMenu .optionMenu ul li a{
+    color: #e2e2e2;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.container-fluid .row #backgroundImage {
     background-image: url('https://w.forfun.com/fetch/57/575e977810f681a74459b82295104716.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: auto;
+    height: 93.6vh;
 }
 
 
-@media only screen and (max-width: 600px) {
-    .contenedorTotalPagina .container-sm {
-        width: 370px;
+@media only screen and (max-width: 990px) {
+    .container-fluid .row #backgroundImage {
+        background-image: url('https://w.forfun.com/fetch/57/575e977810f681a74459b82295104716.jpeg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 94.1vh;
     }
 
-    .contenedorTotalPagina .container-sm .loginBox {
-        width: 100%;
-        padding: 10% 0% 10% 0%;
+    .container-fluid .row .col .userActions{
+        height: 100vh;
     }
 
-    .contenedorTotalPagina .container-sm .loginBox .authGoogle {
-        margin: 0 auto;
-        /* Margen automático */
-        width: 60%;
-        /* Ancho del div */
+    .container-fluid .row #backgroundImage {
+        background-image: none;
+        background-color: #F5F5F5;
+        height: 41vh;
+    }
+
+    .container-fluid .row .col .welcomeBanner {
+        margin-top: 23vh;
     }
 }
 
@@ -35,4 +72,8 @@
 
 .grayLight {
     background-color: #2D2D2D;
+}
+
+.btn-light{
+    background-color: #e2e2e2;
 }

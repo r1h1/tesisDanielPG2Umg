@@ -15,7 +15,7 @@ body {
 }
 
 .contenedorTotalPagina .container-sm .loginBox form .buttonLogin a {
-    color: #ffffff;
+    color: #464646;
 }
 
 .contenedorTotalPagina .container-sm .loginBox form .buttonLogin a:hover {
@@ -41,7 +41,7 @@ body {
 
 /* MODIFICACIONES AL CSS DE BOOTSTRAP */
 .btn-light{
-    background-color: #585858;
+    background-color: #e2e2e2;
 }
 
 .btn-light:hover{
