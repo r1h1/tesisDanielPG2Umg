@@ -5,13 +5,21 @@
 }
 
 body {
-    background-color: #f3f3f3;
+    background-color: #F5F5F5;
 }
 
 .contenedorTotalPagina .container-sm .loginBox {
     width: 370px;
     margin: 0 auto;
     padding: 8% 0% 10% 0%;
+}
+
+.contenedorTotalPagina .container-sm .loginBox form .buttonLogin a {
+    color: #ffffff;
+}
+
+.contenedorTotalPagina .container-sm .loginBox form .buttonLogin a:hover {
+    color: #000000;
 }
 
 @media only screen and (max-width: 600px) {
@@ -27,7 +35,7 @@ body {
 
 /* MODIFICACIONES AL CSS DE BOOTSTRAP */
 .btn-light{
-    background-color: #ffffff;
+    background-color: #585858;
 }
 
 .btn-light:hover{

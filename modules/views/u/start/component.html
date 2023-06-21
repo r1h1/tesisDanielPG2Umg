@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Compras | PG2</title>
+
+    <!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- HOJA DE ESTILOS PROPIA -->
+    <link rel="stylesheet" href="component.css">
+
+    <!-- ICONOS -->
+    <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+    <!-- ICONO EN EL TAB -->
+    <link rel="icon" href="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png">
+
+</head>
+
+<body>
+
+    <!-- HTML BASICO PARA LA PÁGINA -->
+    <div class="contenedorTotalPagina">
+        <div class="navBar w-100">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand">
+                        <img src="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png" alt="Bootstrap" width="80">
+                    </a>
+                    <form class="d-flex" role="search">
+                        <a><i class="fa-solid fa-bars fs-2 text-dark" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i></a>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <div class="rightMenu">
+            <div class="offcanvas offcanvas-end grayLight w-25" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>Hola</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PEDIDOS Y DEMAS -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 h-100">
+                <div class="welcomeBanner">
+                    <h1 class="h2">¡Hola, <span id="nameVisit">Visitante!</span></h1>
+                    <p>¡Es un gran día para un pastel!</p>
+                </div>
+                <div class="actionButton1">
+                    <div class="buttonAskForNow btn btn-warning px-5 text-start">
+                        <p>¡Realiza un pedido!</p>
+                        <p>No te arrepentirás</p>
+                    </div>
+                </div>
+                <div class="actionButton2">
+                    <a href="../signUp/component">Registrarse</a>
+                </div>
+            </div>
+            <div class="col-lg-9" id="backgroundImage">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT PARA BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

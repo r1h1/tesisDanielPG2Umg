@@ -5,13 +5,21 @@
 }
 
 body {
-    background-color: #f3f3f3;
+    background-color: #F5F5F5;
 }
 
 .contenedorTotalPagina .container-sm .loginBox {
     width: 80%;
     margin: 0 auto;
     padding: 5% 0% 10% 0%;
+}
+
+.contenedorTotalPagina .container-sm .loginBox form .buttonLogin a {
+    color: #ffffff;
+}
+
+.contenedorTotalPagina .container-sm .loginBox form .buttonLogin a:hover {
+    color: #000000;
 }
 
 
@@ -33,7 +41,7 @@ body {
 
 /* MODIFICACIONES AL CSS DE BOOTSTRAP */
 .btn-light{
-    background-color: #ffffff;
+    background-color: #585858;
 }
 
 .btn-light:hover{
