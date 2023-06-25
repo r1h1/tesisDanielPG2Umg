@@ -36,7 +36,7 @@ body {
 }
 
 .container-fluid .row #backgroundImage {
-    background-image: url(../../../../assets/img/575e977810f681a74459b82295104716.jpeg);
+    background-image: url(../../../../assets/img/cake-strawberries.webp);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -46,10 +46,6 @@ body {
 
 @media only screen and (max-width: 990px) {
     .container-fluid .row #backgroundImage {
-        background-image: url(../../../../assets/img/575e977810f681a74459b82295104716.jpeg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
         height: 94.1vh;
     }
 
@@ -64,7 +60,7 @@ body {
     }
 
     .container-fluid .row .col .welcomeBanner {
-        margin-top: 23vh;
+        margin-top: 20vh;
     }
 }
 
