@@ -37,15 +37,23 @@
                 <h1 class="h5 title text-center mt-3">Selecciona una opción para acceder o crear tu cuenta</h1>
 
                 <form class="text-center mt-4">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control text-muted" id="floatingInput" placeholder="ejemplo1">
-                        <label for="floatingInput text-muted">Usuario</label>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-user text-secondary"></i></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control text-muted" id="floatingInput"
+                                placeholder="ejemplo1">
+                            <label for="floatingInput text-muted">Usuario</label>
+                        </div>
                     </div>
 
-                    <div class="form-floating">
-                        <input type="password" class="form-control text-muted" id="floatingPassword"
-                            placeholder="Contraseña">
-                        <label for="floatingPassword text-muted">Contraseña</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-key text-secondary"></i></span>
+                        <div class="form-floating">
+                            <input type="password" class="form-control text-muted" id="floatingPassword"
+                                placeholder="Contraseña">
+                            <label for="floatingPassword text-muted">Contraseña</label>
+                        </div>
                     </div>
 
                     <div class="buttonLogin mt-3">
@@ -54,8 +62,7 @@
                                 <a href="../start/component" class="btn btn-light w-100 py-3">Ingresar</a>
                             </div>
                             <div class="col">
-                                <a href="../signUp/component"
-                                    class="btn btn-light w-100 py-3">Registrarse</a>
+                                <a href="../signUp/component" class="btn btn-light w-100 py-3">Registrarse</a>
                             </div>
                         </div>
                     </div>

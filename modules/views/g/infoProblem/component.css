@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F5F5F5;
+}
+
+.contenedorTotalPagina .container-sm .loginBox {
+    width: 80%;
+    margin: 0 auto;
+    padding: 5% 0% 10% 0%;
+}
+
+.contenedorTotalPagina .container-sm .loginBox form .buttonLogin a {
+    color: #464646;
+}
+
+.contenedorTotalPagina .container-sm .loginBox form .buttonLogin a:hover {
+    color: #000000;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .contenedorTotalPagina .container-sm {
+        width: 370px;
+    }
+
+    .contenedorTotalPagina .container-sm .loginBox {
+        width: 100%;
+        padding: 10% 0% 10% 0%;
+    }
+
+    .contenedorTotalPagina .container-sm .loginBox .authGoogle {
+        margin: 0 auto; /* Margen automático */
+        width: 60%; /* Ancho del div */
+    }
+}
+
+/* MODIFICACIONES AL CSS DE BOOTSTRAP */
+.btn-light{
+    background-color: #e2e2e2;
+}
+
+.btn-light:hover{
+    background-color: #e7e7e7;
+}
+
+.bg-warning{
+    background-color: #e7e7e7;
+}
+
+.quitDecorationAElement{
+    text-decoration: none;
+}
