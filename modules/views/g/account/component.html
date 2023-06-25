@@ -34,8 +34,8 @@
                             loading="lazy">
                     </a>
                     <form class="d-flex" role="search">
-                        <a><i class="fa-solid fa-bars fs-3" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i></a>
+                        <a><i class="fa-solid fa-bars fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                aria-controls="offcanvasRight"></i></a>
                     </form>
                 </div>
             </nav>
@@ -83,27 +83,122 @@
 
     <!-- PEDIDOS Y DEMAS -->
     <div class="container-fluid buttonsAndWelcomeText">
+
         <div class="row">
-            <div class="col userActions mb-5">
-                <div class="welcomeBanner text-center">
-                    <h1>Hola, <span id="nameVisit">{nombreCliente}</span></h1>
-                    <p class="text-muted">¡Que tengas un día tan dulce y bonito como un pastel!</p>
+
+            <div class="col userActions shadow">
+                <div class="imagenLogo text-center">
+                    <img src="../../../../assets/img/575e977810f681a74459b82295104716.jpeg" alt="logoCuenta" width="160"
+                        height="150" class="rounded-circle">
                 </div>
-                <div class="actionButton1 text-center mt-5">
-                    <div class="buttonAskForNow btn btn-dark px-5 text-start">
-                        <p class="mt-3">Realizar Pedido <i class="fa-solid fa-gift ms-3"></i></p>
-                    </div>
+                <div class="text-center mt-3">
+                    <h1 class="h2"><span id="nameVisit">Daniel Estuardo Rivas Herrera</span></h1>
+                    <p class="text-muted">¡Bienvenido a tu perfil!, manten al día tus datos.</p>
                 </div>
-                <div class="actionButton1 text-center mt-3">
-                    <a href="../signUp/component">
+                <div class="actionButton1 text-center mt-2">
+                    <a href="../../u/start/component">
                         <div class="buttonSignUp btn btn-light px-5 text-start">
-                            <p class="mt-3">Registrate Aquí <i class="fa-solid fa-arrow-right ms-3"></i></p>
+                            <p class="mt-3"><i class="fa-solid fa-arrow-left fs-4"></i></p>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6" id="backgroundImage" loading="lazy">
+            <div class="col-lg-6 px-4 userInformation">
 
+                <form class="text-center mt-4">
+
+                    <div class="row">
+
+                        <div class="informationDiv">
+
+                            <p class="h5 text-start mb-4 text-muted">Edita tus datos, tu contraseña o elimina tu
+                                usuario.</p>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3 rounded-circle">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-user text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control text-muted" id="floatingInput"
+                                            placeholder="ejemplo1" value="Daniel Estuardo Rivas Herrera">
+                                        <label for="floatingInput text-muted">Nombre(s) y Apellido(s) *</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-phone text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control text-muted" id="floatingInput"
+                                            placeholder="ejemplo1" value="45025463">
+                                        <label for="floatingInput text-muted">Teléfono (+Extensión) *</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-address-book text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control text-muted" id="floatingInput"
+                                            placeholder="ejemplo1" value="San Miguel Petapa, 7ma Calle">
+                                        <label for="floatingInput text-muted">Dirección de Residencia *</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-envelope text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control text-muted" id="floatingInput"
+                                            placeholder="ejemplo1" value="ejemplo@gmail.com">
+                                        <label for="floatingInput text-muted">Correo Electrónico</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-person text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <select class="form-select" id="floatingSelect"
+                                            aria-label="Floating label select example">
+                                            <option value="">Selecciona uno</option>
+                                            <option value="H" selected>Hombre</option>
+                                            <option value="M">Mujer</option>
+                                            <option value="O">Otro</option>
+                                        </select>
+                                        <label for="floatingSelect">Género *</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="buttonLogin">
+                        <div class="row">
+                            <div class="col">
+                                <a href="../../u/login/component" class="btn btn-light w-100 py-3 mt-2">Guardar <i
+                                        class="fa-solid fa-floppy-disk ms-2 fs-5"></i></a>
+                            </div>
+                            <div class="col">
+                                <a href="" class="btn btn-danger w-100 py-3 mt-2">Eliminar <i
+                                        class="fa-solid fa-trash ms-2 fs-5"></i></a>
+                            </div>
+                            <div class="col">
+                                <a href="" class="btn btn-light w-100 py-3 mt-2">Restablecer
+                                    Contraseña <i class="fa-solid fa-unlock ms-2 fs-5"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
