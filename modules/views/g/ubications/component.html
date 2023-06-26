@@ -34,13 +34,14 @@
                             loading="lazy">
                     </a>
                     <form class="d-flex" role="search">
-                        <a><i class="fa-solid fa-bars fs-3" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i></a>
+                        <a><i class="fa-solid fa-bars fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                aria-controls="offcanvasRight"></i></a>
                     </form>
                 </div>
             </nav>
         </div>
 
+        <!-- MENU DE OPCIONES EXTRAS -->
         <div class="rightMenu">
             <div class="offcanvas offcanvas-end grayLight" tabindex="-1" id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel">
@@ -52,19 +53,23 @@
                     <div class="optionMenu">
                         <p class="fw-bold h5 mb-4 mt-5">Menú de Opciones</p>
                         <ul>
-                            <li><a href=""><i class="fa-solid fa-user me-3"></i> Mi Cuenta</a></li>
-                            <li><a href=""><i class="fa-solid fa-location-crosshairs me-3"></i> Ubicaciones</a></li>
-                            <li><a href=""><i class="fa-solid fa-cart-shopping me-3"></i> Pedidos</a></li>
-                            <li><a href="../termsAndConditions/component"><i class="fa-brands fa-readme me-3"></i>
+                            <li><a href="../../g/account/component"><i class="fa-solid fa-user me-3"></i> Mi Cuenta</a>
+                            </li>
+                            <li><a href="../../g/ubications/component"><i
+                                        class="fa-solid fa-location-crosshairs me-3"></i> Ubicaciones</a></li>
+                            <li><a href="../../u/termsAndConditions/component" target="_blank"><i
+                                        class="fa-brands fa-readme me-3"></i>
                                     Términos y Condiciones</a></li>
-                            <li><a href=""><i class="fa-brands fa-whatsapp me-3"></i> Chatea con Nosotros</a></li>
+                            <li><a href="https://wa.me/50245024363" target="_blank"><i
+                                        class="fa-brands fa-whatsapp me-3"></i> Chatea con Nosotros</a></li>
                         </ul>
                         <div class="mt-5 mb-5">
                             <hr class="bg-light">
                         </div>
                         <p class="fw-bold h5 mb-4">Opciones</p>
                         <ul>
-                            <li><a href=""><i class="fa-solid fa-circle-info me-3"></i> Informar Sobre Un Problema</a>
+                            <li><a href="../../g/infoProblem/component" target="_blank"><i
+                                        class="fa-solid fa-circle-info me-3"></i> Informar Sobre Un Problema</a>
                             </li>
                             <div class="text-center mt-5">
                                 <a href="../login/component">
@@ -79,32 +84,44 @@
                 </div>
             </div>
         </div>
+        <!-- FIN MENU EXTRA -->
     </div>
 
     <!-- PEDIDOS Y DEMAS -->
     <div class="container-fluid buttonsAndWelcomeText">
+
         <div class="row">
-            <div class="col userActions mb-5">
-                <div class="welcomeBanner text-center">
-                    <h1>Hola, <span id="nameVisit">{nombreCliente}</span></h1>
-                    <p class="text-muted">¡Que tengas un día tan dulce y bonito como un pastel!</p>
+
+            <!-- INFORMACIÓN DEL PERFIL BÁSICA -->
+            <div class="col userActions shadow">
+
+                <div class="imagenLogo text-center">
+                    <img src="../../../../assets/img/cake-strawberries.webp" alt="logoCuenta" width="160" height="150"
+                        class="rounded-circle" loading="lazy">
                 </div>
-                <div class="actionButton1 text-center mt-5">
-                    <div class="buttonAskForNow btn btn-dark px-5 text-start">
-                        <p class="mt-3">Realizar Pedido <i class="fa-solid fa-gift ms-3"></i></p>
-                    </div>
+                <div class="text-center mt-3">
+                    <h1 class="h2"><span id="nameVisit">Nuestra Ubicación</span></h1>
+                    <p class="text-muted">Puedes encontrar nuestra ubicación por el mapa, o por los botones abajo de
+                        este.</p>
                 </div>
-                <div class="actionButton1 text-center mt-3">
-                    <a href="../signUp/component">
+                <div class="actionButton1 text-center mt-2">
+                    <a href="../../u/start/component">
                         <div class="buttonSignUp btn btn-light px-5 text-start">
-                            <p class="mt-3">Registrate Aquí <i class="fa-solid fa-arrow-right ms-3"></i></p>
+                            <p class="mt-3"><i class="fa-solid fa-arrow-left fs-4"></i></p>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6" id="backgroundImage" loading="lazy">
+
+            <!-- FORMULARIO PARA DATOS DE USUARIO -->
+            <div class="col-lg-6 userInformation">
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d341.41807902678585!2d-90.56175990815443!3d14.501638535569993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a7706b116275%3A0xe6e050382d0b687b!2sCasa!5e0!3m2!1ses!2sgt!4v1687805319280!5m2!1ses!2sgt"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
             </div>
+
         </div>
     </div>
 
