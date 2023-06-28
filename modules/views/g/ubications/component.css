@@ -14,7 +14,7 @@ body {
 }
 
 .container-fluid .buttonsAndWelcomeText{
-    background-color: #F5F5F5;
+    background-color: rgb(247, 247, 247);
 }
 
 .container-fluid .userActions{
@@ -69,6 +69,11 @@ body {
 
     .container-fluid .userInformation form .row .informationDiv{
         margin-top: 3vh;
+    }
+
+    .container-fluid .userInformation iframe{
+        width: 100%;
+        height: 100vh;
     }
 }
 

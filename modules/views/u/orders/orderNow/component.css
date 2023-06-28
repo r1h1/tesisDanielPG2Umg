@@ -13,7 +13,7 @@ body {
     background-color: #F5F5F5;
 }
 
-.container-fluid .buttonsAndWelcomeText{
+.container-fluid .buttonsAndWelcomeText {
     background-color: #eeeeee;
 }
 
@@ -21,28 +21,28 @@ body {
     margin-top: 3vh;
 }
 
-.container-fluid .row .col .userActions{
+.container-fluid .row .col .userActions {
     height: auto;
 }
 
-.actionButton1{
+.actionButton1 {
     margin-top: 20vh;
-    margin-bottom: 5vh;
+    margin-bottom: 6vh;
 }
 
-.container-fluid .userInformation{
+.container-fluid .userInformation {
     height: auto;
 }
 
-.container-fluid .userInformation form .row .informationDiv{
+.container-fluid .userInformation form .row .informationDiv {
     margin-top: 13vh;
 }
 
-.contenedorTotalPagina .rightMenu .optionMenu ul li{
+.contenedorTotalPagina .rightMenu .optionMenu ul li {
     list-style: none;
 }
 
-.contenedorTotalPagina .rightMenu .optionMenu ul li a{
+.contenedorTotalPagina .rightMenu .optionMenu ul li a {
     color: #e2e2e2;
     text-decoration: none;
     font-size: 20px;
@@ -51,20 +51,21 @@ body {
 
 @media only screen and (max-width: 990px) {
 
-    .container-fluid .userActions{
-        height: 45vh;
+    .container-fluid .userActions {
+        height: auto;
+        margin-bottom: 7vh;
     }
 
-    .actionButton1{
+    .actionButton1 {
         margin-top: 3vh;
         margin-bottom: 0vh;
     }
-    
+
     .container-fluid .row .col .welcomeBanner {
         margin-top: 3vh;
     }
 
-    .container-fluid .userInformation form .row .informationDiv{
+    .container-fluid .userInformation form .row .informationDiv {
         margin-top: 3vh;
     }
 }
@@ -75,10 +76,10 @@ body {
     background-color: #2D2D2D;
 }
 
-.btn-light{
+.btn-light {
     background-color: #e2e2e2;
 }
 
-.bg-light{
+.bg-light {
     background-color: #f5f5f5;
 }
