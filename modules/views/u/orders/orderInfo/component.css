@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+}
+
+.container-fluid .buttonsAndWelcomeText {
+    background-color: #eeeeee;
+}
+
+.container-fluid .row .col .welcomeBanner {
+    margin-top: 3vh;
+}
+
+.container-fluid .userActions {
+    height: auto;
+}
+
+.actionButton1 {
+    margin-top: 26vh;
+    margin-bottom: 6vh;
+}
+
+.container-fluid .userInformation {
+    height: auto;
+}
+
+.container-fluid .userInformation form .row .informationDiv {
+    margin-top: 13vh;
+}
+
+.contenedorTotalPagina .rightMenu .optionMenu ul li {
+    list-style: none;
+}
+
+.contenedorTotalPagina .rightMenu .optionMenu ul li a {
+    color: #e2e2e2;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+@media only screen and (max-width: 990px) {
+
+    .container-fluid .userActions {
+        height: auto;
+        margin-bottom: 7vh;
+    }
+
+    .actionButton1 {
+        margin-top: 3vh;
+        margin-bottom: 0vh;
+    }
+
+    .container-fluid .row .col .welcomeBanner {
+        margin-top: 3vh;
+    }
+
+    .container-fluid .userInformation form .row .informationDiv {
+        margin-top: 3vh;
+    }
+}
+
+/* COLORES */
+
+.grayLight {
+    background-color: #2D2D2D;
+}
+
+.btn-light {
+    background-color: #e2e2e2;
+}
+
+.bg-light {
+    background-color: #f5f5f5;
+}

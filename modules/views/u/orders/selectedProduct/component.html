@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Pedidos | PG2</title>
+
+    <!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- HOJA DE ESTILOS PROPIA -->
+    <link rel="stylesheet" href="component.css">
+
+    <!-- ICONOS -->
+    <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+    <!-- ICONO EN EL TAB -->
+    <link rel="icon" href="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png">
+
+</head>
+
+<body>
+
+    <!-- HTML BASICO PARA LA PÁGINA -->
+    <div class="contenedorTotalPagina">
+
+        <div class="navBar w-100 bg-light">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand">
+                        <img src="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png" alt="Bootstrap" width="80"
+                            loading="lazy">
+                    </a>
+                    <form class="d-flex" role="search">
+                        <i class="fa-solid fa-bars fs-3 me-2" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <!-- MENU DE OPCIONES EXTRAS -->
+        <div class="rightMenu">
+            <div class="offcanvas offcanvas-end grayLight" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body text-white">
+                    <div class="optionMenu">
+                        <p class="fw-bold h5 mb-4 mt-5">Menú de Opciones</p>
+                        <ul>
+                            <li><a href="../../../g/account/component"><i class="fa-solid fa-user me-3"></i> Mi
+                                    Cuenta</a>
+                            </li>
+                            <li><a href="../../../g/ubications/component"><i
+                                        class="fa-solid fa-location-crosshairs me-3"></i> Ubicaciones</a></li>
+                            <li><a href="../../../u/termsAndConditions/component" target="_blank"><i
+                                        class="fa-brands fa-readme me-3"></i>
+                                    Términos y Condiciones</a></li>
+                            <li><a href="https://wa.me/50245024363" target="_blank"><i
+                                        class="fa-brands fa-whatsapp me-3"></i> Chatea con Nosotros</a></li>
+                        </ul>
+                        <div class="mt-5 mb-5">
+                            <hr class="bg-light">
+                        </div>
+                        <p class="fw-bold h5 mb-4">Opciones</p>
+                        <ul>
+                            <li><a href="../../../g/infoProblem/component" target="_blank"><i
+                                        class="fa-solid fa-circle-info me-3"></i> Informar Sobre Un Problema</a>
+                            </li>
+                            <div class="text-center mt-5">
+                                <a href="../../login/component">
+                                    <div class="buttonCloseSession btn btn-light px-5 text-start rounded-5">
+                                        <p class="mt-3"><i class="fa-solid fa-right-to-bracket me-3"></i> Cerrar Sesión
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN MENU EXTRA -->
+    </div>
+
+    <!-- PEDIDOS Y DEMAS -->
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- INFORMACIÓN DEL PERFIL BÁSICA -->
+            <div class="col userActions bg-light">
+                <div class="actionButton1 text-center">
+                    <a href="../../orders/orderNow/component">
+                        <div class="buttonReturn btn btn-light px-5 text-start rounded-5">
+                            <p class="mt-3"><i class="fa-solid fa-arrow-left fs-5"></i></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="storedProducts mt-2 text-center">
+                    <div class="text-center mt-3 mb-5">
+                        <h1 class="h4">Pastel de Queso</h1>
+                        <p class="mt-4 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Maiores
+                            ab,
+                            facilis optio ducimus eum consectetur praesentium, <br> cumque veniam et, quibusdam delectus
+                            reprehenderit.<br> Minima sint aperiam nisi, in iusto blanditiis aut.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PEDIDOS DE USUARIO -->
+            <div class="col-lg-8 userInformation buttonsAndWelcomeText">
+
+                <div class="row px-4 mb-5 mt-2 justify-content-center">
+
+                    <div class="col-sm-12 col-md-9 col-lg-8 mt-4 mb-3">
+                        <div class="card bg-light border-0 shadow rounded-3">
+                            <div class="card-body p-3">
+                                <div class="cardTexts ms-4 text-center">
+                                    <i class="fa-solid fa-bag-shopping fs-1 mt-4 mb-4"></i>
+                                    <h5 class="mt-2 text-muted">¿Cómo deseas tu pedido?</h5>
+                                    <p class="mt-1 text-muted">Llena las opciones y especifica cosas que no
+                                        deseas</p>
+                                </div>
+                                <div class="size text-start ms-4 mt-5">
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Tamaño</h5>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Normal (30 ancho, 30 alto)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Agrandado (50 alto, 50 ancho) + Q35
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="ingredients text-start ms-4 mt-5">
+
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Ingredientes</h5>
+                                    <p class="text-start mt-1 text-muted">Desmarca lo que no quisieras agregar</p>
+
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Queso Crema
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Queso Manchego
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Mantequilla de Maní
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Chantillí
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Harinas Refinadas
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="extras text-start ms-4 mt-5">
+
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Extras</h5>
+                                    <p class="text-start mt-1 text-muted">Marca lo que te interese, si no, deja en
+                                        blanco</p>
+
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Velas para Pastel (5 velas)
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Velas para Pastel (10 velas)
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Velas para Pastel (30 velas)
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Velas para Pastel (60 velas)
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="extras text-start ms-4 mt-5">
+
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Cantidad</h5>
+                                    <p class="text-start mt-1 text-muted">Coloca el número de producto que deseas</p>
+                                    <div class="input-group">
+                                        <button class="btn btn-secondary px-4" type="button">-</button>
+                                        <input type="number" class="form-control text-center" value="1" min="1">
+                                        <button class="btn btn-secondary px-4" type="button">+</button>
+                                    </div>
+                                </div>
+
+                                <hr class="text-secondary p-1 mt-5">
+                                <div class="totalPay mb-5 text-center mt-3">
+                                    <i class="fa-solid fa-circle-question fs-1"></i>
+                                    <p class="text-muted text-center mt-2 fw-bold">¿Deseas agregar una descripción?</p>
+                                    <p class="text-muted mb-4">Puedes informar si eres alérgico a algún producto, si
+                                        deseas una instrucción
+                                        especial, algún producto extra como números de cumpleaños, globos o algún
+                                        mensaje en este aparatado para incluírlo en tu orden.</p>
+                                    <div class="form-floating">
+                                        <textarea class="form-control" cols="30" rows="10"
+                                            style="height: 160px;"></textarea>
+                                        <label for="floatingTextarea">Comenta aquí</label>
+                                    </div>
+                                </div>
+
+                                <div class="actionButton1 text-center mt-5">
+                                    <a href="../orderNow/component">
+                                        <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
+                                            <p class="mt-3">Continuar Comprando <i
+                                                    class="fa-solid fa-arrow-right ms-3"></i></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- FIN PEDIDOS DE USUARIO -->
+
+            </div>
+        </div>
+
+        <!-- SCRIPT PARA BOOTSTRAP -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
