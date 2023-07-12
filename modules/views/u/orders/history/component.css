@@ -22,7 +22,7 @@ body {
 }
 
 .container-fluid .row .col .userActions{
-    height: auto;
+    min-height: 100vh;
 }
 
 .actionButton1{
@@ -31,7 +31,7 @@ body {
 }
 
 .container-fluid .userInformation{
-    height: auto;
+    min-height: 100vh;
 }
 
 .container-fluid .userInformation form .row .informationDiv{
