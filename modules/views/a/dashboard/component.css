@@ -37,7 +37,6 @@ hr.h-color {
 }
 
 @media(max-width: 767px){
-
     #side_nav{
         margin-left: -300px;
         position: fixed;
@@ -48,6 +47,12 @@ hr.h-color {
     #side_nav.active {
         margin-left: 0px;
     }
+}
 
-
+@media(max-width: 303px){
+    #side_nav {
+        background-color: #e4e4e4;
+        min-width: 250px;
+        max-width: 250px;
+    }
 }
