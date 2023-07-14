@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,30 +8,46 @@ body {
     background-color: #F5F5F5;
 }
 
-#side_nav{
-    background-color: #dfdede;
+#side_nav {
+    background-color: #e4e4e4;
     min-width: 300px;
     max-width: 300px;
 }
 
-.content{
+.content {
     min-height: 100vh;
     width: 100%;
 }
 
-hr.h-color{
+hr.h-color {
     background: #eee;
 }
 
-.sidebar li a{
-    color: #000;
-}
-
-.sidebar li.active{
+.active {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-.sidebar li.active a, .sidebar li.active a:hover{
+.sidebar li a {
     color: #000;
+}
+
+.sidebar li a:hover {
+    color: #000;
+}
+
+@media(max-width: 767px){
+
+    #side_nav{
+        margin-left: -300px;
+        position: fixed;
+        min-height: 100vh;
+        z-index: 1;
+    }
+
+    #side_nav.active {
+        margin-left: 0px;
+    }
+
+
 }
