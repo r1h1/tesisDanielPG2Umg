@@ -11,7 +11,7 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <!-- HOJA DE ESTILOS PROPIA -->
-    <link rel="stylesheet" href="component.css">
+    <link rel="stylesheet" href="../dashboard/component.css">
 
     <!-- ICONOS -->
     <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
@@ -31,17 +31,19 @@
                         alt="icono" width="120px"></h1>
             </div>
             <ul class="list-unstyled px-2">
-                <li class="activo shadow mt-2"><a href="../dashboard/component"
-                        class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gauge me-3"></i>
+                <li class="mt-2"><a href="../dashboard/component" class="text-decoration-none px-3 py-2 d-block"><i
+                            class="fa-solid fa-gauge me-3"></i>
                         Dashboard</a></li>
                 <li class="mt-2"><a href="../administrative/component" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fa-solid fa-lock me-3"></i> Administrativo</a></li>
+                            class="fa-solid fa-lock me-3"></i>
+                        Administrativo</a></li>
                 <li class="mt-2"><a href="../products/component" class="text-decoration-none px-3 py-2 d-block"><i
                             class="fa-solid fa-box me-3"></i> Productos</a></li>
                 <li class="mt-2"><a href="../orders/component" class="text-decoration-none px-3 py-2 d-block"><i
                             class="fa-solid fa-truck me-3"></i> Pedidos</a></li>
-                <li class="mt-2"><a href="../reports/component" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fa-solid fa-chart-pie me-3"></i> Reportería</a></li>
+                <li class="activo shadow mt-2"><a href="../reports/component"
+                        class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-chart-pie me-3"></i>
+                        Reportería</a></li>
             </ul>
         </div>
         <div class="content">
@@ -60,24 +62,35 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a></li>
-                                <li><a class="dropdown-item" href="../../g/login/component"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                </li>
+                                <li><a class="dropdown-item" href="../../g/login/component"><i
+                                            class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
             <div class="contenido container-fluid px-5 mt-5 px-1">
-                <h2 class="h3 fw-bold">Dashboard</h2>
+                <h2 class="h3 fw-bold">Reportería</h2>
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
                     <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
                         data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
-                        aria-selected="true">Pedidos</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark" id="dinero-tab"
-                        data-bs-toggle="tab" data-bs-target="#dinero" role="tab" aria-controls="dinero"
-                        aria-selected="false">Dinero</a>
+                        aria-selected="true">Más Vendido</a>
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
+                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                        aria-selected="true">Menos Vendido</a>
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
+                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                        aria-selected="true">Ventas por Cliente</a>
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
+                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                        aria-selected="true">Cantidad de Dinero</a>
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
+                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                        aria-selected="true">Lista Negra</a>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
