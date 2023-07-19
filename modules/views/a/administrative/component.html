@@ -61,8 +61,10 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a></li>
-                                <li><a class="dropdown-item" href="../../g/login/component"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                </li>
+                                <li><a class="dropdown-item" href="../../g/login/component"><i
+                                            class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,60 +75,389 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="usuarios-tab"
+                        data-bs-toggle="tab" data-bs-target="#usuarios" role="tab" aria-controls="usuarios-tab-pane"
                         aria-selected="true">Usuarios</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="dinero-tab"
-                        data-bs-toggle="tab" data-bs-target="#dinero" role="tab" aria-controls="dinero"
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="roles-tab"
+                        data-bs-toggle="tab" data-bs-target="#roles" role="tab" aria-controls="roles"
                         aria-selected="false">Roles</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark" id="dinero-tab"
-                        data-bs-toggle="tab" data-bs-target="#dinero" role="tab" aria-controls="dinero"
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark" id="clientes-tab"
+                        data-bs-toggle="tab" data-bs-target="#clientes" role="tab" aria-controls="clientes"
                         aria-selected="false">Clientes</a>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
-                        <div class="card shadow">
+                    <div class="tab-pane fade show" id="usuarios" role="tabpanel" aria-labelledby="usuarios-tab">
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Pedidos Día</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <div class="card mt-4 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Pedidos Mes</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <div class="card mt-4 mb-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Pedidos Año</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Usuarios Registrados</p>
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">First</th>
+                                                    <th scope="col">Last</th>
+                                                    <th scope="col">Handle</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td colspan="2">Larry the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Dirección
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Teléfono
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Correo Electrónico
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="floatingSelect"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="H">Hombre</option>
+                                                        <option value="M">Mujer</option>
+                                                        <option value="O">Otro</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Rol *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Usuario
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Contraseña
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="floatingSelect"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="H">Hombre</option>
+                                                        <option value="M">Mujer</option>
+                                                        <option value="O">Otro</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Estado Actual *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button"
+                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="dinero" role="tabpanel" aria-labelledby="dinero-tab">
-                        <div class="card shadow">
+                    <div class="tab-pane fade" id="roles" role="tabpanel" aria-labelledby="clientes-tab">
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Día</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Roles Actuales</p>
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">First</th>
+                                                    <th scope="col">Last</th>
+                                                    <th scope="col">Handle</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td colspan="2">Larry the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Nombre Rol
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="floatingSelect"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="H">Hombre</option>
+                                                        <option value="M">Mujer</option>
+                                                        <option value="O">Otro</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Módulos Acceso *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5">Módulos Accesibles</p>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">First</th>
+                                                            <th scope="col">Last</th>
+                                                            <th scope="col">Handle</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td>Mark</td>
+                                                            <td>Otto</td>
+                                                            <td>@mdo</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button"
+                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 shadow">
+                    </div>
+                    <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Mes</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <div class="card mt-4 mb-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Año</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Clientes Registrados</p>
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">First</th>
+                                                    <th scope="col">Last</th>
+                                                    <th scope="col">Handle</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td colspan="2">Larry the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Dirección
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Teléfono
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Correo Electrónico
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Usuario
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Contraseña
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="floatingSelect"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="H">Hombre</option>
+                                                        <option value="M">Mujer</option>
+                                                        <option value="O">Otro</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Género *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="floatingSelect"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="H">Hombre</option>
+                                                        <option value="M">Mujer</option>
+                                                        <option value="O">Otro</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Estado Actual *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button"
+                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
                     </div>
