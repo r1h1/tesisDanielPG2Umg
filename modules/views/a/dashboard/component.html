@@ -18,6 +18,9 @@
 
     <!-- ICONO EN EL TAB -->
     <link rel="icon" href="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png">
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -60,8 +63,10 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a></li>
-                                <li><a class="dropdown-item" href="../../g/login/component"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                </li>
+                                <li><a class="dropdown-item" href="../../g/login/component"><i
+                                            class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -80,51 +85,222 @@
                         aria-selected="false">Dinero</a>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+
                     <div class="tab-pane fade show" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
-                        <div class="card shadow">
+
+                        <!-- FILTRO POR DIA -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Pedidos Día</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Pedidos Por Día</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <div class="w-100">
+                                                    <canvas id="myChart"></canvas>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 shadow">
+                        <!-- FIN FILTROS POR DIA -->
+
+                        <!-- FILTRO POR MES -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Pedidos Mes</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Pedidos Por Mes</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <div class="w-100">
+                                                    <canvas id="myChart2"></canvas>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 mb-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Pedidos Año</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
+                        <!-- FIN FILTRO POR MES -->
+
+
                     </div>
+
                     <div class="tab-pane fade" id="dinero" role="tabpanel" aria-labelledby="dinero-tab">
-                        <div class="card shadow">
+
+                        <!-- FILTRO POR DIA -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Día</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Dinero Por Día</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <div class="w-100">
+                                                    <canvas id="myChart3"></canvas>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 shadow">
+                        <!-- FIN FILTROS POR DIA -->
+
+                        <!-- FILTRO POR MES -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Mes</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Dinero Por Mes</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <div class="w-100">
+                                                    <canvas id="myChart4"></canvas>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 mb-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Año</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
+                        <!-- FIN FILTRO POR MES -->
+
                     </div>
                 </div>
             </div>
@@ -138,6 +314,88 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script>
+
+        const ctx = document.getElementById('myChart');
+        const ctx2 = document.getElementById('myChart2');
+        const ctx3 = document.getElementById('myChart3');
+        const ctx4 = document.getElementById('myChart4');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [800, 100, 300, 500, 200, 1000],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
         $(".sidebar ul li").on('click', function () {
             $(".activo").removeClass('activo');
             $(".shadow").removeClass('shadow');
