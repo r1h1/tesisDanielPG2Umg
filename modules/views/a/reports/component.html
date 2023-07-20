@@ -76,68 +76,323 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
-                        aria-selected="true">Más Vendido</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
-                        aria-selected="true">Menos Vendido</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="reporte-productos-vendidos-tab"
+                        data-bs-toggle="tab" data-bs-target="#reporte-productos-vendidos" role="tab" aria-controls="reporte-productos-vendidos-tab-pane"
+                        aria-selected="true">Productos Vendidos</a>
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="reporte-ventas-tab"
+                        data-bs-toggle="tab" data-bs-target="#reporte-ventas" role="tab" aria-controls="reporte-ventas-tab-pane"
                         aria-selected="true">Ventas por Cliente</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
+                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="reporte-cantidad-dinero-tab"
+                        data-bs-toggle="tab" data-bs-target="#reporte-cantidad-dinero" role="tab" aria-controls="reporte-cantidad-dinero-tab-pane"
                         aria-selected="true">Cantidad de Dinero</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
-                        aria-selected="true">Lista Negra</a>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
-                        <div class="card shadow">
+
+                    <div class="tab-pane fade show" id="reporte-productos-vendidos" role="tabpanel" aria-labelledby="reporte-productos-vendidos-tab">
+
+                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Pedidos Día</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Productos Vendidos</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-5">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 mb-2">
+
+                                                <div class="row">
+
+                                                    <div class="d-flex justify-content-end">
+                                                        <div class="col-sm-12 col-md-12 col-lg-10">
+
+                                                            <div class="input-group mb-3">
+                                                                <button class="btn btn-success me-2"><i
+                                                                        class="fa-solid fa-file-excel me-2"></i>
+                                                                    Exportar</button>
+                                                                <div class="form-floating">
+                                                                    <input type="text" class="form-control text-muted"
+                                                                        id="floatingInput" placeholder="ejemplo1">
+                                                                    <label for="floatingInput text-muted"><i
+                                                                            class="fa-solid fa-magnifying-glass me-3"></i>
+                                                                        Buscar</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">First</th>
+                                                                    <th scope="col">Last</th>
+                                                                    <th scope="col">Handle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td colspan="2">Larry the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Pedidos Mes</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <div class="card mt-4 mb-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Pedidos Año</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
+                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+
                     </div>
-                    <div class="tab-pane fade" id="dinero" role="tabpanel" aria-labelledby="dinero-tab">
-                        <div class="card shadow">
+
+                    <div class="tab-pane fade" id="reporte-ventas" role="tabpanel" aria-labelledby="reporte-ventas-tab">
+
+                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Día</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Ventas</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-5">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 mb-2">
+
+                                                <div class="row">
+
+                                                    <div class="d-flex justify-content-end">
+                                                        <div class="col-sm-12 col-md-12 col-lg-10">
+
+                                                            <div class="input-group mb-3">
+                                                                <button class="btn btn-success me-2"><i
+                                                                        class="fa-solid fa-file-excel me-2"></i>
+                                                                    Exportar</button>
+                                                                <div class="form-floating">
+                                                                    <input type="text" class="form-control text-muted"
+                                                                        id="floatingInput" placeholder="ejemplo1">
+                                                                    <label for="floatingInput text-muted"><i
+                                                                            class="fa-solid fa-magnifying-glass me-3"></i>
+                                                                        Buscar</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">First</th>
+                                                                    <th scope="col">Last</th>
+                                                                    <th scope="col">Handle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td colspan="2">Larry the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 shadow">
+                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                    </div>
+
+                    <div class="tab-pane fade" id="reporte-cantidad-dinero" role="tabpanel" aria-labelledby="reporte-cantidad-dinero-tab">
+
+                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <div class="card shadow mb-5">
                             <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Mes</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Dinero</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-5">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="floatingInput" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
+                                                                class="fa-solid fa-search me-3"></i> Buscar
+                                                            Información</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 mb-2">
+
+                                                <div class="row">
+
+                                                    <div class="d-flex justify-content-end">
+                                                        <div class="col-sm-12 col-md-12 col-lg-10">
+
+                                                            <div class="input-group mb-3">
+                                                                <button class="btn btn-success me-2"><i
+                                                                        class="fa-solid fa-file-excel me-2"></i>
+                                                                    Exportar</button>
+                                                                <div class="form-floating">
+                                                                    <input type="text" class="form-control text-muted"
+                                                                        id="floatingInput" placeholder="ejemplo1">
+                                                                    <label for="floatingInput text-muted"><i
+                                                                            class="fa-solid fa-magnifying-glass me-3"></i>
+                                                                        Buscar</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">First</th>
+                                                                    <th scope="col">Last</th>
+                                                                    <th scope="col">Handle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td colspan="2">Larry the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="card mt-4 mb-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Flujo De Dinero Año</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
+                        <!-- FILTRO REPORTE MÁS VENDIDO -->
                     </div>
                 </div>
             </div>
