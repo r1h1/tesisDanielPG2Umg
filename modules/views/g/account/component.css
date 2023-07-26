@@ -51,7 +51,7 @@ body {
 @media only screen and (max-width: 990px) {
 
     .container-fluid .userActions{
-        height: 45vh;
+        min-height: 45vh;
     }
 
     .container-fluid .imagenLogo{
