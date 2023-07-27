@@ -74,7 +74,7 @@
             </nav>
 
             <!-- CONTENIDO DE LA PAGINA -->
-            <div class="contenido container-fluid px-5 mt-5 px-1">
+            <div class="contenido container-fluid px-3 mt-5 px-1">
                 <h2 class="h3 fw-bold">Pedidos</h2>
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
@@ -250,11 +250,28 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <div class="card bg-light mb-3 shadow rounded-3">
+                                <div class="card-body">
+                                    <h4 class="text-center mt-2 text-muted">Cambiar Estado</h4>
+                                    <p class="text-center text-muted">Al presionar un estado, automáticamente
+                                        recargará la página y la información, procede con precaución</p>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="floatingSelect"
+                                            aria-label="Floating label select example">
+                                            <option selected>Selecciona uno...</option>
+                                            <option value="1">En Revisión de Pago</option>
+                                            <option value="2">Pendiente</option>
+                                            <option value="3">Finalizado</option>
+                                        </select>
+                                        <label for="floatingSelect">Estado del Pedido</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card bg-light border-1 shadow rounded-3">
                                 <div class="card-body">
                                     <h4 class="text-center mt-2 text-muted">Estado Actual</h4>
                                     <div class="text-center">
-                                        <p class="btn btn-danger">Finalizado</p>
+                                        <p class="btn btn-success">Pendiente</p>
                                     </div>
                                     <hr class="text-secondary p-3">
                                     <div class="detail text-start ms-4">
