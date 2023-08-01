@@ -13,7 +13,7 @@ async function login(req, res, next) {
         responses.success(req, res, token, 200);
     }
     catch (err) {
-        next(err);
+        next('Server Off');
     }
 };
 

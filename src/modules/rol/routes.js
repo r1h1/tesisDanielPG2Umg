@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const security = require('./security');
 const responses = require('../../network/responses');
 const controller = require('./index');
 
 //RUTAS PARA CONSULTAR
-router.get('/', data);
-router.get('/:id', oneData);
-router.post('/', addData);
-router.put('/', deleteData);
+router.get('/', security(), data);
+router.get('/:id', security(), oneData);
+router.post('/', security(), addData);
+router.put('/', security(), deleteData);
 
 //CONSULTAR TODOS LOS ÍTEMS
 async function data(req, res, next) {
