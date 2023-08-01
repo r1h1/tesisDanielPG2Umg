@@ -1,25 +1,33 @@
-const db = require('../../db/mysql');
 const dataTable = 'rol';
 
-const data = (table) => {
-    return db.data(dataTable)
-}
+module.exports = function (dbInjected) {
 
-const oneData = (id) => {
-    return db.oneData(dataTable, id);
-}
+    let db = dbInjected;
 
-const addData = (body) => {
-    return db.addData(dataTable, body);
-}
+    if(!db){
+        db = require("../../db/mysql");
+    }
 
-const deleteData = (body) => {
-    return db.deleteData(dataTable, body);
-}
+    const data = (table) => {
+        return db.data(dataTable)
+    }
 
-module.exports = {
-    data,
-    oneData,
-    deleteData,
-    addData
+    const oneData = (id) => {
+        return db.oneData(dataTable, id);
+    }
+
+    const addData = (body) => {
+        return db.addData(dataTable, body);
+    }
+
+    const deleteData = (body) => {
+        return db.deleteData(dataTable, body);
+    }
+
+    return {
+        data,
+        oneData,
+        deleteData,
+        addData
+    }
 }

@@ -21,6 +21,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+//ROUTERS
 app.set('port', config.app.port);
 app.use('/api/v1/users', users);
 app.use('/api/v1/rol', rol);

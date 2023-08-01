@@ -63,29 +63,10 @@ const oneData = (table, id) => {
     });
 }
 
-//AÑADIR O ACTUALIZAR UN REGISTRO A LA BASE DE DATOS
-const addData = (table, data) => {
-    if(data && data.id == 0){
-        return insertData(table, data);
-    }
-    else{
-        return updateData(table, data);
-    }
-}
-
 //INSERTAR UN REGISTRO DE LA BASE DE DATOS
-const insertData = (table, data) => {
+const addData = (table, data) => {
     return new Promise((resolve, reject) => {
-        stringConnection.query(`INSERT INTO ${table} SET ?`, data, (error, result) => {
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-
-//ACTUALIZAR UN REGISTRO DE LA BASE DE DATOS
-const updateData = (table, data) => {
-    return new Promise((resolve, reject) => {
-        stringConnection.query(`UPDATE ${table} SET ? WHERE id=?`, [data, data.id], (error, result) => {
+        stringConnection.query(`INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`, [data,data], (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });
@@ -100,10 +81,20 @@ const deleteData = (table, data) => {
     });
 }
 
+//CONSULTAR POR QUERY
+const query = (table, query) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE ?`, query, (error, result) => {
+            return error ? reject(error) : resolve(result[0]);
+        });
+    });
+}
+
 //SE EXPORTAN LOS PROTOCOLOS PARA MANEJO DE INFO
 module.exports = {
     data,
     oneData,
     addData,
-    deleteData
+    deleteData,
+    query
 }

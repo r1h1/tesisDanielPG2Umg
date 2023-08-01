@@ -24,25 +24,19 @@ CREATE TABLE users (
     fullname VARCHAR(250),
     address VARCHAR(250),
     phonenumber VARCHAR(20),
-    email VARCHAR(250),
+    email VARCHAR(100),
     nit VARCHAR(50),
     idrol INT,
-    authentication VARCHAR(500),
     status INT,
     gender INT,
     FOREIGN KEY (idrol) REFERENCES rol(id)
 );
 
 -- CREACION DE TABLA AUTENTICACION
-CREATE TABLE auth_process (
-    id INT PRIMARY KEY NOT NULL auto_increment,
-    name VARCHAR(100),
-    createdate VARCHAR(50),
-    token VARCHAR(250),
-    expiredate VARCHAR(50),
-    sessionstatus INT,
-    idusersession INT,
-    FOREIGN KEY (idusersession) REFERENCES users(id)
+CREATE TABLE auth (
+    id INT PRIMARY KEY NOT NULL,
+    user varchar(100),
+    password varchar(250)
 );
 
 -- CREACION DE TABLA PRODUCTOS

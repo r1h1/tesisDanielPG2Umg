@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const responses = require('../../network/responses');
-const controller = require('./controler');
+const controller = require('./index');
 
 //RUTAS PARA CONSULTAR
 router.get('/', data);
