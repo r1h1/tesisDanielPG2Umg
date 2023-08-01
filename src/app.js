@@ -1,8 +1,10 @@
 //REQUERIDOS PARA EL FUNCIONAMIENTO DEL PROYECTO
 const express = require('express');
+var cors = require('cors');
 const config = require('./config');
 const users = require('./modules/users/routes.js');
 const rol = require('./modules/rol/routes.js');
+const modules = require('./modules/modules/routes.js');
 const productPerOrder = require('./modules/productPerOrder/routes.js');
 const productExtraIngredients = require('./modules/productExtraIngredients/routes.js');
 const products = require('./modules/products/routes.js');
@@ -20,11 +22,13 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 //ROUTERS
 app.set('port', config.app.port);
 app.use('/api/v1/users', users);
 app.use('/api/v1/rol', rol);
+app.use('/api/v1/modules', modules);
 app.use('/api/v1/productPerOrder', productPerOrder);
 app.use('/api/v1/productExtraIngredients', productExtraIngredients);
 app.use('/api/v1/products', products);

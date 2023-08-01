@@ -1,4 +1,4 @@
-const dataTable = 'products';
+const dataTable = 'product_per_order';
 
 module.exports = function (dbInjected) {
 
