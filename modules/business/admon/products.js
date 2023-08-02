@@ -1,12 +1,39 @@
 //ROUTES
 const globalApiUrl = 'http://localhost:3000/api/v1/products';
 
+
+//VALIDATE EXIST TOKEN IN SESSION STORAGE
+const validateToken = () => {
+    let token = sessionStorage.getItem('signInToken');
+    if (token == null || token.length == 0 || token == '') {
+        sessionStorage.removeItem('signInToken');
+        window.location.href = '../../../views/g/login/component';
+    }
+    else {
+        //CORRECT ACCESS
+    }
+}
+validateToken();
+
+
+
+//CLOSE SESSION AND REMOVE SESSION STORAGE ITEMS
+const closeSession = () => {
+    sessionStorage.removeItem('signInToken');
+    window.location.href = '../../../views/g/login/component';
+}
+
+//EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN
+setInterval(validateToken, 60000);
+
+
+
 //GET ALL PRODUCTS
 const getAllProducts = () => {
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlciI6ImRlLnJpdmFzaGVycmVyYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQwNSR1ZFVIQ3ZqNVFNSXE1dkc3all5VUcuYVlZL3g1dkNvSkpEUnZvVXJWZzlwLmJITXdSNzNWbSIsImlhdCI6MTY5MDk0NTEzOX0.eLTcIxqKAOrhAhWOq96v8FZ0DbFrr2o11KII0MQS7Jg");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
 
     let requestOptions = {
         method: 'GET',
@@ -29,6 +56,7 @@ const getAllProducts = () => {
     }
 }
 getAllProducts();
+
 
 
 //PRINT ALL PRODUCTS IN PRODUCT DATATABLE
