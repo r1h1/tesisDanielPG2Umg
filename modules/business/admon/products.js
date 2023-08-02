@@ -6,7 +6,7 @@ const getAllProducts = () => {
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer e  yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlciI6ImRlLnJpdmFzaGVycmVyYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQwNSR1ZFVIQ3ZqNVFNSXE1dkc3all5VUcuYVlZL3g1dkNvSkpEUnZvVXJWZzlwLmJITXdSNzNWbSIsImlhdCI6MTY5MDkzMDIzNX0.QvQta9d45ori0e7ndjGAEaHjs4t3N5_B_4Q2qxtYXew");
+    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlciI6ImRlLnJpdmFzaGVycmVyYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQwNSR1ZFVIQ3ZqNVFNSXE1dkc3all5VUcuYVlZL3g1dkNvSkpEUnZvVXJWZzlwLmJITXdSNzNWbSIsImlhdCI6MTY5MDk0NTEzOX0.eLTcIxqKAOrhAhWOq96v8FZ0DbFrr2o11KII0MQS7Jg");
 
     let requestOptions = {
         method: 'GET',
@@ -20,10 +20,10 @@ const getAllProducts = () => {
         .catch(error => console.log('Error: ' + error))
 
     const showData = (dataObtained) => {
-        try{
+        try {
             addDataToDataTable(dataObtained);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
@@ -36,15 +36,37 @@ const addDataToDataTable = (dataObtained) => {
 
     let dataSet = [];
 
-    for (let i = 0; i < dataObtained.body.length; i++) {
-        dataSet.push([
-            dataObtained.body[i].name,
-            dataObtained.body[i].base64img,
-            dataObtained.body[i].baseingredients,
-            dataObtained.body[i].description,
-            dataObtained.body[i].allergyinformation,
-            dataObtained.body[i].applyextraingredients
-        ]);
+    if (dataObtained.body === 'invalid token') {
+        //NO DATA OBTAINED
+        Swal.fire({
+            icon: 'error',
+            title: '¡Lo Sentimos!',
+            text: 'No tienes permisos para ver los datos, por favor cierra sesión e inicia sesión nuevamente',
+            footer: 'Informa al administrador del error: 401 Unauthorized'
+        });
+    }
+    else if (dataObtained.body.length == 0) {
+        if (dataObtained.body === 'invalid token') {
+            //NO DATA OBTAINED
+            Swal.fire({
+                icon: 'error',
+                title: '¡Lo Sentimos!',
+                text: 'No se pudo concretar la extracción de los datos',
+                footer: 'Informa al administrador del error: ' + dataObtained.body.toUpperCase()
+            });
+        }
+    }
+    else {
+        for (let i = 0; i < dataObtained.body.length; i++) {
+            dataSet.push([
+                dataObtained.body[i].name,
+                `<img src="${dataObtained.body[i].base64img}" alt="img-producto" width="60"/>`,
+                dataObtained.body[i].baseingredients,
+                dataObtained.body[i].description,
+                dataObtained.body[i].allergyinformation,
+                dataObtained.body[i].applyextraingredients
+            ]);
+        }
     }
 
     new DataTable('#example', {

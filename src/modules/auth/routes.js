@@ -4,7 +4,7 @@ const responses = require('../../network/responses');
 const controller = require('./index');
 
 //RUTAS PARA CONSULTAR
-router.get('/login', login);
+router.post('/login', login);
 
 //CONSULTAR UN SOLO ÍTEM
 async function login(req, res, next) {
