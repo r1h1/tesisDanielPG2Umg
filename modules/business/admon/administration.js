@@ -1,6 +1,7 @@
 //ROUTES
 const globalApiUrl = 'http://localhost:3000/api/v1/users';
-const globalRolApiUrl = 'http://localhost:3000/api/v1/rol'
+const globalRolApiUrl = 'http://localhost:3000/api/v1/rol';
+const globalModuleApiUrl = 'http://localhost:3000/api/v1/modules';
 
 
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
@@ -325,3 +326,38 @@ const addDataToRolTable = (dataObtained) => {
         select: true
     });
 }
+
+
+
+//GET MODULES TO SELECT ITEM
+const getModuleInfo = () => {
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(globalModuleApiUrl, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => console.log('Error: ' + error))
+
+    const showData = (dataObtained) => {
+        try {
+            let optionsSelect = '';
+            for (let i = 0; i < dataObtained.body.length; i++) {
+                optionsSelect = `<option value="${dataObtained.body[i].id}">${dataObtained.body[i].name}</option>`;
+            }
+            document.getElementById('selectModules').innerHTML = optionsSelect;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
+getModuleInfo();

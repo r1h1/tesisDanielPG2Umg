@@ -123,23 +123,32 @@ const getAllUserData = (id, tokenObtained) => {
         }
         else {
             try {
-                if (dataObtained.body[0].idrol != 3) {
+                if (dataObtained.body[0].idrol != 3 && dataObtained.body[0].status === 1) {
                     let userInformation = window.btoa(JSON.stringify(dataObtained.body));
                     sessionStorage.setItem("sessionInfo", userInformation);
                     window.location.href = '../../../views/a/dashboard/component';
                 }
-                else {
+                else if (dataObtained.body[0].idrol === 3 && dataObtained.body[0].status === 1) {
                     let userInformation = window.btoa(JSON.stringify(dataObtained.body));
                     sessionStorage.setItem("sessionInfo", userInformation);
                     window.location.href = '../../../views/u/start/component';
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'Datos incorrectos o sin autorización para acceder',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
                 }
             }
             catch (err) {
                 Swal.fire({
                     icon: 'error',
                     title: '¡Lo Sentimos!',
-                    text: 'Sa ha generado un error interno',
-                    footer: 'Este error es generado por el sistema, informa al administrador',
+                    text: 'Se ha generado un error interno',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
                     confirmButtonText: 'Entendido'
                 });
                 sessionStorage.removeItem("signInToken");
