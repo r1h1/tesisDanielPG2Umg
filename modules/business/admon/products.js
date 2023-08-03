@@ -5,8 +5,13 @@ const globalApiUrl = 'http://localhost:3000/api/v1/products';
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
 const validateToken = () => {
     let token = sessionStorage.getItem('signInToken');
+    let userInformation = sessionStorage.getItem('sessionInfo');
     if (token == null || token.length == 0 || token == '') {
         sessionStorage.removeItem('signInToken');
+        window.location.href = '../../../views/g/login/component';
+    }
+    else if (userInformation == null || userInformation.length == 0 || userInformation == '') {
+        sessionStorage.removeItem('sessionInfo');
         window.location.href = '../../../views/g/login/component';
     }
     else {
@@ -20,11 +25,21 @@ validateToken();
 //CLOSE SESSION AND REMOVE SESSION STORAGE ITEMS
 const closeSession = () => {
     sessionStorage.removeItem('signInToken');
+    sessionStorage.removeItem('sessionInfo');
     window.location.href = '../../../views/g/login/component';
 }
 
 //EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN
 setInterval(validateToken, 60000);
+
+
+//SET USER INFO IN ADMIN PANEL
+const setUserInfo = () => {
+    let userInformation = atob(sessionStorage.getItem('sessionInfo'));
+    userInformation = JSON.parse(userInformation);
+    document.getElementById('fullName').innerHTML = userInformation[0].fullname;
+}
+setUserInfo();
 
 
 
@@ -70,7 +85,7 @@ const addDataToDataTable = (dataObtained) => {
             icon: 'error',
             title: '¡Lo Sentimos!',
             text: 'No tienes permisos para ver los datos, por favor cierra sesión e inicia sesión nuevamente',
-            footer: 'Informa al administrador del error: 401 Unauthorized'
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
         });
     }
     else if (dataObtained.body.length == 0) {
@@ -80,31 +95,35 @@ const addDataToDataTable = (dataObtained) => {
                 icon: 'error',
                 title: '¡Lo Sentimos!',
                 text: 'No se pudo concretar la extracción de los datos',
-                footer: 'Informa al administrador del error: ' + dataObtained.body.toUpperCase()
+                footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error. ' + dataObtained.body.toUpperCase()
             });
         }
     }
     else {
         for (let i = 0; i < dataObtained.body.length; i++) {
             dataSet.push([
-                dataObtained.body[i].name,
+                dataObtained.body[i].name ?? 'Sin Datos',
                 `<img src="${dataObtained.body[i].base64img}" alt="img-producto" width="60"/>`,
-                dataObtained.body[i].baseingredients,
-                dataObtained.body[i].description,
-                dataObtained.body[i].allergyinformation,
-                dataObtained.body[i].applyextraingredients
+                dataObtained.body[i].baseingredients ?? 'Sin Datos',
+                dataObtained.body[i].description ?? 'Sin Datos',
+                dataObtained.body[i].allergyinformation ?? 'Sin Datos',
+                dataObtained.body[i].applyextraingredients ?? 'Sin Datos',
+                `<button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>`,
+                `<button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>`
             ]);
         }
     }
 
-    new DataTable('#example', {
+    new DataTable('#productsTable', {
         columns: [
             { title: 'Nombre' },
             { title: 'Imagen' },
             { title: 'Ingredientes Base' },
             { title: 'Descripción' },
             { title: 'Información Alérgica' },
-            { title: 'Aplica Productos Extra' }
+            { title: 'Aplica Ingredientes Extra' },
+            { title: 'Edicion' },
+            { title: 'Eliminación' }
         ],
         data: dataSet,
         language: {

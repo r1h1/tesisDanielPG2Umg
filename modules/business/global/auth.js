@@ -14,9 +14,10 @@ const signIn = () => {
             icon: 'warning',
             title: 'Advertencia',
             text: 'Llena todos los datos que se te solicitan',
-            footer: 'Este error es generado por el sistema'
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
         });
         sessionStorage.removeItem("signInToken");
+        sessionStorage.removeItem("sessionInfo");
     }
     else {
         let myHeaders = new Headers();
@@ -45,9 +46,11 @@ const signIn = () => {
                     icon: 'error',
                     title: '¡Lo Sentimos!',
                     text: 'Datos incorrectos o sin autorización para acceder',
-                    footer: 'Este error es generado por el sistema, informa al administrador'
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
                 });
                 sessionStorage.removeItem("signInToken");
+                sessionStorage.removeItem("sessionInfo");
             }
             else {
                 try {
@@ -61,9 +64,11 @@ const signIn = () => {
                         icon: 'error',
                         title: '¡Lo Sentimos!',
                         text: 'Sa ha generado un error interno',
-                        footer: 'Este error es generado por el sistema, informa al administrador'
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
                     });
                     sessionStorage.removeItem("signInToken");
+                    sessionStorage.removeItem("sessionInfo");
                     console.log(err);
                 }
             }
@@ -110,16 +115,22 @@ const getAllUserData = (id, tokenObtained) => {
                 icon: 'error',
                 title: '¡Lo Sentimos!',
                 text: 'Datos incorrectos o sin autorización para acceder',
-                footer: 'Este error es generado por el sistema, informa al administrador'
+                footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                confirmButtonText: 'Entendido'
             });
             sessionStorage.removeItem("signInToken");
+            sessionStorage.removeItem("sessionInfo");
         }
         else {
             try {
                 if (dataObtained.body[0].idrol != 3) {
+                    let userInformation = window.btoa(JSON.stringify(dataObtained.body));
+                    sessionStorage.setItem("sessionInfo", userInformation);
                     window.location.href = '../../../views/a/dashboard/component';
                 }
                 else {
+                    let userInformation = window.btoa(JSON.stringify(dataObtained.body));
+                    sessionStorage.setItem("sessionInfo", userInformation);
                     window.location.href = '../../../views/u/start/component';
                 }
             }
@@ -128,9 +139,11 @@ const getAllUserData = (id, tokenObtained) => {
                     icon: 'error',
                     title: '¡Lo Sentimos!',
                     text: 'Sa ha generado un error interno',
-                    footer: 'Este error es generado por el sistema, informa al administrador'
+                    footer: 'Este error es generado por el sistema, informa al administrador',
+                    confirmButtonText: 'Entendido'
                 });
                 sessionStorage.removeItem("signInToken");
+                sessionStorage.removeItem("sessionInfo");
                 console.log(err);
             }
         }

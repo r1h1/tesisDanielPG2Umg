@@ -44,6 +44,10 @@ hr.h-color {
     color: #000;
 }
 
+.swal-modal .swal-text {
+    text-align: center;
+}
+
 @media(max-width: 767px) {
     #side_nav {
         margin-left: -300px;
