@@ -21,6 +21,9 @@
 
     <!-- CHART JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -63,7 +66,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
                                 </li>
                                 <li onclick="closeSession()"><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -76,9 +79,9 @@
                 <h2 class="h3 fw-bold">Cuenta Empleado</h2>
                 <p>Gestiona los accesos a tu cuenta, información y demás.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark" id="dinero-tab"
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="dinero-tab"
                         data-bs-toggle="tab" data-bs-target="#dinero" role="tab" aria-controls="dinero"
-                        aria-selected="false">Mi cuenta</a>
+                        aria-selected="false">Mi cuenta</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
 

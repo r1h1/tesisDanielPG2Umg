@@ -22,6 +22,9 @@
     <!-- CSS DATATABLE -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -65,7 +68,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
                                 </li>
                                 <li onclick="closeSession()"><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -79,15 +82,15 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="usuarios-tab"
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="usuarios-tab"
                         data-bs-toggle="tab" data-bs-target="#usuarios" role="tab" aria-controls="usuarios-tab-pane"
-                        aria-selected="true">Usuarios</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="roles-tab"
+                        aria-selected="true">Usuarios</button>
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="roles-tab"
                         data-bs-toggle="tab" data-bs-target="#roles" role="tab" aria-controls="roles"
-                        aria-selected="false">Roles</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark" id="clientes-tab"
+                        aria-selected="false">Roles</button>
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="clientes-tab"
                         data-bs-toggle="tab" data-bs-target="#clientes" role="tab" aria-controls="clientes"
-                        aria-selected="false">Clientes</a>
+                        aria-selected="false">Clientes</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show" id="usuarios" role="tabpanel" aria-labelledby="usuarios-tab">
@@ -104,7 +107,7 @@
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="userNameAdmin" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
                                                         *</label>
                                                 </div>
@@ -112,8 +115,8 @@
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="text" class="form-control text-muted" id="addressAdmin"
+                                                        placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Dirección
                                                         *</label>
                                                 </div>
@@ -121,8 +124,8 @@
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="number" class="form-control text-muted"
+                                                        id="cellPhoneAdmin" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Teléfono
                                                         *</label>
                                                 </div>
@@ -130,8 +133,8 @@
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="text" class="form-control text-muted" id="emailAdmin"
+                                                        placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Correo Electrónico
                                                         *</label>
                                                 </div>
@@ -139,12 +142,7 @@
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="floatingSelect"
-                                                        aria-label="Floating label select example">
-                                                        <option value="">Selecciona uno</option>
-                                                        <option value="H">Hombre</option>
-                                                        <option value="M">Mujer</option>
-                                                        <option value="O">Otro</option>
+                                                    <select class="form-select" id="selectRols">
                                                     </select>
                                                     <label for="floatingSelect">Rol *</label>
                                                 </div>
@@ -152,17 +150,17 @@
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
-                                                    <label for="floatingInput text-muted">Usuario
+                                                    <input type="text" class="form-control text-muted" id="nitAdmin"
+                                                        placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">NIT
                                                         *</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="password" class="form-control text-muted"
+                                                        id="passwordAdmin" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Contraseña
                                                         *</label>
                                                 </div>
@@ -170,20 +168,19 @@
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="floatingSelect"
+                                                    <select class="form-select" id="genderSelect"
                                                         aria-label="Floating label select example">
                                                         <option value="">Selecciona uno</option>
-                                                        <option value="H">Hombre</option>
-                                                        <option value="M">Mujer</option>
-                                                        <option value="O">Otro</option>
+                                                        <option value="1">Hombre</option>
+                                                        <option value="0">Mujer</option>
                                                     </select>
-                                                    <label for="floatingSelect">Estado Actual *</label>
+                                                    <label for="floatingSelect">Género *</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
-                                                <button type="button"
-                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createAdminUser()">Guardar</button>
                                             </div>
 
                                         </div>
@@ -208,14 +205,16 @@
 
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-6">
-                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+                                        <p class="h5 fw-bold text-muted">Mantenimiento</p>
+                                        <p class="text-muted mb-4">Al asignar un módulo, presiona enter luego de
+                                            seleccionar.</p>
 
                                         <div class="row">
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="text" class="form-control text-muted" id="rolName"
+                                                        placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Nombre Rol
                                                         *</label>
                                                 </div>
@@ -223,15 +222,18 @@
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="selectModules">
+                                                    <select class="form-select" id="selectModules"
+                                                        onkeypress="addModuleToRolTemporaly(this)">
                                                         <!-- DATA OBTAINED JS -->
                                                     </select>
                                                     <label for="floatingSelect">Módulos Acceso *</label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="col-md-12 col-lg-12 mb-2" id="accessibleModules">
                                                 <p class="fw-bold text-muted mt-4 h5">Módulos Accesibles</p>
+                                                <p class="text-muted">Los datos que ingreses se guardan de manera
+                                                    temporal, si refrescas la página se perderán.</p>
                                                 <table class="table table-striped text-center">
                                                     <thead>
                                                         <tr>
@@ -239,11 +241,7 @@
                                                             <th scope="col">Nombre Módulo</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th hidden>1</th>
-                                                            <td>Mark</td>
-                                                        </tr>
+                                                    <tbody id="moduleTemporalyTable">
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -281,7 +279,7 @@
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="userNameClient" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
                                                         *</label>
                                                 </div>
@@ -290,7 +288,7 @@
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="addressClient" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Dirección
                                                         *</label>
                                                 </div>
@@ -299,7 +297,7 @@
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="cellPhoneClient" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Teléfono
                                                         *</label>
                                                 </div>
@@ -307,8 +305,8 @@
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="text" class="form-control text-muted" id="emailClient"
+                                                        placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Correo Electrónico
                                                         *</label>
                                                 </div>
@@ -316,17 +314,17 @@
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
-                                                    <label for="floatingInput text-muted">Usuario
+                                                    <input type="text" class="form-control text-muted" id="nitClient"
+                                                        placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">NIT
                                                         *</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                    <input type="password" class="form-control text-muted"
+                                                        id="passwordClient" placeholder="ejemplo">
                                                     <label for="floatingInput text-muted">Contraseña
                                                         *</label>
                                                 </div>
@@ -334,33 +332,19 @@
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="floatingSelect"
+                                                    <select class="form-select" id="genderSelectClient"
                                                         aria-label="Floating label select example">
                                                         <option value="">Selecciona uno</option>
-                                                        <option value="H">Hombre</option>
-                                                        <option value="M">Mujer</option>
-                                                        <option value="O">Otro</option>
+                                                        <option value="1">Hombre</option>
+                                                        <option value="0">Mujer</option>
                                                     </select>
                                                     <label for="floatingSelect">Género *</label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 col-lg-12 mb-2">
-                                                <div class="form-floating">
-                                                    <select class="form-select" id="floatingSelect"
-                                                        aria-label="Floating label select example">
-                                                        <option value="">Selecciona uno</option>
-                                                        <option value="H">Hombre</option>
-                                                        <option value="M">Mujer</option>
-                                                        <option value="O">Otro</option>
-                                                    </select>
-                                                    <label for="floatingSelect">Estado Actual *</label>
-                                                </div>
-                                            </div>
-
                                             <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
-                                                <button type="button"
-                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createClientUser()">Guardar</button>
                                             </div>
 
                                         </div>

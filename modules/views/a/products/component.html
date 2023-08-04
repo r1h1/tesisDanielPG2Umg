@@ -69,7 +69,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
                                 </li>
                                 <li onclick="closeSession()"><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -83,9 +83,9 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1" id="productos-tab"
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="productos-tab"
                         data-bs-toggle="tab" data-bs-target="#productos" role="tab" aria-controls="productos-tab-pane"
-                        aria-selected="true">Productos</a>
+                        aria-selected="true">Productos</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show" id="productos" role="tabpanel" aria-labelledby="productos-tab">

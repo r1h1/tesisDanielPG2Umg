@@ -22,6 +22,9 @@
     <!-- CSS DATATABLE -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -62,11 +65,11 @@
                         <div class="dropdown me-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fa-solid fa-user me-3"></i>Daniel Rivas
+                                <i class="fa-solid fa-user me-3"></i><span id="fullName">{userName}</span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
                                 </li>
                                 <li><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -80,17 +83,17 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1"
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
                         id="reporte-productos-vendidos-tab" data-bs-toggle="tab"
                         data-bs-target="#reporte-productos-vendidos" role="tab"
-                        aria-controls="reporte-productos-vendidos-tab-pane" aria-selected="true">Productos Vendidos</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1"
+                        aria-controls="reporte-productos-vendidos-tab-pane" aria-selected="true">Productos Vendidos</button>
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
                         id="reporte-ventas-tab" data-bs-toggle="tab" data-bs-target="#reporte-ventas" role="tab"
-                        aria-controls="reporte-ventas-tab-pane" aria-selected="true">Ventas por Cliente</a>
-                    <a class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1"
+                        aria-controls="reporte-ventas-tab-pane" aria-selected="true">Ventas por Cliente</button>
+                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
                         id="reporte-cantidad-dinero-tab" data-bs-toggle="tab" data-bs-target="#reporte-cantidad-dinero"
                         role="tab" aria-controls="reporte-cantidad-dinero-tab-pane" aria-selected="true">Cantidad de
-                        Dinero</a>
+                        Dinero</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
 
@@ -341,6 +344,7 @@
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <!-- SCRIPT DE DATATABLES -->
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="../../../business/admon/reports.js"></script>
     <script>
         $(".sidebar ul li").on('click', function () {
             $(".activo").removeClass('activo');
