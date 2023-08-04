@@ -7,7 +7,7 @@ const controller = require('./index');
 //RUTAS PARA CONSULTAR
 router.get('/', security(), data);
 router.get('/:id', security(), oneData);
-router.post('/', security(), addData);
+router.post('/', addData);
 router.put('/', security(), deleteData);
 
 

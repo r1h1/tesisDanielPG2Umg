@@ -351,7 +351,7 @@ const getModuleInfo = () => {
         try {
             let optionsSelect = '';
             for (let i = 0; i < dataObtained.body.length; i++) {
-                optionsSelect = `<option value="${dataObtained.body[i].id}">${dataObtained.body[i].name}</option>`;
+                optionsSelect += `<option value="${dataObtained.body[i].id}">${dataObtained.body[i].name}</option>`;
             }
             document.getElementById('selectModules').innerHTML = optionsSelect;
         }

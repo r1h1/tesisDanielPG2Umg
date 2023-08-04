@@ -20,6 +20,9 @@
     <!-- ICONO EN EL TAB -->
     <link rel="icon" href="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png">
 
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -46,7 +49,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fa-solid fa-user text-secondary"></i></span>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control text-muted" id="floatingInput"
+                                    <input type="text" class="form-control text-muted" id="userName"
                                         placeholder="ejemplo1">
                                     <label for="floatingInput text-muted">Nombres y Apellidos *</label>
                                 </div>
@@ -57,7 +60,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fa-solid fa-phone text-secondary"></i></span>
                                 <div class="form-floating">
-                                    <input type="number" class="form-control text-muted" id="floatingInput"
+                                    <input type="number" class="form-control text-muted" id="cellPhone"
                                         placeholder="ejemplo1">
                                     <label for="floatingInput text-muted">Teléfono (+Extensión) *</label>
                                 </div>
@@ -69,7 +72,7 @@
                                 <span class="input-group-text"><i
                                         class="fa-solid fa-address-book text-secondary"></i></span>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control text-muted" id="floatingInput"
+                                    <input type="text" class="form-control text-muted" id="address"
                                         placeholder="ejemplo1">
                                     <label for="floatingInput text-muted">Dirección de Residencia *</label>
                                 </div>
@@ -81,31 +84,21 @@
                                 <span class="input-group-text"><i
                                         class="fa-solid fa-envelope text-secondary"></i></span>
                                 <div class="form-floating">
-                                    <input type="email" class="form-control text-muted" id="floatingInput"
+                                    <input type="email" class="form-control text-muted" id="email"
                                         placeholder="ejemplo1">
-                                    <label for="floatingInput text-muted">Correo Electrónico</label>
+                                    <label for="floatingInput text-muted">Correo Electrónico *</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fa-solid fa-user text-secondary"></i></span>
+                                <span class="input-group-text"><i
+                                        class="fa-solid fa-user text-secondary"></i></span>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control text-muted" id="floatingInput"
+                                    <input type="text" class="form-control text-muted" id="nit"
                                         placeholder="ejemplo1">
-                                    <label for="floatingInput text-muted">Usuario *</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fa-solid fa-key text-secondary"></i></span>
-                                <div class="form-floating">
-                                    <input type="password" class="form-control text-muted" id="floatingInput"
-                                        placeholder="ejemplo1">
-                                    <label for="floatingInput text-muted">Contraseña *</label>
+                                    <label for="floatingInput text-muted">NIT *</label>
                                 </div>
                             </div>
                         </div>
@@ -114,14 +107,24 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fa-solid fa-person text-secondary"></i></span>
                                 <div class="form-floating">
-                                    <select class="form-select" id="floatingSelect"
+                                    <select class="form-select" id="genderSelect"
                                         aria-label="Floating label select example">
                                         <option value="">Selecciona uno</option>
-                                        <option value="H">Hombre</option>
-                                        <option value="M">Mujer</option>
-                                        <option value="O">Otro</option>
+                                        <option value="1">Hombre</option>
+                                        <option value="2">Mujer</option>
                                     </select>
                                     <label for="floatingSelect">Género *</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fa-solid fa-key text-secondary"></i></span>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control text-muted" id="password"
+                                        placeholder="ejemplo1">
+                                    <label for="floatingInput text-muted">Contraseña *</label>
                                 </div>
                             </div>
                         </div>
@@ -131,8 +134,8 @@
                     <div class="buttonLogin">
                         <div class="row">
                             <div class="col">
-                                <a href="../../g/login/component" class="btn btn-light w-100 py-3 rounded-5">Finalizar
-                                    Registro</a>
+                                <button type="button" class="btn btn-light w-100 py-3 rounded-5" onclick="signUpUser()">Finalizar
+                                    Registro</button>
                             </div>
                             <div class="col">
                                 <a href="../../g/login/component" class="btn btn-light w-100 py-3 rounded-5">Ya Tengo
@@ -158,6 +161,7 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="../../../business/user/signUp.js"></script>
 </body>
 
 </html>
