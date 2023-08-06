@@ -1160,8 +1160,6 @@ verifyArrayModules();
 
 const addModuleToRolTemporaly = (selectModule) => {
 
-    document.getElementById('rolName').disabled = true;
-
     let rolName = document.getElementById('rolName').value;
     let idModule = document.getElementById('selectModules').value;
     let nameModule = selectModule[selectModule.selectedIndex].text;
@@ -1175,17 +1173,47 @@ const addModuleToRolTemporaly = (selectModule) => {
         });
     }
     else {
-        modulesArray.push([idModule, nameModule]);
-        let moduleData = '';
-        for (let i = 0; i < modulesArray.length; i++) {
-            moduleData += `
-            <tr>
-                <th hidden>${modulesArray[i][0]}</th>
-                <td>${modulesArray[i][1]}</td>
-            </tr>
-            `;
+
+        document.getElementById('rolName').disabled = true;
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+        let requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(globalModuleApiUrl + '/' + idModule, requestOptions)
+            .then(response => response.json())
+            .then(dataObtained => showData(dataObtained))
+            .catch(error => console.log('Error: ' + error))
+
+        const showData = (dataObtained) => {
+            try {
+                modulesArray.push([idModule, nameModule, dataObtained.body[0].route]);
+                let moduleData = '';
+                for (let i = 0; i < modulesArray.length; i++) {
+                    moduleData += `
+                    <tr>
+                        <td>${modulesArray[i][1]}</td>
+                    </tr>
+                    `;
+                }
+                document.getElementById('moduleTemporalyTable').innerHTML = moduleData;
+            }
+            catch (err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Lo Sentimos!',
+                    text: 'No se pudo obtener información del módulo, intenta de nuevo',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
+                });
+                console.log(err);
+            }
         }
-        document.getElementById('moduleTemporalyTable').innerHTML = moduleData;
     }
 }
 
@@ -1291,8 +1319,7 @@ const createModuleWithRolId = (idCreateRol) => {
             var raw = JSON.stringify({
                 "id": 0,
                 "name": modulesArray[i][1],
-                "route": "<a href=\"\">",
-                "permissions": "{\"edit\": 0, \"delete\": 0}",
+                "route": modulesArray[i][2],
                 "idrol": idCreateRol
             });
 

@@ -13,7 +13,6 @@ CREATE TABLE modules (
     id INT PRIMARY KEY NOT NULL auto_increment,
     name VARCHAR(50) NOT NULL,
     route VARCHAR(500) NOT NULL,
-    permissions VARCHAR(100) NOT NULL,
     idrol INT,
     FOREIGN KEY (idrol) REFERENCES rol(id)
 );
