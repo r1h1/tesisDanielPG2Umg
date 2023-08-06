@@ -68,7 +68,8 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component"
+                                        target="_blank">Reportar Problema</a>
                                 </li>
                                 <li onclick="closeSession()"><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -82,15 +83,18 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="usuarios-tab"
-                        data-bs-toggle="tab" data-bs-target="#usuarios" role="tab" aria-controls="usuarios-tab-pane"
-                        aria-selected="true">Usuarios</button>
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="roles-tab"
-                        data-bs-toggle="tab" data-bs-target="#roles" role="tab" aria-controls="roles"
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" role="tab"
+                        aria-controls="usuarios-tab-pane" aria-selected="true">Usuarios</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="roles-tab" data-bs-toggle="tab" data-bs-target="#roles" role="tab" aria-controls="roles"
                         aria-selected="false">Roles</button>
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="clientes-tab"
-                        data-bs-toggle="tab" data-bs-target="#clientes" role="tab" aria-controls="clientes"
-                        aria-selected="false">Clientes</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" role="tab"
+                        aria-controls="clientes" aria-selected="false">Clientes</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show" id="usuarios" role="tabpanel" aria-labelledby="usuarios-tab">
@@ -198,6 +202,110 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- EDIT USER ADMIN MODAL -->
+                    <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header bg-warning">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Usuario</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                        <input type="text" id="idUserAdminEdit" hidden>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="userNameAdminEdit">
+                                                <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="addressAdminEdit"
+                                                    placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Dirección
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <input type="number" class="form-control text-muted"
+                                                    id="cellPhoneAdminEdit" placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Teléfono
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2" hidden>
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="emailAdminEdit"
+                                                    placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Correo Electrónico
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="selectRolsEdit">
+                                                </select>
+                                                <label for="floatingSelect">Rol *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="nitAdminEdit"
+                                                    placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">NIT
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="genderSelectEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="1">Hombre</option>
+                                                    <option value="0">Mujer</option>
+                                                </select>
+                                                <label for="floatingSelect">Género *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="statusAdminEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="1">Activo</option>
+                                                    <option value="0">Inactivo</option>
+                                                </select>
+                                                <label for="floatingSelect">Estado *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                            <button type="button" class="btn btn-success py-3 w-100"
+                                                onclick="saveInfoBeforeEdit()">Guardar</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EDIT USER ADMIN MODAL -->
+
+
+                    <!-- TAB POR ROLE -->
                     <div class="tab-pane fade" id="roles" role="tabpanel" aria-labelledby="clientes-tab">
                         <div class="card shadow mb-5">
                             <div class="card-body">
@@ -247,8 +355,8 @@
                                             </div>
 
                                             <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
-                                                <button type="button"
-                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createRol()">Guardar</button>
                                             </div>
 
                                         </div>
@@ -265,6 +373,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- TAB FOR CLIENTS -->
                     <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
                         <div class="card shadow mb-5">
                             <div class="card-body">
@@ -362,6 +472,99 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- EDIT CLIENT MODAL -->
+                    <div class="modal fade" id="editClientModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header bg-warning">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        
+                                        <input type="text" id="idClientEdit" hidden>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="userNameClienteEdit" placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="addressClientEdit" placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Dirección
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="cellPhoneClientEdit" placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Teléfono
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2" hidden>
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="emailClientEdit"
+                                                    placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">Correo Electrónico
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="nitClientEdit"
+                                                    placeholder="ejemplo1">
+                                                <label for="floatingInput text-muted">NIT
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="genderSelectClientEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="">Selecciona uno</option>
+                                                    <option value="1">Hombre</option>
+                                                    <option value="0">Mujer</option>
+                                                </select>
+                                                <label for="floatingSelect">Género *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="statusClientEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="1">Activo</option>
+                                                    <option value="0">Inactivo</option>
+                                                </select>
+                                                <label for="floatingSelect">Estado *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                            <button type="button" class="btn btn-success py-3 w-100" onclick="saveInfoBeforeEditClient()">Guardar</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EDIT CLIENT MODAL -->
 
                 </div>
             </div>
