@@ -54,6 +54,18 @@ const data = (table) => {
     });
 }
 
+
+//PROTOCOLOS PARA MANEJO DE INFORMACIÓN
+//DEVOLVER TODOS LOS DATOS
+const dataWithDates = (table, createdDate, finishDate) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE createdDate AND finishDate BETWEEN '${createdDate}' AND '${finishDate}'`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
 //DEVOLVER UN SOLO DATO POR ID
 const oneData = (table, id) => {
     return new Promise((resolve, reject) => {
@@ -66,7 +78,7 @@ const oneData = (table, id) => {
 //INSERTAR UN REGISTRO DE LA BASE DE DATOS
 const addData = (table, data) => {
     return new Promise((resolve, reject) => {
-        stringConnection.query(`INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`, [data,data], (error, result) => {
+        stringConnection.query(`INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`, [data, data], (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });
@@ -94,6 +106,7 @@ const query = (table, query) => {
 module.exports = {
     data,
     oneData,
+    dataWithDates,
     addData,
     deleteData,
     query

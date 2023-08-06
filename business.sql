@@ -82,6 +82,8 @@ CREATE TABLE orders (
     idclient INT,
     address VARCHAR(250),
     description VARCHAR(250),
+    createdDate VARCHAR(50),
+    finishDate VARCHAR(50),
     base64imgreference MEDIUMTEXT,
     FOREIGN KEY (idpayoption) REFERENCES payoptions(id),
     FOREIGN KEY (idpayfile) REFERENCES payfiles(id),
@@ -102,5 +104,6 @@ CREATE TABLE invoice (
     id INT PRIMARY KEY NOT NULL auto_increment,
     idorder INT,
     idclientgenerate INT,
-    createat VARCHAR(50)
+    createdDate VARCHAR(50),
+    finishDate VARCHAR(50)
 );

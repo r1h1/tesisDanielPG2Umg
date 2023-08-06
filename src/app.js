@@ -13,6 +13,7 @@ const payFiles = require('./modules/payFiles/routes.js');
 const orders = require('./modules/orders/routes.js');
 const invoice = require('./modules/invoice/routes.js');
 const auth = require('./modules/auth/routes.js');
+const reports = require('./modules/reports/routes.js');
 const morgan = require('morgan');
 const { error } = require('./network/responses');
 const errors = require('./network/errors');
@@ -26,6 +27,7 @@ app.use(cors());
 
 //ROUTERS
 app.set('port', config.app.port);
+app.use('/api/v1/reports', reports);
 app.use('/api/v1/users', users);
 app.use('/api/v1/rol', rol);
 app.use('/api/v1/modules', modules);
