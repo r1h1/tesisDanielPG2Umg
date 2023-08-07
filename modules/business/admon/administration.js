@@ -243,7 +243,7 @@ const saveInfoBeforeEdit = () => {
                         Swal.fire({
                             icon: 'success',
                             title: '¡Correcto!',
-                            text: 'La operación de completó con éxito',
+                            text: 'La operación se completó con éxito',
                             footer: '',
                             showDenyButton: false,
                             showCancelButton: false,
@@ -330,7 +330,7 @@ const deleteAdminUser = (idUserToEliminate) => {
                             Swal.fire({
                                 icon: 'success',
                                 title: '¡Correcto!',
-                                text: 'La operación de completó con éxito',
+                                text: 'La operación se completó con éxito',
                                 footer: '',
                                 showDenyButton: false,
                                 showCancelButton: false,
@@ -534,7 +534,7 @@ const deleteRol = (idRol) => {
                             Swal.fire({
                                 icon: 'success',
                                 title: '¡Correcto!',
-                                text: 'La operación de completó con éxito',
+                                text: 'La operación se completó con éxito',
                                 footer: '',
                                 showDenyButton: false,
                                 showCancelButton: false,
@@ -687,7 +687,7 @@ const createAdminUser = () => {
                         Swal.fire({
                             icon: 'success',
                             title: '¡Correcto!',
-                            text: 'La operación de completó con éxito',
+                            text: 'La operación se completó con éxito',
                             footer: '',
                             showDenyButton: false,
                             showCancelButton: false,
@@ -795,7 +795,7 @@ const createClientUser = () => {
                         Swal.fire({
                             icon: 'success',
                             title: '¡Correcto!',
-                            text: 'La operación de completó con éxito',
+                            text: 'La operación se completó con éxito',
                             footer: '',
                             showDenyButton: false,
                             showCancelButton: false,
@@ -998,7 +998,7 @@ const saveInfoBeforeEditClient = () => {
                         Swal.fire({
                             icon: 'success',
                             title: '¡Correcto!',
-                            text: 'La operación de completó con éxito',
+                            text: 'La operación se completó con éxito',
                             footer: '',
                             showDenyButton: false,
                             showCancelButton: false,
@@ -1086,7 +1086,7 @@ const deleteClients = (idUser) => {
                             Swal.fire({
                                 icon: 'success',
                                 title: '¡Correcto!',
-                                text: 'La operación de completó con éxito',
+                                text: 'La operación se completó con éxito',
                                 footer: '',
                                 showDenyButton: false,
                                 showCancelButton: false,
@@ -1351,7 +1351,7 @@ const createModuleWithRolId = (idCreateRol) => {
                             Swal.fire({
                                 icon: 'success',
                                 title: '¡Correcto!',
-                                text: 'La operación de completó con éxito',
+                                text: 'La operación se completó con éxito',
                                 footer: '',
                                 showDenyButton: false,
                                 showCancelButton: false,

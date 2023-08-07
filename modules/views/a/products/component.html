@@ -69,7 +69,8 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component"
+                                        target="_blank">Reportar Problema</a>
                                 </li>
                                 <li onclick="closeSession()"><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -83,9 +84,10 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="productos-tab"
-                        data-bs-toggle="tab" data-bs-target="#productos" role="tab" aria-controls="productos-tab-pane"
-                        aria-selected="true">Productos</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos" role="tab"
+                        aria-controls="productos-tab-pane" aria-selected="true">Productos</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show" id="productos" role="tabpanel" aria-labelledby="productos-tab">
@@ -96,7 +98,7 @@
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-6">
                                         <p class="h5 fw-bold text-muted">Mantenimiento</p>
-                                        <p class="mt-1 mb-4">Separa por comas los ingredientes base que lleva el pastel
+                                        <p class="text-muted mb-4">Separa por comas los ingredientes base que lleva el pastel
                                             o el producto.</p>
 
                                         <div class="row">
@@ -104,7 +106,7 @@
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="productName" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Nombre del Producto
                                                         *</label>
                                                 </div>
@@ -112,66 +114,29 @@
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="file" class="form-control text-muted"
-                                                        id="floatingInput" accept="image/png, image/jpeg">
+                                                    <input type="file" class="form-control text-muted" id="fileInput"
+                                                        accept="image/png, image/jpeg">
                                                     <label for="floatingInput text-muted">Fotografía
                                                         *</label>
                                                 </div>
                                             </div>
 
+                                            <!-- CONVERT IMG TO BASE64 -->
+                                            <input type="text" id="photoBase64Product" hidden>
+
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="baseIngredients" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Ingredientes Base
                                                         *</label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 col-lg-6 mb-2">
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
-                                                    <label for="floatingInput text-muted">Ingrediente Extra
-                                                        *</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 col-lg-6 mb-2">
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
-                                                    <label for="floatingInput text-muted">Precio
-                                                        *</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 col-lg-12 mb-2">
-                                                <p class="fw-bold text-muted mt-4 h5">Ingredientes Y Precio</p>
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">First</th>
-                                                            <th scope="col">Last</th>
-                                                            <th scope="col">Handle</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="allergyInformation" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Información Alérgica
                                                         *</label>
                                                 </div>
@@ -180,15 +145,53 @@
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <input type="text" class="form-control text-muted"
-                                                        id="floatingInput" placeholder="ejemplo1">
+                                                        id="productDescription" placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Descripción del Producto
                                                         *</label>
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="extraIngredient" placeholder="ejemplo1">
+                                                    <label for="floatingInput text-muted">Ingrediente Extra
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="number" class="form-control text-muted"
+                                                        id="priceExtraIngredient" placeholder="ejemplo1" min="0.00"
+                                                        max="9999999999.99" onchange="addExtraIngredientAndPrice()">
+                                                    <label for="floatingInput text-muted">Precio
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <p class="fw-bold text-muted mt-4 h5">Ingredientes Y Precio</p>
+                                                <p class="text-muted">Al agregar el nombre y el precio, se añadirá
+                                                    automáticamente a una tabla temporal,
+                                                    si refrescas la pantalla, estos ingredientes serán eliminados.
+                                                </p>
+                                                <table class="table table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nombre Producto</th>
+                                                            <th scope="col">Precio</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="extraIngredientsAndPrice">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                             <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
                                                 <button type="button"
-                                                    class="btn btn-success py-3 w-100">Guardar</button>
+                                                    class="btn btn-success py-3 w-100" onclick="createProduct()">Guardar</button>
                                             </div>
 
                                         </div>
