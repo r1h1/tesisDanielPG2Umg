@@ -89,6 +89,7 @@
                         id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos" role="tab"
                         aria-controls="productos-tab-pane" aria-selected="true">Productos</button>
                 </ul>
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show" id="productos" role="tabpanel" aria-labelledby="productos-tab">
                         <div class="card shadow mb-5">
@@ -98,15 +99,16 @@
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-6">
                                         <p class="h5 fw-bold text-muted">Mantenimiento</p>
-                                        <p class="text-muted mb-4">Separa por comas los ingredientes base que lleva el pastel
+                                        <p class="text-muted mb-4">Separa por comas los ingredientes base que lleva el
+                                            pastel
                                             o el producto.</p>
 
                                         <div class="row">
 
                                             <div class="col-md-12 col-lg-12 mb-2">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control text-muted"
-                                                        id="productName" placeholder="ejemplo1">
+                                                    <input type="text" class="form-control text-muted" id="productName"
+                                                        placeholder="ejemplo1">
                                                     <label for="floatingInput text-muted">Nombre del Producto
                                                         *</label>
                                                 </div>
@@ -190,8 +192,8 @@
                                             </div>
 
                                             <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
-                                                <button type="button"
-                                                    class="btn btn-success py-3 w-100" onclick="createProduct()">Guardar</button>
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createProduct()">Guardar</button>
                                             </div>
 
                                         </div>
@@ -211,6 +213,188 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- EDIT PRODUCTS MODAL -->
+                <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">Editar Producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+
+                                    <input type="text" id="idProductToEdit" hidden>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-muted" id="productNameEdit"
+                                                placeholder="ejemplo1">
+                                            <label for="floatingInput text-muted">Nombre del Producto
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <p class="text-muted fw-bold mb-3 mt-3 text-center h5">Imagen actual del productoy</p>
+                                        <div id="productPhoto" class="text-center">
+                                        </div>
+                                        <p class="text-muted text-center mb-3 mt-3">Si no deseas cambiar la foto, deja en blanco el campo siguiente</p>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="form-floating">
+                                            <input type="file" class="form-control text-muted" id="fileInputEdit"
+                                                accept="image/png, image/jpeg">
+                                            <label for="floatingInput text-muted">Nueva Fotografía
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- CONVERT IMG TO BASE64 -->
+                                    <input type="text" id="photoBase64ProductEdit" hidden>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-muted" id="baseIngredientsEdit"
+                                                placeholder="ejemplo1">
+                                            <label for="floatingInput text-muted">Ingredientes Base
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-muted"
+                                                id="allergyInformationEdit" placeholder="ejemplo1">
+                                            <label for="floatingInput text-muted">Información Alérgica
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-muted"
+                                                id="productDescriptionEdit" placeholder="ejemplo1">
+                                            <label for="floatingInput text-muted">Descripción del Producto
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control text-muted" id="extraIngredientEdit"
+                                                placeholder="ejemplo1">
+                                            <label for="floatingInput text-muted">Ingrediente Extra
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-8 mb-2">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control text-muted"
+                                                id="priceExtraIngredientEdit" placeholder="ejemplo1" min="0.00"
+                                                max="9999999999.99" onchange="addExtraIngredientAndPrice()">
+                                            <label for="floatingInput text-muted">Precio
+                                                *</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-4 mb-2">
+                                        <button type="button" class="btn btn-success py-3 w-100">+ Agregar</button>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p class="fw-bold text-muted mt-4 h5">Ingredientes y precio</p>
+                                                <p class="text-muted">Se muestran los ingredientes actuales guardados
+                                                    según el producto consultado.
+                                                </p>
+                                                <table class="table table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nombre Producto</th>
+                                                            <th scope="col">Precio</th>
+                                                            <th scope="col">Editar</th>
+                                                            <th scope="col">Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="extraIngredientsAndPriceEdit">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="fw-bold text-muted mt-4 h5">Nuevos ingredientes y precio</p>
+                                                <p class="text-muted">Al agregar el nombre y el precio, se añadirá
+                                                    automáticamente a una tabla temporal,
+                                                    si refrescas la pantalla, estos ingredientes serán eliminados.
+                                                </p>
+                                                <table class="table table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nombre Producto</th>
+                                                            <th scope="col">Precio</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="extraIngredientsAndPriceEditNewTemporaly">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                        <button type="button" class="btn btn-success py-3 w-100"
+                                            onclick="editProduct()">Guardar</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END EDIT PRODUCTS MODAL -->
+
+                <!-- EDIT PRODUCTS MODAL -->
+                <div class="modal fade" id="viewExtraIngredientsPerProductIdModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">Visualización de
+                                    ingredientes y precio</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 mb-2 table-responsive">
+                                        <p class="text-muted mb-4 mt-3 text-center" id="nameProductConsulted">
+                                            {nameProduct}</p>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Nombre Producto</th>
+                                                    <th>Precio</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="viewExtraIngredientsPerProductId">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END EDIT PRODUCTS MODAL -->
+
             </div>
         </div>
     </div>

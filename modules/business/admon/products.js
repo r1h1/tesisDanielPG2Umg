@@ -1,6 +1,7 @@
 //ROUTES
 const globalApiUrl = 'http://localhost:3000/api/v1/products';
 const globalExtraIngredientUrl = 'http://localhost:3000/api/v1/productExtraIngredients';
+const globalGetExtraIngredientsProductId = 'http://localhost:3000/api/v1/productExtraIngredients/ei/';
 
 
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
@@ -108,8 +109,10 @@ const addDataToDataTable = (dataObtained) => {
                 dataObtained.body[i].baseingredients ?? 'Sin Datos',
                 dataObtained.body[i].description ?? 'Sin Datos',
                 dataObtained.body[i].allergyinformation ?? 'Sin Datos',
-                dataObtained.body[i].applyextraingredients === 0 ? 'No Aplica' : 'Aplica' ?? 'Sin Datos',
-                `<button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>`,
+                `<button class="btn btn-primary text-white" onclick="viewExtraIngredientsAndPrice(${dataObtained.body[i].id}, '${dataObtained.body[i].name}')"><i class="fa-solid fa-eye"></i></button>`,
+                `<button class="btn btn-warning" onclick="setInfoEditProduct(${dataObtained.body[i].id}, '${dataObtained.body[i].name}', '${dataObtained.body[i].base64img}', 
+                '${dataObtained.body[i].baseingredients}', '${dataObtained.body[i].description}', '${dataObtained.body[i].allergyinformation}')">
+                <i class="fa-solid fa-pen-to-square"></i></button>`,
                 `<button class="btn btn-danger" onclick="deleteProduct(${dataObtained.body[i].id})"><i class="fa-solid fa-trash"></i></button>`
             ]);
         }
@@ -122,7 +125,7 @@ const addDataToDataTable = (dataObtained) => {
             { title: 'Ingredientes Base' },
             { title: 'Descripción' },
             { title: 'Información Alérgica' },
-            { title: 'Aplica Ingredientes Extra' },
+            { title: 'Ingredientes Extra' },
             { title: 'Edicion' },
             { title: 'Eliminación' }
         ],
@@ -150,6 +153,145 @@ const addDataToDataTable = (dataObtained) => {
         select: true
     });
 }
+
+
+const viewExtraIngredientsAndPrice = (idProduct, nameProduct) => {
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(globalGetExtraIngredientsProductId + idProduct, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => console.log('Error: ' + error))
+
+    const showData = (dataObtained) => {
+        try {
+            let extraIngredients = '';
+
+            if (dataObtained.body.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Lo Sentimos!',
+                    text: 'Este producto no cuenta con ingredientes extras, por lo tanto es imposible su visualización',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+            else {
+                for (let i = 0; i < dataObtained.body.length; i++) {
+                    extraIngredients += `
+                    <tr>
+                        <td hidden>${dataObtained.body[i].id}</td>
+                        <td class="text-muted text-center">${dataObtained.body[i].name}</td>
+                        <td class="text-muted">Q${dataObtained.body[i].price}</td>
+                        <td hidden>${dataObtained.body[i].idproduct}</td>
+                    </tr>
+                    `;
+                }
+                document.getElementById('viewExtraIngredientsPerProductId').innerHTML = extraIngredients;
+                document.getElementById('nameProductConsulted').innerHTML = nameProduct.toUpperCase();
+                $('#viewExtraIngredientsPerProductIdModal').modal('show');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
+
+//SET INFO BEFORE EDIT PRODUCT
+//AND SHOW EXTRA INGREDIENTS FOR PRICE AND INGREDIENTS TABLE
+const setInfoEditProduct = (idProductToEdit, productName, base64Img, baseIngredients, description, allergyInformation) => {
+
+    document.getElementById('idProductToEdit').value = idProductToEdit;
+    document.getElementById('productNameEdit').value = productName;
+    document.getElementById('photoBase64ProductEdit').value = base64Img;
+    document.getElementById('baseIngredientsEdit').value = baseIngredients;
+    document.getElementById('productDescriptionEdit').value = description;
+    document.getElementById('allergyInformationEdit').value = allergyInformation;
+
+    let imgToInner = `<img src="${base64Img}" alt="img-producto" width="200"/>`;
+    document.getElementById('productPhoto').innerHTML = imgToInner;
+
+    setExtraIngredientsInExtraIngredientsAndPriceTable(idProductToEdit);
+
+    $('#editProductModal').modal('show');
+}
+
+const setExtraIngredientsInExtraIngredientsAndPriceTable = (idProductToEdit) => {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(globalGetExtraIngredientsProductId + idProductToEdit, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => console.log('Error: ' + error))
+
+    const showData = (dataObtained) => {
+        try {
+
+            let extraIngredients = '';
+
+            if (dataObtained.body.length === 0) {
+                for (let i = 0; i < 1; i++) {
+                    extraIngredients += `
+                <tr>
+                    <td hidden>-- Sin Datos --</td>
+                    <td class="text-muted text-center">-- Sin Datos --</td>
+                    <td class="text-muted text-center">-- Sin Datos --</td>
+                    <td hidden>-- Sin Datos --</td>
+                    <td>-- Sin Datos --</td>
+                    <td>-- Sin Datos --</td>
+                </tr>
+                `;
+                }
+            }
+            else {
+                for (let i = 0; i < dataObtained.body.length; i++) {
+                    extraIngredients += `
+                <tr>
+                    <td hidden>${dataObtained.body[i].id}</td>
+                    <td class="text-muted text-center">${dataObtained.body[i].name}</td>
+                    <td class="text-muted">Q${dataObtained.body[i].price}</td>
+                    <td hidden>${dataObtained.body[i].idproduct}</td>
+                    <td><button class="btn btn-warning" onclick=""><i class="fa-solid fa-pen"></i></button></td>
+                    <td><button class="btn btn-danger" onclick=""><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+                `;
+                }
+            }
+            document.getElementById('extraIngredientsAndPriceEdit').innerHTML = extraIngredients;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
+
+//EDIT PRODUCT AFTER SET INFO FOR EDIT
+const editProduct = () => {
+    alert('no');
+}
+
 
 
 //DELETE PRODUCT INFO
@@ -251,6 +393,7 @@ const deleteProduct = (idToEliminate) => {
 }
 
 
+
 //CONVERT FILE CHOOSEN TO BASE64 FOR SAVE IN DB
 const convertImgToBase64 = () => {
 
@@ -262,13 +405,13 @@ const convertImgToBase64 = () => {
 
         reader.addEventListener("load", () => {
             let imageRoute = reader.result;
-            let tamañoImagen = file.size;
+            let sizeImage = file.size;
 
-            if (tamañoImagen > 100000) {
+            if (sizeImage > 100000) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Advertencia',
-                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar',
+                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar (MAX 100 KB)',
                     footer: '<a href="https://tinyjpg.com/" target="_blank">Presione acá para ser redirigido al compresor de imágenes</a>',
                     confirmButtonText: 'Entendido'
                 });
@@ -283,6 +426,40 @@ const convertImgToBase64 = () => {
     });
 }
 convertImgToBase64();
+
+
+//CONVERT FILE IN EDIT MODAL CHOOSEN TO BASE64 FOR SAVE IN DB
+const convertImgToBase64EditModal = () => {
+
+    const fileInput = document.getElementById('fileInputEdit');
+
+    fileInput.addEventListener("change", e => {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            let imageRoute = reader.result;
+            let sizeImage = file.size;
+
+            if (sizeImage > 100000) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Advertencia',
+                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar (MAX 100 KB)',
+                    footer: '<a href="https://tinyjpg.com/" target="_blank">Presione acá para ser redirigido al compresor de imágenes</a>',
+                    confirmButtonText: 'Entendido'
+                });
+                document.getElementById('fileInputEdit').value = '';
+            }
+            else {
+                document.getElementById('photoBase64ProductEdit').value = imageRoute;
+            }
+        });
+        reader.readAsDataURL(file);
+    });
+}
+convertImgToBase64EditModal();
+
 
 
 //ADD INGREDIENT AND PRICE WITH TEMPORAL ARRAY AFTER PRODUCT SAVE
@@ -303,6 +480,7 @@ const verifyArrayExtraIngredients = () => {
             `;
         }
         document.getElementById('extraIngredientsAndPrice').innerHTML = extraIngredients;
+        document.getElementById('extraIngredientsAndPriceEdit').innerHTML = extraIngredients;
     }
     else {
         // EXECUTE THE ADD MODULE TO ROL TEMPORALY FUNCTION

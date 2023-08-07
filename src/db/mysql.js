@@ -75,6 +75,17 @@ const oneData = (table, id) => {
     });
 }
 
+
+//DEVOLVER INGREDIENTES EXTRA POR ID PRODUCT
+const extraIngredientsQuery = (table, id) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE idproduct=${id}`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
 //INSERTAR UN REGISTRO DE LA BASE DE DATOS
 const addData = (table, data) => {
     return new Promise((resolve, reject) => {
@@ -109,5 +120,6 @@ module.exports = {
     dataWithDates,
     addData,
     deleteData,
-    query
+    query,
+    extraIngredientsQuery
 }

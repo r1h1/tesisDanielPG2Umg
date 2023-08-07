@@ -16,6 +16,10 @@ module.exports = function (dbInjected) {
         return db.oneData(dataTable, id);
     }
 
+    const extraIngredientsQuery = (idproduct) => {
+        return db.extraIngredientsQuery(dataTable, idproduct);
+    }
+
     const addData = (body) => {
         return db.addData(dataTable, body);
     }
@@ -28,6 +32,7 @@ module.exports = function (dbInjected) {
         data,
         oneData,
         deleteData,
-        addData
+        addData,
+        extraIngredientsQuery
     }
 }
