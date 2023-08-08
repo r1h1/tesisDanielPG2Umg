@@ -80,6 +80,7 @@ CREATE TABLE orders (
     idpayoption INT,
     idpayfile INT,
     idclient INT,
+    idproduct INT,
     address VARCHAR(250),
     description VARCHAR(250),
     createdDate VARCHAR(50),
@@ -87,7 +88,8 @@ CREATE TABLE orders (
     base64imgreference MEDIUMTEXT,
     FOREIGN KEY (idpayoption) REFERENCES payoptions(id),
     FOREIGN KEY (idpayfile) REFERENCES payfiles(id),
-    FOREIGN KEY (idclient) REFERENCES users(id)
+    FOREIGN KEY (idclient) REFERENCES users(id),
+    FOREIGN KEY (idproduct) REFERENCES products(id)
 );
 
 -- CREACION DE TABLA PRODUCTOS POR ORDEN

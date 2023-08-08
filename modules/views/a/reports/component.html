@@ -25,6 +25,9 @@
     <!-- SweetAlert2 Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- SHEET JS FOR IMPORT DATA TO EXCEL -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
@@ -69,7 +72,8 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component"
+                                        target="_blank">Reportar Problema</a>
                                 </li>
                                 <li><a class="dropdown-item" href="../../g/login/component"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
@@ -83,14 +87,18 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
                         id="reporte-productos-vendidos-tab" data-bs-toggle="tab"
                         data-bs-target="#reporte-productos-vendidos" role="tab"
-                        aria-controls="reporte-productos-vendidos-tab-pane" aria-selected="true">Productos Vendidos</button>
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        aria-controls="reporte-productos-vendidos-tab-pane" aria-selected="true">Productos
+                        Vendidos</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
                         id="reporte-ventas-tab" data-bs-toggle="tab" data-bs-target="#reporte-ventas" role="tab"
                         aria-controls="reporte-ventas-tab-pane" aria-selected="true">Ventas por Cliente</button>
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
                         id="reporte-cantidad-dinero-tab" data-bs-toggle="tab" data-bs-target="#reporte-cantidad-dinero"
                         role="tab" aria-controls="reporte-cantidad-dinero-tab-pane" aria-selected="true">Cantidad de
                         Dinero</button>
@@ -100,7 +108,7 @@
                     <div class="tab-pane fade show" id="reporte-productos-vendidos" role="tabpanel"
                         aria-labelledby="reporte-productos-vendidos-tab">
 
-                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <!-- FILTRO REPORTE PRODUCTOS VENDIDOS -->
                         <div class="card shadow mb-5">
                             <div class="card-body">
                                 <p class="card-text mt-4 mb-4">
@@ -116,7 +124,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="startDateSalesProduct" placeholder="ejemplo1">
                                                             <label for="floatingInput text-muted">Fecha de Inicio
                                                                 *</label>
                                                         </div>
@@ -124,15 +132,18 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="endDateSalesProduct" placeholder="ejemplo1">
                                                             <label for="floatingInput text-muted">Fecha Fin
                                                                 *</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
+                                                        <button type="button" class="btn btn-primary py-2 px-5"
+                                                            onclick="getSalesProductWithRangeOfDates()"><i
+                                                                class="fa-solid fa-search me-3"></i> Generar reporte</button>
+                                                        <button class="btn btn-success py-2 px-5" onclick="exportSalesProductReport()"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>
+                                                            Exportar a excel</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,30 +151,26 @@
 
                                                 <div class="row">
 
-                                                    <div class="d-flex justify-content-end">
-                                                        <div class="col-sm-12 col-md-12 col-lg-10">
-
-                                                            <div class="input-group mb-3">
-                                                                <button class="btn btn-success me-2"><i
-                                                                        class="fa-solid fa-file-excel me-2"></i>
-                                                                    Exportar</button>
-                                                                <div class="form-floating">
-                                                                    <input type="text" class="form-control text-muted"
-                                                                        id="floatingInput" placeholder="ejemplo1">
-                                                                    <label for="floatingInput text-muted"><i
-                                                                            class="fa-solid fa-magnifying-glass me-3"></i>
-                                                                        Buscar</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
-                                                        <div class="table-responsive">
-                                                            <table id="example2" class="display" width="100%"></table>
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 w-100" id="salesProductTable">
+                                                        <div class="table-responsive w-100">
+                                                            <table class="table table-striped text-center w-100" id="reportTableSalesProduct">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Número de órden</th>
+                                                                        <th scope="col">Total de Pago</th>
+                                                                        <th scope="col">Fecha de Creación</th>
+                                                                        <th scope="col">Fecha de Finalización</th>
+                                                                        <th scope="col">Producto</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="salesProductReport">
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
+
+                                                    <!-- INPUT FLAG FOR DATA REPORT TABLE MONEY IS COMPLETE  -->
+                                                    <input type="text" id="dataCompleteReportSalesProduct" hidden>
                                                 </div>
                                             </div>
                                         </div>
@@ -172,19 +179,19 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <!-- END FILTRO REPORTE PRODUCTOS VENDIDOS -->
 
                     </div>
 
                     <div class="tab-pane fade" id="reporte-ventas" role="tabpanel" aria-labelledby="reporte-ventas-tab">
 
-                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <!-- FILTRO REPORTE VENTAS POR CLIENTE -->
                         <div class="card shadow mb-5">
                             <div class="card-body">
                                 <p class="card-text mt-4 mb-4">
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-12">
-                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Ventas</p>
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Ventas por Cliente</p>
 
                                         <div class="row">
 
@@ -194,7 +201,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="startDateSalesClient" placeholder="ejemplo1">
                                                             <label for="floatingInput text-muted">Fecha de Inicio
                                                                 *</label>
                                                         </div>
@@ -202,15 +209,18 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="endDateSalesClient" placeholder="ejemplo1">
                                                             <label for="floatingInput text-muted">Fecha Fin
                                                                 *</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
+                                                        <button type="button" class="btn btn-primary py-2 px-5"
+                                                            onclick="getSalesClientWithRangeOfDates()"><i
+                                                                class="fa-solid fa-search me-3"></i> Generar reporte</button>
+                                                        <button class="btn btn-success py-2 px-5" onclick="exportSalesClientReport()"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>
+                                                            Exportar a excel</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,30 +228,26 @@
 
                                                 <div class="row">
 
-                                                    <div class="d-flex justify-content-end">
-                                                        <div class="col-sm-12 col-md-12 col-lg-10">
-
-                                                            <div class="input-group mb-3">
-                                                                <button class="btn btn-success me-2"><i
-                                                                        class="fa-solid fa-file-excel me-2"></i>
-                                                                    Exportar</button>
-                                                                <div class="form-floating">
-                                                                    <input type="text" class="form-control text-muted"
-                                                                        id="floatingInput" placeholder="ejemplo1">
-                                                                    <label for="floatingInput text-muted"><i
-                                                                            class="fa-solid fa-magnifying-glass me-3"></i>
-                                                                        Buscar</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
-                                                        <div class="table-responsive">
-                                                            <table id="example3" class="display" width="100%"></table>
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 w-100" id="salesClientTable">
+                                                        <div class="table-responsive w-100">
+                                                            <table class="table table-striped text-center w-100" id="reportTableSalesClient">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Número de órden</th>
+                                                                        <th scope="col">Total de Pago</th>
+                                                                        <th scope="col">Fecha de Creación</th>
+                                                                        <th scope="col">Fecha de Finalización</th>
+                                                                        <th scope="col">Nombre Cliente</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="salesClientReport">
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
+
+                                                    <!-- INPUT FLAG FOR DATA REPORT TABLE MONEY IS COMPLETE  -->
+                                                    <input type="text" id="dataCompleteReportSalesClient" hidden>
                                                 </div>
                                             </div>
                                         </div>
@@ -250,13 +256,13 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <!-- END FILTRO REPORTE VENTAS POR CLIENTE -->
                     </div>
 
                     <div class="tab-pane fade" id="reporte-cantidad-dinero" role="tabpanel"
                         aria-labelledby="reporte-cantidad-dinero-tab">
 
-                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <!-- FILTRO REPORTE CANTIDAD DE DINERO -->
                         <div class="card shadow mb-5">
                             <div class="card-body">
                                 <p class="card-text mt-4 mb-4">
@@ -272,7 +278,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="startDateMoney" placeholder="ejemplo1">
                                                             <label for="floatingInput text-muted">Fecha de Inicio
                                                                 *</label>
                                                         </div>
@@ -280,15 +286,18 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="endDateMoney" placeholder="ejemplo1">
                                                             <label for="floatingInput text-muted">Fecha Fin
                                                                 *</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
+                                                        <button type="button" class="btn btn-primary py-2 px-5"
+                                                            onclick="getMoneyWithRangeOfDates()"><i
+                                                                class="fa-solid fa-search me-3"></i> Generar reporte</button>
+                                                        <button class="btn btn-success py-2 px-5" onclick="exportMoneyQuantityReport()"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>
+                                                            Exportar a excel</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,30 +305,25 @@
 
                                                 <div class="row">
 
-                                                    <div class="d-flex justify-content-end">
-                                                        <div class="col-sm-12 col-md-12 col-lg-10">
-
-                                                            <div class="input-group mb-3">
-                                                                <button class="btn btn-success me-2"><i
-                                                                        class="fa-solid fa-file-excel me-2"></i>
-                                                                    Exportar</button>
-                                                                <div class="form-floating">
-                                                                    <input type="text" class="form-control text-muted"
-                                                                        id="floatingInput" placeholder="ejemplo1">
-                                                                    <label for="floatingInput text-muted"><i
-                                                                            class="fa-solid fa-magnifying-glass me-3"></i>
-                                                                        Buscar</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
-                                                        <div class="table-responsive">
-                                                            <table id="example" class="display" width="100%"></table>
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 w-100" id="moneyQuantityTable">
+                                                        <div class="table-responsive w-100">
+                                                            <table class="table table-striped text-center w-100" id="reportTableMoneyQuantity">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Número de órden</th>
+                                                                        <th scope="col">Total de Pago</th>
+                                                                        <th scope="col">Fecha de Creación</th>
+                                                                        <th scope="col">Fecha de Finalización</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="moneyQuantityOrderReport">
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
+
+                                                    <!-- INPUT FLAG FOR DATA REPORT TABLE MONEY IS COMPLETE  -->
+                                                    <input type="text" id="dataCompleteReportMoneyQuantity" hidden>
                                                 </div>
                                             </div>
                                         </div>
@@ -328,7 +332,7 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- FILTRO REPORTE MÁS VENDIDO -->
+                        <!-- END FILTRO REPORTE CANTIDAD DE DINERO -->
                     </div>
                 </div>
             </div>
@@ -361,143 +365,9 @@
             $(".sidebar").removeClass('activo');
         });
 
-        const dataSet = [
-            ['Tiger Nixon', 'System Architect', 'Edinburgh', '5421', '2011/04/25', '$320,800'],
-            ['Garrett Winters', 'Accountant', 'Tokyo', '8422', '2011/07/25', '$170,750'],
-            ['Ashton Cox', 'Junior Technical Author', 'San Francisco', '1562', '2009/01/12', '$86,000'],
-            ['Cedric Kelly', 'Senior Javascript Developer', 'Edinburgh', '6224', '2012/03/29', '$433,060'],
-            ['Airi Satou', 'Accountant', 'Tokyo', '5407', '2008/11/28', '$162,700'],
-            ['Brielle Williamson', 'Integration Specialist', 'New York', '4804', '2012/12/02', '$372,000'],
-            ['Herrod Chandler', 'Sales Assistant', 'San Francisco', '9608', '2012/08/06', '$137,500'],
-            ['Rhona Davidson', 'Integration Specialist', 'Tokyo', '6200', '2010/10/14', '$327,900'],
-            ['Colleen Hurst', 'Javascript Developer', 'San Francisco', '2360', '2009/09/15', '$205,500'],
-            ['Sonya Frost', 'Software Engineer', 'Edinburgh', '1667', '2008/12/13', '$103,600'],
-            ['Jena Gaines', 'Office Manager', 'London', '3814', '2008/12/19', '$90,560'],
-            ['Quinn Flynn', 'Support Lead', 'Edinburgh', '9497', '2013/03/03', '$342,000'],
-            ['Charde Marshall', 'Regional Director', 'San Francisco', '6741', '2008/10/16', '$470,600'],
-            ['Haley Kennedy', 'Senior Marketing Designer', 'London', '3597', '2012/12/18', '$313,500'],
-            ['Tatyana Fitzpatrick', 'Regional Director', 'London', '1965', '2010/03/17', '$385,750'],
-            ['Michael Silva', 'Marketing Designer', 'London', '1581', '2012/11/27', '$198,500'],
-            ['Paul Byrd', 'Chief Financial Officer (CFO)', 'New York', '3059', '2010/06/09', '$725,000'],
-            ['Gloria Little', 'Systems Administrator', 'New York', '1721', '2009/04/10', '$237,500'],
-            ['Bradley Greer', 'Software Engineer', 'London', '2558', '2012/10/13', '$132,000'],
-            ['Dai Rios', 'Personnel Lead', 'Edinburgh', '2290', '2012/09/26', '$217,500'],
-            ['Jenette Caldwell', 'Development Lead', 'New York', '1937', '2011/09/03', '$345,000'],
-            ['Yuri Berry', 'Chief Marketing Officer (CMO)', 'New York', '6154', '2009/06/25', '$675,000'],
-            ['Caesar Vance', 'Pre-Sales Support', 'New York', '8330', '2011/12/12', '$106,450'],
-            ['Doris Wilder', 'Sales Assistant', 'Sydney', '3023', '2010/09/20', '$85,600'],
-            ['Angelica Ramos', 'Chief Executive Officer (CEO)', 'London', '5797', '2009/10/09', '$1,200,000'],
-            ['Gavin Joyce', 'Developer', 'Edinburgh', '8822', '2010/12/22', '$92,575'],
-            ['Jennifer Chang', 'Regional Director', 'Singapore', '9239', '2010/11/14', '$357,650'],
-            ['Brenden Wagner', 'Software Engineer', 'San Francisco', '1314', '2011/06/07', '$206,850'],
-            ['Fiona Green', 'Chief Operating Officer (COO)', 'San Francisco', '2947', '2010/03/11', '$850,000'],
-            ['Shou Itou', 'Regional Marketing', 'Tokyo', '8899', '2011/08/14', '$163,000'],
-            ['Michelle House', 'Integration Specialist', 'Sydney', '2769', '2011/06/02', '$95,400'],
-            ['Suki Burks', 'Developer', 'London', '6832', '2009/10/22', '$114,500'],
-            ['Prescott Bartlett', 'Technical Author', 'London', '3606', '2011/05/07', '$145,000'],
-            ['Gavin Cortez', 'Team Leader', 'San Francisco', '2860', '2008/10/26', '$235,500'],
-            ['Martena Mccray', 'Post-Sales support', 'Edinburgh', '8240', '2011/03/09', '$324,050'],
-            ['Unity Butler', 'Marketing Designer', 'San Francisco', '5384', '2009/12/09', '$85,675'],
-        ];
-
-        new DataTable('#example', {
-            columns: [
-                { title: 'Nombre' },
-                { title: 'Posición' },
-                { title: 'Oficina' },
-                { title: 'Extensión' },
-                { title: 'Fecha Inicio' },
-                { title: 'Salario' }
-            ],
-            data: dataSet,
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            select: true
-        });
-
-        new DataTable('#example2', {
-            columns: [
-                { title: 'Nombre' },
-                { title: 'Posición' },
-                { title: 'Oficina' },
-                { title: 'Extensión' },
-                { title: 'Fecha Inicio' },
-                { title: 'Salario' }
-            ],
-            data: dataSet,
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            select: true
-        });
-
-        new DataTable('#example3', {
-            columns: [
-                { title: 'Nombre' },
-                { title: 'Posición' },
-                { title: 'Oficina' },
-                { title: 'Extensión' },
-                { title: 'Fecha Inicio' },
-                { title: 'Salario' }
-            ],
-            data: dataSet,
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            select: true
-        });
+        document.getElementById('moneyQuantityTable').style.display = 'none';
+        document.getElementById('salesClientTable').style.display = 'none';
+        document.getElementById('salesProductTable').style.display = 'none';
     </script>
 </body>
 

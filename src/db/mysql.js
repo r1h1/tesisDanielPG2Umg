@@ -56,10 +56,39 @@ const data = (table) => {
 
 
 //PROTOCOLOS PARA MANEJO DE INFORMACIÓN
-//DEVOLVER TODOS LOS DATOS
+//DEVOLVER TODOS LOS DATOS POR FECHAS
 const dataWithDates = (table, createdDate, finishDate) => {
     return new Promise((resolve, reject) => {
-        stringConnection.query(`SELECT * FROM ${table} WHERE createdDate AND finishDate BETWEEN '${createdDate}' AND '${finishDate}'`, (error, result) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE createdDate >= '${createdDate}' AND finishDate <= '${finishDate}'`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+//DEVOLVER TODOS LOS DATOS POR FECHAS Y CLIENTES
+const dataWithDatesAndClients = (table, createdDate, finishDate) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT ${table}.id,${table}.ordernumber,${table}.status,${table}.totalpay,
+        ${table}.idpayoption,${table}.idpayfile,${table}.idclient,${table}.address,
+        ${table}.description,${table}.createdDate,${table}.finishDate,users.fullname
+        FROM ${table} 
+        INNER JOIN users ON ${table}.idclient = users.id
+        WHERE createdDate >= '${createdDate}' AND finishDate <= '${finishDate}'`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
+//DEVOLVER TODOS LOS DATOS POR FECHAS Y PRODUCTOS
+const dataWithDatesAndProducts = (table, createdDate, finishDate) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT ${table}.id,${table}.ordernumber,${table}.status,${table}.totalpay,
+        ${table}.idpayoption,${table}.idpayfile,${table}.idclient,${table}.address,
+        ${table}.description,${table}.createdDate,${table}.finishDate,products.name
+        FROM ${table} 
+        INNER JOIN products ON ${table}.idproduct = products.id
+        WHERE createdDate >= '${createdDate}' AND finishDate <= '${finishDate}'`, (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });
@@ -121,5 +150,7 @@ module.exports = {
     addData,
     deleteData,
     query,
-    extraIngredientsQuery
+    extraIngredientsQuery,
+    dataWithDatesAndClients,
+    dataWithDatesAndProducts
 }

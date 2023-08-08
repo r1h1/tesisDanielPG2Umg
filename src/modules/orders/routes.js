@@ -4,11 +4,55 @@ const security = require('./security');
 const responses = require('../../network/responses');
 const controller = require('./index');
 
+
 //RUTAS PARA CONSULTAR
 router.get('/', security(), data);
 router.get('/:id', security(), oneData);
 router.post('/', security(), addData);
-router.put('/', security(), deleteData);
+router.put('/', security(), deleteData);//RUTAS PARA CONSULTAR
+router.get('/:createdDate/:finishDate', security(), dataWithDates);
+router.get('/salesClient/:createdDate/:finishDate', security(), dataWithDatesAndClients);
+router.get('/salesProduct/:createdDate/:finishDate', security(), dataWithDatesAndProducts);
+
+
+//CONSULTAR UN SOLO ÍTEM POR FECHAS
+async function dataWithDates(req, res, next) {
+    try {
+        const items = await controller.dataWithDates(req.params.createdDate, req.params.finishDate).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
+
+//CONSULTAR UN SOLO ÍTEM POR FECHAS AÑADIENDO CLIENTE
+async function dataWithDatesAndClients(req, res, next) {
+    try {
+        const items = await controller.dataWithDatesAndClients(req.params.createdDate, req.params.finishDate).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
+
+//CONSULTAR UN SOLO ÍTEM POR FECHAS AÑADIENDO PRODUCTOS
+async function dataWithDatesAndProducts(req, res, next) {
+    try {
+        const items = await controller.dataWithDatesAndProducts(req.params.createdDate, req.params.finishDate).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
 
 //CONSULTAR TODOS LOS ÍTEMS
 async function data(req, res, next) {

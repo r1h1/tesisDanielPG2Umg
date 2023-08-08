@@ -16,6 +16,18 @@ module.exports = function (dbInjected) {
         return db.oneData(dataTable, id);
     }
 
+    const dataWithDates = (createdDate, finishDate) => {
+        return db.dataWithDates(dataTable, createdDate, finishDate);
+    }
+
+    const dataWithDatesAndClients = (createdDate, finishDate) => {
+        return db.dataWithDatesAndClients(dataTable, createdDate, finishDate);
+    }
+
+    const dataWithDatesAndProducts = (createdDate, finishDate) => {
+        return db.dataWithDatesAndProducts(dataTable, createdDate, finishDate);
+    }
+
     const addData = (body) => {
         return db.addData(dataTable, body);
     }
@@ -28,6 +40,9 @@ module.exports = function (dbInjected) {
         data,
         oneData,
         deleteData,
-        addData
+        addData,
+        dataWithDates,
+        dataWithDatesAndClients,
+        dataWithDatesAndProducts
     }
 }
