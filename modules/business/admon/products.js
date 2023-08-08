@@ -220,7 +220,7 @@ const setInfoEditProduct = (idProductToEdit, productName, base64Img, baseIngredi
     document.getElementById('productDescriptionEdit').value = description;
     document.getElementById('allergyInformationEdit').value = allergyInformation;
 
-    let imgToInner = `<img src="${base64Img}" alt="img-producto" width="200"/>`;
+    let imgToInner = `<img src="${base64Img}" alt="img-producto" width="150"/>`;
     document.getElementById('productPhoto').innerHTML = imgToInner;
 
     setExtraIngredientsInExtraIngredientsAndPriceTable(idProductToEdit);
@@ -229,6 +229,7 @@ const setInfoEditProduct = (idProductToEdit, productName, base64Img, baseIngredi
 }
 
 const setExtraIngredientsInExtraIngredientsAndPriceTable = (idProductToEdit) => {
+
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
@@ -258,7 +259,6 @@ const setExtraIngredientsInExtraIngredientsAndPriceTable = (idProductToEdit) => 
                     <td class="text-muted text-center">-- Sin Datos --</td>
                     <td hidden>-- Sin Datos --</td>
                     <td>-- Sin Datos --</td>
-                    <td>-- Sin Datos --</td>
                 </tr>
                 `;
                 }
@@ -271,8 +271,7 @@ const setExtraIngredientsInExtraIngredientsAndPriceTable = (idProductToEdit) => 
                     <td class="text-muted text-center">${dataObtained.body[i].name}</td>
                     <td class="text-muted">Q${dataObtained.body[i].price}</td>
                     <td hidden>${dataObtained.body[i].idproduct}</td>
-                    <td><button class="btn btn-warning" onclick=""><i class="fa-solid fa-pen"></i></button></td>
-                    <td><button class="btn btn-danger" onclick=""><i class="fa-solid fa-trash"></i></button></td>
+                    <td><button class="btn btn-danger" onclick="deleteExtraIngredientsPerProduct(${dataObtained.body[i].id})"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 `;
                 }
@@ -286,17 +285,47 @@ const setExtraIngredientsInExtraIngredientsAndPriceTable = (idProductToEdit) => 
 }
 
 
+//ADD NEW EXTRA INGREDIENT AND PRICE IN THE TEMPORALY ARRAY
+let extraIngredientsAndPriceArrayEdit = [];
+const addExtraIngredientAndPriceEdit = () => {
 
-//EDIT PRODUCT AFTER SET INFO FOR EDIT
-const editProduct = () => {
-    alert('no');
+    let extraIngredient = document.getElementById('extraIngredientEdit').value.toString();
+    let priceExtraIngredient = parseFloat(document.getElementById('priceExtraIngredientEdit').value);
+
+    extraIngredientsAndPriceArrayEdit.push([extraIngredient, priceExtraIngredient]);
+
+    if (extraIngredientsAndPriceArrayEdit.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Lo Sentimos!',
+            text: 'No se pudo concretar la operación, intenta de nuevo',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+            confirmButtonText: 'Entendido'
+        });
+    }
+    else {
+
+        let extraIngredients = '';
+        for (let i = 0; i < extraIngredientsAndPriceArrayEdit.length; i++) {
+            extraIngredients += `
+            <tr>
+                <td class="text-muted">${extraIngredientsAndPriceArrayEdit[i][0]}</td>
+                <td class="text-muted">Q${extraIngredientsAndPriceArrayEdit[i][1]}</td>
+            </tr>
+            `;
+        }
+        document.getElementById('extraIngredientsAndPriceEditNewTemporaly').innerHTML = extraIngredients;
+
+        //CLEAR AND FOCUS INPUT
+        document.getElementById('extraIngredientEdit').value = '';
+        document.getElementById('priceExtraIngredientEdit').value = '';
+        document.getElementById('extraIngredientEdit').focus();
+    }
 }
 
 
-
-//DELETE PRODUCT INFO
-const deleteProduct = (idToEliminate) => {
-
+//DELETE EXTRA INGREDIENTS PER PRODUCT
+const deleteExtraIngredientsPerProduct = (idExtraIngredientToEliminate) => {
     Swal.fire({
         icon: 'info',
         title: '¿Seguro?',
@@ -311,7 +340,7 @@ const deleteProduct = (idToEliminate) => {
             myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
 
             var raw = JSON.stringify({
-                "id": idToEliminate
+                "id": idExtraIngredientToEliminate
             });
 
             var requestOptions = {
@@ -321,7 +350,7 @@ const deleteProduct = (idToEliminate) => {
                 redirect: 'follow'
             };
 
-            fetch(globalApiUrl, requestOptions)
+            fetch(globalExtraIngredientUrl, requestOptions)
                 .then(response => response.json())
                 .then(dataObtained => showData(dataObtained))
                 .catch(error => console.log('Error: ' + error))
@@ -391,6 +420,320 @@ const deleteProduct = (idToEliminate) => {
         }
     });
 }
+
+
+
+//EDIT PRODUCT AFTER SET INFO FOR EDIT AND ADD EXTRA INGREDIENTS IF APPLY CORRECTLY
+const editProduct = () => {
+
+    let idProductToEdit = document.getElementById('idProductToEdit').value;
+    let productName = document.getElementById('productNameEdit').value;
+    let base64ImgProduct = document.getElementById('photoBase64ProductEdit').value;
+    let baseIngredients = document.getElementById('baseIngredientsEdit').value;
+    let allergyInformation = document.getElementById('allergyInformationEdit').value;
+    let productDescription = document.getElementById('productDescriptionEdit').value;
+    let applyExtraIngredientsEdit;
+
+    //IF THE TEMPORARY ARRAY OF EXTRA INGREDIENTS HAVE A DATA, AUTOMATICALLY PRODUCT APPLY EXTRA INGREDIENTS
+    if (extraIngredientsAndPriceArrayEdit.length > 0) {
+        applyExtraIngredientsEdit = 1;
+    }
+    else {
+        applyExtraIngredientsEdit = 0;
+    }
+
+    if (productName === '' || baseIngredients === '' || allergyInformation === '' || productDescription === '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'Llena todos los datos que se te solicitan',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
+        });
+    }
+    else if (base64ImgProduct === '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'La imagen no se ha subido o no ha sido validada, por favor intenta de nuevo',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
+        });
+    }
+    else {
+
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+        var raw = JSON.stringify({
+            "id": idProductToEdit,
+            "name": productName,
+            "base64img": base64ImgProduct,
+            "baseingredients": baseIngredients,
+            "allergyinformation": allergyInformation,
+            "description": productDescription,
+            "applyextraingredients": applyExtraIngredientsEdit
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(globalApiUrl, requestOptions)
+            .then(response => response.json())
+            .then(dataObtained => showData(dataObtained))
+            .catch(error => err = error);
+
+        const showData = (dataObtained) => {
+            if (dataObtained.body === 'Error de Servidor') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Lo Sentimos!',
+                    text: 'No se pudo concretar la operación, intenta de nuevo',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+            else {
+                if (dataObtained.status === 200 || dataObtained.status === 201 || dataObtained.status === 304) {
+                    try {
+                        if (extraIngredientsAndPriceArrayEdit.length === 0) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Correcto!',
+                                text: 'La operación se completó con éxito',
+                                footer: '',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Entendido',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '../../../views/a/products/component';
+                                } else if (result.isDenied) {
+                                    window.location.href = '../../../views/a/products/component';
+                                }
+                            });
+                        }
+                        else {
+                            createExtraIngredientsWithEditProduct(idProductToEdit);
+                        }
+                    }
+                    catch (err) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Lo Sentimos!',
+                            text: 'Sa ha generado un error interno',
+                            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'Sa ha generado un error interno',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            }
+        }
+    }
+}
+
+const createExtraIngredientsWithEditProduct = (idProductToPostExtraIngredients) => {
+
+    for (let i = 0; i < extraIngredientsAndPriceArrayEdit.length; i++) {
+
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+        var raw = JSON.stringify({
+            "name": extraIngredientsAndPriceArrayEdit[i][0],
+            "price": extraIngredientsAndPriceArrayEdit[i][1],
+            "idproduct": idProductToPostExtraIngredients
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(globalExtraIngredientUrl, requestOptions)
+            .then(response => response.json())
+            .then(dataObtained => showData(dataObtained))
+            .catch(error => err = error);
+
+        const showData = (dataObtained) => {
+            if (dataObtained.body === 'Error de Servidor') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Lo Sentimos!',
+                    text: 'No se pudo concretar la operación, intenta de nuevo',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+            else {
+                if (dataObtained.status === 200 || dataObtained.status === 201 || dataObtained.status === 304) {
+                    try {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Correcto!',
+                            text: 'La operación se completó con éxito',
+                            footer: '',
+                            showDenyButton: false,
+                            showCancelButton: false,
+                            confirmButtonText: 'Entendido',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '../../../views/a/products/component';
+                            } else if (result.isDenied) {
+                                window.location.href = '../../../views/a/products/component';
+                            }
+                        });
+                    }
+                    catch (err) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Lo Sentimos!',
+                            text: 'Sa ha generado un error interno',
+                            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                            confirmButtonText: 'Entendido'
+                        });
+                        console.log(err);
+                    }
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'Sa ha generado un error interno',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                    console.log(err);
+                }
+            }
+        }
+    }
+}
+
+
+
+//DELETE PRODUCT INFO
+const deleteProduct = (idToEliminate) => {
+
+    Swal.fire({
+        icon: 'info',
+        title: '¿Seguro?',
+        text: 'Los cambios no se podrán recuperar',
+        showDenyButton: true,
+        confirmButtonText: 'Continuar',
+        denyButtonText: `Cancelar`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+            var raw = JSON.stringify({
+                "id": idToEliminate
+            });
+
+            var requestOptions = {
+                method: 'PUT',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch(globalApiUrl, requestOptions)
+                .then(response => response.json())
+                .then(dataObtained => showData(dataObtained))
+                .catch(error => console.log('Error: ' + error))
+
+            const showData = (dataObtained) => {
+                if (dataObtained.body === 'Error de Servidor') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'No se pudo concretar la operación, intenta de nuevo',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+                else if (dataObtained.body === 'ER_ROW_IS_REFERENCED_2: Cannot delete or update a parent row: a foreign key constraint fails (`bakerygo`.`product_extra_ingredients`, CONSTRAINT `product_extra_ingredients_ibfk_1` FOREIGN KEY (`idproduct`) REFERENCES `products` (`id`))') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'Hay ingredientes extras creados que dependen de este, por favor, eliminelos e intente de nuevo',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+                else {
+                    if (dataObtained.status === 200 || dataObtained.status === 201 || dataObtained.status === 304) {
+                        try {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Correcto!',
+                                text: 'La operación se completó con éxito',
+                                footer: '',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Entendido',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '../../../views/a/products/component';
+                                } else if (result.isDenied) {
+                                    window.location.href = '../../../views/a/products/component';
+                                }
+                                else {
+                                    window.location.href = '../../../views/a/products/component';
+                                }
+                            })
+                        }
+                        catch (err) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '¡Lo Sentimos!',
+                                text: 'Sa ha generado un error interno',
+                                footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                                confirmButtonText: 'Entendido'
+                            });
+                        }
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Lo Sentimos!',
+                            text: 'Sa ha generado un error interno',
+                            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
+                }
+            }
+        } else if (result.isDenied) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'info',
+                title: '¡No te preocupes!',
+                text: 'No se modificó nada',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    });
+}
+
 
 
 
@@ -481,6 +824,7 @@ const verifyArrayExtraIngredients = () => {
         }
         document.getElementById('extraIngredientsAndPrice').innerHTML = extraIngredients;
         document.getElementById('extraIngredientsAndPriceEdit').innerHTML = extraIngredients;
+        document.getElementById('extraIngredientsAndPriceEditNewTemporaly').innerHTML = extraIngredients;
     }
     else {
         // EXECUTE THE ADD MODULE TO ROL TEMPORALY FUNCTION

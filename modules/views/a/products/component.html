@@ -229,6 +229,15 @@
                                     <input type="text" id="idProductToEdit" hidden>
 
                                     <div class="col-md-12 col-lg-12 mb-2">
+                                        <p class="text-muted fw-bold mb-3 mt-3 text-center h5">Imagen actual del
+                                            producto</p>
+                                        <div id="productPhoto" class="text-center">
+                                        </div>
+                                        <p class="text-muted text-center mb-3 mt-3">Si no deseas cambiar la foto, deja
+                                            en blanco el campo siguiente</p>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 mb-2">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-muted" id="productNameEdit"
                                                 placeholder="ejemplo1">
@@ -238,18 +247,10 @@
                                     </div>
 
                                     <div class="col-md-12 col-lg-12 mb-2">
-                                        <p class="text-muted fw-bold mb-3 mt-3 text-center h5">Imagen actual del productoy</p>
-                                        <div id="productPhoto" class="text-center">
-                                        </div>
-                                        <p class="text-muted text-center mb-3 mt-3">Si no deseas cambiar la foto, deja en blanco el campo siguiente</p>
-                                    </div>
-
-                                    <div class="col-md-12 col-lg-12 mb-2">
                                         <div class="form-floating">
                                             <input type="file" class="form-control text-muted" id="fileInputEdit"
                                                 accept="image/png, image/jpeg">
-                                            <label for="floatingInput text-muted">Nueva Fotografía
-                                                *</label>
+                                            <label for="floatingInput text-muted">Nueva Fotografía</label>
                                         </div>
                                     </div>
 
@@ -283,6 +284,14 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-12 mb-2">
+                                        <p class="fw-bold text-muted mt-4 h5">Nuevos ingredientes y precio</p>
+                                        <p class="text-muted">Al agregar el nombre y el precio, presione agregar para
+                                            guardarlo en una tabla temporal,
+                                            si refrescas la pantalla, estos ingredientes serán eliminados.
+                                        </p>
+                                    </div>
+
                                     <div class="col-md-12 col-lg-12 mb-2">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-muted" id="extraIngredientEdit"
@@ -302,14 +311,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 col-lg-4 mb-2">
-                                        <button type="button" class="btn btn-success py-3 w-100">+ Agregar</button>
+                                    <div class="col-md-12 col-lg-4 mb-3">
+                                        <button type="button" class="btn btn-success py-3 w-100" onclick="addExtraIngredientAndPriceEdit()">+ Agregar</button>
                                     </div>
 
                                     <div class="col-md-12 col-lg-12 mb-2">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <p class="fw-bold text-muted mt-4 h5">Ingredientes y precio</p>
+                                                <p class="fw-bold text-muted mt-4 h5">Visualizar ingredientes y precio
+                                                </p>
                                                 <p class="text-muted">Se muestran los ingredientes actuales guardados
                                                     según el producto consultado.
                                                 </p>
@@ -318,7 +328,6 @@
                                                         <tr>
                                                             <th scope="col">Nombre Producto</th>
                                                             <th scope="col">Precio</th>
-                                                            <th scope="col">Editar</th>
                                                             <th scope="col">Eliminar</th>
                                                         </tr>
                                                     </thead>
@@ -328,10 +337,10 @@
                                                 </table>
                                             </div>
                                             <div class="col-lg-6">
-                                                <p class="fw-bold text-muted mt-4 h5">Nuevos ingredientes y precio</p>
-                                                <p class="text-muted">Al agregar el nombre y el precio, se añadirá
-                                                    automáticamente a una tabla temporal,
-                                                    si refrescas la pantalla, estos ingredientes serán eliminados.
+                                                <p class="fw-bold text-muted mt-4 h5">Visualizar nuevos ingredientes y
+                                                    precio</p>
+                                                <p class="text-muted">Se muestran los ingredientes nuevos guardados
+                                                    en la tabla temporal que se visualiza abajo.
                                                 </p>
                                                 <table class="table table-striped text-center">
                                                     <thead>
