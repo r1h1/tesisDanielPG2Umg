@@ -28,6 +28,13 @@
 
 <body>
 
+    <!-- loader page -->
+    <div class="preloader-wrapper">
+        <div class="spinner-border text-dark" style="width: 3rem;height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
     <div class="main-container d-flex">
         <div class="sidebar border border-3" id="side_nav">
             <button class="btn d-md-none d-block close-btn px-1 py-0"><i
@@ -66,9 +73,10 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="../../g/infoProblem/component" target="_blank">Reportar Problema</a>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component"
+                                        target="_blank">Reportar Problema</a>
                                 </li>
-                                <li onclick="closeSession()"><a class="dropdown-item" href="../../g/login/component"><i
+                                <li onclick="closeSession()"><a class="dropdown-item"><i
                                             class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
@@ -80,11 +88,13 @@
                 <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
                     cada opción.</p>
                 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="pedidos-tab"
-                        data-bs-toggle="tab" data-bs-target="#pedidos" role="tab" aria-controls="pedidos-tab-pane"
-                        aria-selected="true">Pedidos</button>
-                    <button type="button" class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light" id="dinero-tab"
-                        data-bs-toggle="tab" data-bs-target="#dinero" role="tab" aria-controls="dinero"
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="pedidos-tab" data-bs-toggle="tab" data-bs-target="#pedidos" role="tab"
+                        aria-controls="pedidos-tab-pane" aria-selected="true">Pedidos</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="dinero-tab" data-bs-toggle="tab" data-bs-target="#dinero" role="tab" aria-controls="dinero"
                         aria-selected="false">Dinero</button>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -107,7 +117,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="startDateOrdersDay" placeholder="ejemplo1" disabled>
                                                             <label for="floatingInput text-muted">Fecha de Inicio
                                                                 *</label>
                                                         </div>
@@ -115,23 +125,20 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="endDateOrdersDay" placeholder="ejemplo1" disabled>
                                                             <label for="floatingInput text-muted">Fecha Fin
                                                                 *</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
-                                                    </div>
                                                 </div>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-3 mt-3">Total: <span
+                                                        id="totalOrdersDay" class="text-muted mt-4 h5"></span></p>
                                             </div>
 
                                             <div class="col-md-12 col-lg-6 mb-2">
-                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información graficada</p>
                                                 <div class="w-100">
-                                                    <canvas id="myChart"></canvas>
+                                                    <canvas id="chartOrdersDay"></canvas>
                                                 </div>
                                             </div>
 
@@ -156,34 +163,34 @@
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
                                                 <div class="row g-3">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-12">
                                                         <div class="form-floating">
-                                                            <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Fecha de Inicio
-                                                                *</label>
+                                                            <select class="form-select" id="dateMonthOrders" disabled>
+                                                                <option value="01">Enero</option>
+                                                                <option value="02">Febrero</option>
+                                                                <option value="03">Marzo</option>
+                                                                <option value="04">Abril</option>
+                                                                <option value="05">Mayo</option>
+                                                                <option value="06">Junio</option>
+                                                                <option value="07">Julio</option>
+                                                                <option value="08">Agosto</option>
+                                                                <option value="09">Septiembre</option>
+                                                                <option value="10">Octubre</option>
+                                                                <option value="11">Noviembre</option>
+                                                                <option value="12">Diciembre</option>
+                                                            </select>
+                                                            <label for="floatingSelect">Mes búsqueda</label>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-floating">
-                                                            <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Fecha Fin
-                                                                *</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
                                                     </div>
                                                 </div>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-3 mt-3">Total: <span
+                                                        id="totalOrdersMonth" class="text-muted mt-4 h5"></span></p>
                                             </div>
 
                                             <div class="col-md-12 col-lg-6 mb-2">
-                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información graficada</p>
                                                 <div class="w-100">
-                                                    <canvas id="myChart2"></canvas>
+                                                    <canvas id="chartOrdersMonth"></canvas>
                                                 </div>
                                             </div>
 
@@ -194,8 +201,6 @@
                             </div>
                         </div>
                         <!-- FIN FILTRO POR MES -->
-
-
                     </div>
 
                     <div class="tab-pane fade" id="dinero" role="tabpanel" aria-labelledby="dinero-tab">
@@ -206,7 +211,7 @@
                                 <p class="card-text mt-4 mb-4">
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-12">
-                                        <p class="h5 fw-bold mb-4 text-muted">Dinero Por Día</p>
+                                        <p class="h5 fw-bold mb-4 text-muted">Pedidos Por Día</p>
 
                                         <div class="row">
 
@@ -216,7 +221,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="startDateMoneyDay" placeholder="ejemplo1" disabled>
                                                             <label for="floatingInput text-muted">Fecha de Inicio
                                                                 *</label>
                                                         </div>
@@ -224,23 +229,20 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-floating">
                                                             <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
+                                                                id="endDateMoneyDay" placeholder="ejemplo1" disabled>
                                                             <label for="floatingInput text-muted">Fecha Fin
                                                                 *</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
-                                                    </div>
                                                 </div>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-3 mt-3">Total: <span
+                                                        id="totalMoneyDay" class="text-muted mt-4 h5"></span></p>
                                             </div>
 
                                             <div class="col-md-12 col-lg-6 mb-2">
-                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información graficada</p>
                                                 <div class="w-100">
-                                                    <canvas id="myChart3"></canvas>
+                                                    <canvas id="chartMoneyDay"></canvas>
                                                 </div>
                                             </div>
 
@@ -258,41 +260,41 @@
                                 <p class="card-text mt-4 mb-4">
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-12">
-                                        <p class="h5 fw-bold mb-4 text-muted">Dinero Por Mes</p>
+                                        <p class="h5 fw-bold mb-4 text-muted">Pedidos Por Mes</p>
 
                                         <div class="row">
 
                                             <div class="col-md-12 col-lg-6 mb-2">
                                                 <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
                                                 <div class="row g-3">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-12">
                                                         <div class="form-floating">
-                                                            <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Fecha de Inicio
-                                                                *</label>
+                                                            <select class="form-select" id="dateMonthMoney" disabled>
+                                                                <option value="01">Enero</option>
+                                                                <option value="02">Febrero</option>
+                                                                <option value="03">Marzo</option>
+                                                                <option value="04">Abril</option>
+                                                                <option value="05">Mayo</option>
+                                                                <option value="06">Junio</option>
+                                                                <option value="07">Julio</option>
+                                                                <option value="08">Agosto</option>
+                                                                <option value="09">Septiembre</option>
+                                                                <option value="10">Octubre</option>
+                                                                <option value="11">Noviembre</option>
+                                                                <option value="12">Diciembre</option>
+                                                            </select>
+                                                            <label for="floatingSelect">Mes búsqueda</label>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-floating">
-                                                            <input type="date" class="form-control text-muted"
-                                                                id="floatingInput" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Fecha Fin
-                                                                *</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 text-center">
-                                                        <button type="button" class="btn btn-primary py-2 px-5"><i
-                                                                class="fa-solid fa-search me-3"></i> Buscar
-                                                            Información</button>
                                                     </div>
                                                 </div>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-3 mt-3">Total: <span
+                                                        id="totalMoneyMonth" class="text-muted mt-4 h5"></span></p>
                                             </div>
 
                                             <div class="col-md-12 col-lg-6 mb-2">
-                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información</p>
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Información graficada</p>
                                                 <div class="w-100">
-                                                    <canvas id="myChart4"></canvas>
+                                                    <canvas id="chartMoneyMonth"></canvas>
                                                 </div>
                                             </div>
 
@@ -303,7 +305,6 @@
                             </div>
                         </div>
                         <!-- FIN FILTRO POR MES -->
-
                     </div>
                 </div>
             </div>
@@ -318,88 +319,6 @@
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="../../../business/admon/dashboard.js"></script>
     <script>
-
-        const ctx = document.getElementById('myChart');
-        const ctx2 = document.getElementById('myChart2');
-        const ctx3 = document.getElementById('myChart3');
-        const ctx4 = document.getElementById('myChart4');
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [800, 100, 300, 500, 200, 1000],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        new Chart(ctx4, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
         $(".sidebar ul li").on('click', function () {
             $(".activo").removeClass('activo');
             $(".shadow").removeClass('shadow');
@@ -413,6 +332,13 @@
 
         $(".close-btn").on('click', function () {
             $(".sidebar").removeClass('activo');
+        });
+
+        // Loading spinner
+        const preloaderWrapper = document.querySelector('.preloader-wrapper');
+
+        window.addEventListener('load', function () {
+            preloaderWrapper.classList.add('fade-out-animation');
         });
     </script>
 </body>

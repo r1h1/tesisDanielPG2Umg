@@ -8,7 +8,7 @@ body {
     background-color: #F5F5F5;
 }
 
-.globalColor{
+.globalColor {
     background-color: #F5F5F5;
 }
 
@@ -46,6 +46,24 @@ hr.h-color {
 
 .swal-modal .swal-text {
     text-align: center;
+}
+
+.preloader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s
+}
+
+.fade-out-animation {
+    opacity: 0;
+    visibility: hidden
 }
 
 @media(max-width: 767px) {

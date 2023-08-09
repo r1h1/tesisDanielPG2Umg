@@ -23,7 +23,6 @@ const validateToken = () => {
 validateToken();
 
 
-
 //CLOSE SESSION AND REMOVE SESSION STORAGE ITEMS
 const closeSession = () => {
     sessionStorage.removeItem('signInToken');
