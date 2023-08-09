@@ -65,6 +65,16 @@ const dataModules = (table) => {
 }
 
 
+//DEVOLVER UN SOLO PRODUCTO POR NOMBRE
+const dataProductWithName = (table, name) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE name LIKE '%${name}%' ORDER BY name ASC`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
 //PROTOCOLOS PARA MANEJO DE INFORMACIÓN
 //DEVOLVER TODOS LOS DATOS POR FECHAS
 const dataWithDates = (table, createdDate, finishDate) => {
@@ -174,5 +184,6 @@ module.exports = {
     extraIngredientsQuery,
     dataWithDatesAndClients,
     dataWithDatesAndProducts,
-    dataModulesWithIdRol
+    dataModulesWithIdRol,
+    dataProductWithName
 }

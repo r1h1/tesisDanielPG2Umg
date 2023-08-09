@@ -100,73 +100,17 @@
 
                 <div class="row px-4 mb-5 mt-2 justify-content-center">
 
-                    <div class="col-md-6 col-lg-4 mt-4 mb-3">
-                        <a href="../selectedProduct/component" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow rounded-3 placeholder-glow">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img src="../../../../../assets/img/cake-strawberries.webp" alt="pedido"
-                                            width="70%" class="mb-3 rounded-3 placeholder-glow">
-                                    </div>
-                                    <h5 class="card-title text-muted placeholder-glow">Pastel de Queso</h5>
-                                    <p class="text-muted placeholder-glow">Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit.
-                                        Dolore ad
-                                        aut amet, eligendi
-                                        totam magnam officia voluptas explicabo nostrum quisquam minus ea vero,
-                                        alias
-                                        iste
-                                        dolores at saepe expedita doloribus.</p>
-                                    <p class="card-text text-muted fw-bold h3 text-end placeholder-glow">Q53</p>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="col-lg-12 justify-content-center mt-2">
+                        <div class="form-floating">
+                            <input type="text" class="form-control text-muted rounded rounded-5 text-center"
+                                id="productNameSearch" placeholder="ejemplo1" onchange="getProductsForSale()">
+                            <label for="floatingInput text-muted"><i
+                                    class="fa-solid fa-magnifying-glass me-2 ms-2 text-muted"></i>Buscar
+                                Producto</label>
+                        </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4 mt-4 mb-3">
-                        <a href="../selectedProduct/component" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow rounded-3 placeholder-glow">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img src="../../../../../assets/img/cake-strawberries.webp" alt="pedido"
-                                            width="70%" class="mb-3 rounded-3 placeholder-glow">
-                                    </div>
-                                    <h5 class="card-title text-muted placeholder-glow">Pastel de Queso</h5>
-                                    <p class="text-muted placeholder-glow">Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit.
-                                        Dolore ad
-                                        aut amet, eligendi
-                                        totam magnam officia voluptas explicabo nostrum quisquam minus ea vero,
-                                        alias
-                                        iste
-                                        dolores at saepe expedita doloribus.</p>
-                                    <p class="card-text text-muted fw-bold h3 text-end placeholder-glow">Q53</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4 mt-4 mb-3">
-                        <a href="../selectedProduct/component" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow rounded-3 placeholder-glow">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img src="../../../../../assets/img/cake-strawberries.webp" alt="pedido"
-                                            width="70%" class="mb-3 rounded-3 placeholder-glow">
-                                    </div>
-                                    <h5 class="card-title text-muted placeholder-glow">Pastel de Queso</h5>
-                                    <p class="text-muted placeholder-glow">Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit.
-                                        Dolore ad
-                                        aut amet, eligendi
-                                        totam magnam officia voluptas explicabo nostrum quisquam minus ea vero,
-                                        alias
-                                        iste
-                                        dolores at saepe expedita doloribus.</p>
-                                    <p class="card-text text-muted fw-bold h3 text-end placeholder-glow">Q53</p>
-                                </div>
-                            </div>
-                        </a>
+                    <div id="productsForSale" class="row">
                     </div>
 
                 </div>
@@ -261,6 +205,7 @@
             crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="../../../../business/user/orders/orderNow.js"></script>
 </body>
 
 </html>

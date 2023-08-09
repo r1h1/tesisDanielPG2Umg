@@ -105,11 +105,8 @@
                 </div>
                 <div class="storedProducts mt-2 text-center">
                     <div class="text-center mt-3 mb-5">
-                        <h1 class="h4">Pastel de Queso</h1>
-                        <p class="mt-4 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Maiores
-                            ab,
-                            facilis optio ducimus eum consectetur praesentium, <br> cumque veniam et, quibusdam delectus
-                            reprehenderit.<br> Minima sint aperiam nisi, in iusto blanditiis aut.</p>
+                        <h1 class="h4" id="productNameDisplay">{productName}</h1>
+                        <p class="mt-4 text-muted px-5" id="productDescriptionDisplay">{description}</p>
                     </div>
                 </div>
             </div>
@@ -129,65 +126,15 @@
                                         deseas</p>
                                 </div>
                                 <div class="size text-start ms-4 mt-5">
-                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Tamaño</h5>
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Normal (30 ancho, 30 alto)
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Agrandado (50 alto, 50 ancho) + Q35
-                                        </label>
-                                    </div>
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Nombre del Producto</h5>
+                                    <p class="mt-2 mb-2 text-muted" id="nameProductObtained">{name}</p>
                                 </div>
                                 <div class="ingredients text-start ms-4 mt-5">
 
                                     <h5 class="mt-2 mb-2 text-muted fw-bold">Ingredientes</h5>
                                     <p class="text-start mt-1 text-muted">Desmarca lo que no quisieras agregar</p>
 
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault1" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Queso Crema
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Queso Manchego
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Mantequilla de Maní
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Chantillí
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Harinas Refinadas
-                                        </label>
+                                    <div id="baseIngredientsForProductId">
                                     </div>
 
                                 </div>
@@ -197,38 +144,8 @@
                                     <p class="text-start mt-1 text-muted">Marca lo que te interese, si no, deja en
                                         blanco</p>
 
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Velas para Pastel (5 velas)
-                                        </label>
+                                    <div id="extraIngredientsForProductId">
                                     </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Velas para Pastel (10 velas)
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Velas para Pastel (30 velas)
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Velas para Pastel (60 velas)
-                                        </label>
-                                    </div>
-
                                 </div>
 
                                 <div class="extras text-start ms-4 mt-5">
@@ -236,9 +153,7 @@
                                     <h5 class="mt-2 mb-2 text-muted fw-bold">Cantidad</h5>
                                     <p class="text-start mt-1 text-muted">Coloca el número de producto que deseas</p>
                                     <div class="input-group">
-                                        <button class="btn btn-secondary px-4" type="button">-</button>
                                         <input type="number" class="form-control text-center" value="1" min="1">
-                                        <button class="btn btn-secondary px-4" type="button">+</button>
                                     </div>
                                 </div>
 
@@ -281,6 +196,7 @@
             crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="../../../../business/user/orders/selectedProduct.js"></script>
 </body>
 
 </html>

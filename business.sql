@@ -42,6 +42,7 @@ CREATE TABLE auth (
 CREATE TABLE products (
     id INT PRIMARY KEY NOT NULL auto_increment,
     name VARCHAR(100),
+    price NUMERIC(10,2),
     base64img MEDIUMTEXT,
     baseingredients VARCHAR(600),
     allergyinformation VARCHAR(250),

@@ -9,6 +9,7 @@ router.get('/', security(), data);
 router.get('/:id', security(), oneData);
 router.post('/', security(), addData);
 router.put('/', security(), deleteData);
+router.get('/searchByName/:name', security(), dataProductWithName);
 
 //CONSULTAR TODOS LOS ÍTEMS
 async function data(req, res, next) {
@@ -33,6 +34,20 @@ async function oneData(req, res, next) {
         next(err);
     }
 };
+
+
+//CONSULTAR POR NOMBRE DE PRODUCTO
+async function dataProductWithName(req, res, next) {
+    try {
+        const items = await controller.dataProductWithName(req.params.name).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
 
 //CREAR UN NUEVO ITEM
 async function addData(req, res, next) {
