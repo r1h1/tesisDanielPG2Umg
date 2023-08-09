@@ -5,15 +5,16 @@ const responses = require('../../network/responses');
 const controller = require('./index');
 
 //RUTAS PARA CONSULTAR
-router.get('/', security(), data);
+router.get('/', security(), dataModules);
 router.get('/:id', security(), oneData);
+router.get('/rol/:id', security(), dataModulesWithIdRol);
 router.post('/', security(), addData);
 router.put('/', security(), deleteData);
 
 //CONSULTAR TODOS LOS ÍTEMS
-async function data(req, res, next) {
+async function dataModules(req, res, next) {
     try {
-        const items = await controller.data().then((items) => {
+        const items = await controller.dataModules().then((items) => {
             responses.success(req, res, items, 200);
         });
     }
@@ -33,6 +34,20 @@ async function oneData(req, res, next) {
         next(err);
     }
 };
+
+
+//CONSULTAR UN SOLO ÍTEM POR ROL
+async function dataModulesWithIdRol(req, res, next) {
+    try {
+        const items = await controller.dataModulesWithIdRol(req.params.id).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
 
 //CREAR UN NUEVO ITEM
 async function addData(req, res, next) {

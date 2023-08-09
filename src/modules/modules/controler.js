@@ -8,12 +8,16 @@ module.exports = function (dbInjected) {
         db = require("../../db/mysql");
     }
 
-    const data = (table) => {
-        return db.data(dataTable)
+    const dataModules = (table) => {
+        return db.dataModules(dataTable)
     }
 
     const oneData = (id) => {
         return db.oneData(dataTable, id);
+    }
+
+    const dataModulesWithIdRol = (id) => {
+        return db.dataModulesWithIdRol(dataTable, id);
     }
 
     const addData = (body) => {
@@ -25,9 +29,10 @@ module.exports = function (dbInjected) {
     }
 
     return {
-        data,
+        dataModules,
         oneData,
         deleteData,
-        addData
+        addData,
+        dataModulesWithIdRol
     }
 }

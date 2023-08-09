@@ -123,10 +123,15 @@ const getAllUserData = (id, tokenObtained) => {
         }
         else {
             try {
-                if (dataObtained.body[0].idrol != 3 && dataObtained.body[0].status === 1) {
+                if (dataObtained.body[0].idrol === 1 && dataObtained.body[0].status === 1) {
                     let userInformation = window.btoa(JSON.stringify(dataObtained.body));
                     sessionStorage.setItem("sessionInfo", userInformation);
                     window.location.href = '../../../views/a/dashboard/component';
+                }
+                else if (dataObtained.body[0].idrol != 3 && dataObtained.body[0].idrol != 1 && dataObtained.body[0].status === 1) {
+                    let userInformation = window.btoa(JSON.stringify(dataObtained.body));
+                    sessionStorage.setItem("sessionInfo", userInformation);
+                    window.location.href = '../../../views/a/account/component';
                 }
                 else if (dataObtained.body[0].idrol === 3 && dataObtained.body[0].status === 1) {
                     let userInformation = window.btoa(JSON.stringify(dataObtained.body));
