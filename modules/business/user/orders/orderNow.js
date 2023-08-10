@@ -149,11 +149,18 @@ const getShoppingCart = () => {
     const keys = Object.keys(localStorage);
     const values = [];
 
-    document.getElementById('quantityShoppingCart').innerHTML = '-- ' + keys.length + ' Articulo(s) --';
+    document.getElementById('quantityShoppingCart').innerHTML = '-- ' + keys.length + ' Articulo(s) -- <br> Selecciona artículos para tu compra y presiona continuar';
 
     keys.forEach(key => {
         values[key] = localStorage.getItem(key);
     });
+
+    if (keys.length === 0) {
+        document.getElementById('continuePayOrderButton').style.display = 'none';
+    }
+    else {
+        document.getElementById('continuePayOrderButton').style.display = 'block';
+    }
 
     let articlesForShopping = '';
     for (let i = 0; i < keys.length; i++) {
