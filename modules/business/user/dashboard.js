@@ -1,14 +1,18 @@
+localStorage.clear();
+
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
 const validateToken = () => {
     let token = sessionStorage.getItem('signInToken');
     let userInformation = sessionStorage.getItem('sessionInfo');
     if (token == null || token.length == 0 || token == '') {
         sessionStorage.removeItem('signInToken');
-        window.location.href = '../../../views/g/login/component';
+        localStorage.removeItem('shoppingCart');
+        window.location.href = '../../../../views/g/login/component';
     }
     else if (userInformation == null || userInformation.length == 0 || userInformation == '') {
         sessionStorage.removeItem('sessionInfo');
-        window.location.href = '../../../views/g/login/component';
+        localStorage.removeItem('shoppingCart');
+        window.location.href = '../../../../views/g/login/component';
     }
     else {
         //CORRECT ACCESS
@@ -22,8 +26,9 @@ validateToken();
 const closeSession = () => {
     sessionStorage.removeItem('signInToken');
     sessionStorage.removeItem('sessionInfo');
-    window.location.href = '../../../views/g/login/component';
+    window.location.href = '../../../../views/g/login/component';
 }
+
 
 //EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN
 setInterval(validateToken, 60000);

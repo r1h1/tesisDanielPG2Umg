@@ -74,12 +74,10 @@
                                         class="fa-solid fa-circle-info me-3"></i> Informar Sobre Un Problema</a>
                             </li>
                             <div class="text-center mt-5">
-                                <a href="../../../g/login/component">
-                                    <div class="buttonCloseSession btn btn-light px-5 text-start rounded-5">
-                                        <p class="mt-3"><i class="fa-solid fa-right-to-bracket me-3"></i> Cerrar Sesión
-                                        </p>
-                                    </div>
-                                </a>
+                                <div class="buttonCloseSession btn btn-light px-5 text-start rounded-5" onclick="closeSession()">
+                                    <p class="mt-3"><i class="fa-solid fa-right-to-bracket me-3"></i> Cerrar Sesión
+                                    </p>
+                                </div>
                             </div>
                         </ul>
                     </div>
@@ -98,7 +96,7 @@
             <!-- PEDIDOS DE USUARIO -->
             <div class="col-lg-8 userInformation buttonsAndWelcomeText">
 
-                <div class="row px-4 mb-5 mt-2 justify-content-center">
+                <div class="row mb-5 mt-2 justify-content-center">
 
                     <div class="col-lg-12 justify-content-center mt-2">
                         <div class="form-floating">
@@ -133,62 +131,15 @@
                         <h1 class="h4"><span id="nameVisit">Carrito de Compras</span></h1>
                     </div>
                     <div class="shoppingCartArticles">
-                        <p class="text-center text-muted">-- 3 articulo(s) --</p>
+                        <p class="text-center text-muted" id="quantityShoppingCart"></p>
                     </div>
 
                     <!-- PRODUCTOS QUE SE VAN A COMPRAR -->
-                    <div class="row container-fluid">
-
-                        <!-- PEDIDOS -->
-                        <div class="col-md-12 col-lg-12 mt-4 mb-3">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-start text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-start text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-secondary">Pendiente Pago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12 mt-4 mb-3">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-start text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-start text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-secondary">Pendiente Pago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12 mt-4 mb-3">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-start text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-start text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-secondary">Pendiente Pago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row container-fluid" id="articlesForShopping">
                     </div>
                     <!-- FIN PEDIDOS -->
 
-                    <div class="actionButton1 text-center mt-5">
+                    <div class="actionButton1 text-center mt-4">
                         <a href="../payOrder/component">
                             <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
                                 <p class="mt-3">Continuar <i class="fa-solid fa-arrow-right ms-3"></i></p>

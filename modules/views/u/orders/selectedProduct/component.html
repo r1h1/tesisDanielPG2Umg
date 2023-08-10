@@ -119,25 +119,34 @@
                     <div class="col-sm-12 col-md-9 col-lg-8 mt-4 mb-3">
                         <div class="card bg-light border-0 shadow rounded-3">
                             <div class="card-body p-3">
+
                                 <div class="cardTexts ms-4 text-center">
                                     <i class="fa-solid fa-bag-shopping fs-1 mt-4 mb-4"></i>
                                     <h5 class="mt-2 text-muted">¿Cómo deseas tu pedido?</h5>
                                     <p class="mt-1 text-muted">Llena las opciones y especifica cosas que no
                                         deseas</p>
                                 </div>
+
                                 <div class="size text-start ms-4 mt-5">
                                     <h5 class="mt-2 mb-2 text-muted fw-bold">Nombre del Producto</h5>
                                     <p class="mt-2 mb-2 text-muted" id="nameProductObtained">{name}</p>
                                 </div>
+
+                                <div class="size text-start ms-4 mt-5">
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Precio (Q)</h5>
+                                    <p class="mt-2 mb-2 text-muted" id="priceProductObtained">{price}</p>
+                                </div>
+
                                 <div class="ingredients text-start ms-4 mt-5">
 
                                     <h5 class="mt-2 mb-2 text-muted fw-bold">Ingredientes</h5>
-                                    <p class="text-start mt-1 text-muted">Desmarca lo que no quisieras agregar</p>
+                                    <p class="text-start mt-1 text-muted">Elimina el ingrediente que no quisieras agregar</p>
 
                                     <div id="baseIngredientsForProductId">
                                     </div>
 
                                 </div>
+
                                 <div class="extras text-start ms-4 mt-5">
 
                                     <h5 class="mt-2 mb-2 text-muted fw-bold">Extras</h5>
@@ -150,10 +159,20 @@
 
                                 <div class="extras text-start ms-4 mt-5">
 
+                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Información Alérgica</h5>
+                                    <p class="text-start mt-1 text-muted">Se detalla la información de alergenos y demás
+                                        contenidos</p>
+
+                                    <p class="text-start text-muted fw-bold" id="allergyInformation">
+                                        {allergyInformation}</p>
+                                </div>
+
+                                <div class="extras text-start ms-4 mt-5">
+
                                     <h5 class="mt-2 mb-2 text-muted fw-bold">Cantidad</h5>
                                     <p class="text-start mt-1 text-muted">Coloca el número de producto que deseas</p>
                                     <div class="input-group">
-                                        <input type="number" class="form-control text-center" value="1" min="1">
+                                        <input type="number" class="form-control text-center" value="1" min="1" id="quantityProduct">
                                     </div>
                                 </div>
 
@@ -167,18 +186,17 @@
                                         mensaje en este aparatado para incluírlo en tu orden.</p>
                                     <div class="form-floating">
                                         <textarea class="form-control" cols="30" rows="10"
-                                            style="height: 160px;"></textarea>
+                                            style="height: 160px;" id="userDescription"></textarea>
                                         <label for="floatingTextarea">Comenta aquí</label>
                                     </div>
                                 </div>
 
                                 <div class="actionButton1 text-center mt-5">
-                                    <a href="../orderNow/component">
-                                        <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
-                                            <p class="mt-3">Continuar Comprando <i
-                                                    class="fa-solid fa-arrow-right ms-3"></i></p>
-                                        </div>
-                                    </a>
+                                    <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5"
+                                        onclick="addProductToShoppingCartLocalStorage()">
+                                        <p class="mt-3">Seguir Comprando <i class="fa-solid fa-arrow-right ms-2"></i>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

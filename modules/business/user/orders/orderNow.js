@@ -8,11 +8,13 @@ const validateToken = () => {
     let userInformation = sessionStorage.getItem('sessionInfo');
     if (token == null || token.length == 0 || token == '') {
         sessionStorage.removeItem('signInToken');
-        window.location.href = '../../../views/g/login/component';
+        localStorage.removeItem('shoppingCart');
+        window.location.href = '../../../../views/g/login/component';
     }
     else if (userInformation == null || userInformation.length == 0 || userInformation == '') {
         sessionStorage.removeItem('sessionInfo');
-        window.location.href = '../../../views/g/login/component';
+        localStorage.removeItem('shoppingCart');
+        window.location.href = '../../../../views/g/login/component';
     }
     else {
         //CORRECT ACCESS
@@ -26,7 +28,8 @@ validateToken();
 const closeSession = () => {
     sessionStorage.removeItem('signInToken');
     sessionStorage.removeItem('sessionInfo');
-    window.location.href = '../../../views/g/login/component';
+    localStorage.clear();
+    window.location.href = '../../../../views/g/login/component';
 }
 
 //EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN
@@ -116,7 +119,7 @@ const getProductsForSale = () => {
                                     <div class="card-body">
                                         <div class="text-center">
                                             <img src="${dataObtained.body[i].base64img}" alt="pedido"
-                                                width="80%" class="mb-3 rounded-3 placeholder-glow">
+                                                width="100%" height="250" class="mb-3 rounded-3 placeholder-glow">
                                         </div>
                                         <h5 class="card-title text-muted placeholder-glow fw-bold">${dataObtained.body[i].name}</h5>
                                         <p class="text-muted placeholder-glow">${dataObtained.body[i].description}</p>
@@ -137,3 +140,51 @@ const getProductsForSale = () => {
     }
 }
 getProductsForSale();
+
+
+
+// GET SHOPPING CART LOCAL STORAGE
+const getShoppingCart = () => {
+
+    const keys = Object.keys(localStorage);
+    const values = [];
+
+    document.getElementById('quantityShoppingCart').innerHTML = '-- ' + keys.length + ' Articulo(s) --';
+
+    keys.forEach(key => {
+        values[key] = localStorage.getItem(key);
+    });
+
+    let articlesForShopping = '';
+    for (let i = 0; i < keys.length; i++) {
+
+        const key = keys[i];
+        const storedValue = localStorage.getItem(key);
+
+        let parsedValue = '';
+        if (storedValue) {
+            parsedValue = JSON.parse(storedValue);
+        } else {
+            console.log(`No se encontró ningún valor para la clave ${key}`);
+        }
+
+        articlesForShopping += `<div class="col-md-12 col-lg-12 mt-4 mb-3">
+                                    <div class="card bg-light border-0 shadow">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="card-text text-start text-muted fw-bold h5">${parsedValue[0].productQuantity}</p>
+                                                    <h5 class="card-title text-start text-muted">${parsedValue[0].productName}</h5>
+                                                    <p class="card-text text-start text-muted fw-bold h5">Q${parsedValue[0].newPriceProduct}</p>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <p class="btn btn-secondary">Pendiente Pago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+    }
+    document.getElementById('articlesForShopping').innerHTML = articlesForShopping;
+}
+getShoppingCart();

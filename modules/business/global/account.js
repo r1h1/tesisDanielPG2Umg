@@ -8,10 +8,12 @@ const validateToken = () => {
     let userInformation = sessionStorage.getItem('sessionInfo');
     if (token == null || token.length == 0 || token == '') {
         sessionStorage.removeItem('signInToken');
+        localStorage.removeItem('shoppingCart');
         window.location.href = '../../../views/g/login/component';
     }
     else if (userInformation == null || userInformation.length == 0 || userInformation == '') {
         sessionStorage.removeItem('sessionInfo');
+        localStorage.removeItem('shoppingCart');
         window.location.href = '../../../views/g/login/component';
     }
     else {
@@ -26,6 +28,7 @@ validateToken();
 const closeSession = () => {
     sessionStorage.removeItem('signInToken');
     sessionStorage.removeItem('sessionInfo');
+    localStorage.removeItem('shoppingCart');
     window.location.href = '../../../views/g/login/component';
 }
 

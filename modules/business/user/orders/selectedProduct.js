@@ -10,11 +10,13 @@ const validateToken = () => {
     let userInformation = sessionStorage.getItem('sessionInfo');
     if (token == null || token.length == 0 || token == '') {
         sessionStorage.removeItem('signInToken');
-        window.location.href = '../../../views/g/login/component';
+        localStorage.removeItem('shoppingCart');
+        window.location.href = '../../../../views/g/login/component';
     }
     else if (userInformation == null || userInformation.length == 0 || userInformation == '') {
         sessionStorage.removeItem('sessionInfo');
-        window.location.href = '../../../views/g/login/component';
+        localStorage.removeItem('shoppingCart');
+        window.location.href = '../../../../views/g/login/component';
     }
     else {
         //CORRECT ACCESS
@@ -28,7 +30,8 @@ validateToken();
 const closeSession = () => {
     sessionStorage.removeItem('signInToken');
     sessionStorage.removeItem('sessionInfo');
-    window.location.href = '../../../views/g/login/component';
+    localStorage.clear();
+    window.location.href = '../../../../views/g/login/component';
 }
 
 //EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN
@@ -61,26 +64,20 @@ const getProductByIdObtained = () => {
 
     const showData = (dataObtained) => {
         try {
-
-            let baseIngredients = dataObtained.body[0].baseingredients.split(',');
-
+            
             document.getElementById('productNameDisplay').innerHTML = dataObtained.body[0].name;
             document.getElementById('nameProductObtained').innerHTML = dataObtained.body[0].name;
             document.getElementById('productDescriptionDisplay').innerHTML = dataObtained.body[0].description;
+            document.getElementById('allergyInformation').innerHTML = dataObtained.body[0].allergyinformation;
+            document.getElementById('priceProductObtained').innerHTML = dataObtained.body[0].price;
 
-            let checkboxBaseIngredientsOptions = '';
-            for (let i = 0; i < baseIngredients.length; i++) {
-                checkboxBaseIngredientsOptions += `
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox"
-                            id="${dataObtained.body[0].id}" checked>
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            ${baseIngredients[i]}
-                        </label>
-                    </div>
+            let baseIngredientsOptions = '';
+            for (let i = 0; i < dataObtained.body.length; i++) {
+                baseIngredientsOptions += `
+                    <input type="text" class="form-control" value="${dataObtained.body[i].baseingredients}" id="baseIngredients">
                 `;
             }
-            document.getElementById('baseIngredientsForProductId').innerHTML = checkboxBaseIngredientsOptions;
+            document.getElementById('baseIngredientsForProductId').innerHTML = baseIngredientsOptions;
             getExtraIngredientsPerProductId(productIdToGet);
         }
         catch (err) {
@@ -127,7 +124,7 @@ const getExtraIngredientsPerProductId = (productIdToGetExtraIngredients) => {
                     <div class="form-check mt-3">
                         <input class="form-check-input" type="checkbox"
                             id="${dataObtained.body[i].id}">
-                        <label class="form-check-label" for="flexRadioDefault1">
+                        <label class="form-check-label" for="${dataObtained.body[i].id}">
                             ${dataObtained.body[i].name}, Q${dataObtained.body[i].price}
                         </label>
                     </div>
@@ -139,5 +136,50 @@ const getExtraIngredientsPerProductId = (productIdToGetExtraIngredients) => {
         catch (err) {
             console.log(err);
         }
+    }
+}
+
+
+//ADD PRODUCT FOR TEMPORALY SHOP CART IN LOCAL STORAGE
+//ADD PRODUCT FOR TEMPORALY SHOP CART IN LOCAL STORAGE
+let shoppingCart = [];
+const addProductToShoppingCartLocalStorage = () => {
+
+    //GET URL
+    const urlParams = new URLSearchParams(window.location.search);
+    //GET ID
+    const productIdToGet = urlParams.get('q');
+
+    let productName = document.getElementById('nameProductObtained').innerHTML;
+    let productDescription = document.getElementById('productDescriptionDisplay').innerHTML;
+    let productAllergyInformation = document.getElementById('allergyInformation').innerHTML;
+    let productBaseIngredients = document.getElementById('baseIngredientsForProductId').checked;
+    let productExtraIngredients = document.getElementById('extraIngredientsForProductId').checked;
+    let productQuantity = document.getElementById('quantityProduct').value;
+    let userOrderDescription = document.getElementById('userDescription').value;
+    let basePriceProduct = document.getElementById('priceProductObtained').innerHTML;
+    let newPriceProduct = parseFloat(basePriceProduct) * parseFloat(productQuantity);
+    let baseIngredients = document.getElementById('baseIngredients').value;
+
+    let cartItem = {
+        productName,
+        productDescription,
+        productAllergyInformation,
+        productBaseIngredients,
+        productExtraIngredients,
+        productQuantity,
+        userOrderDescription,
+        newPriceProduct,
+        baseIngredients
+    };
+
+    shoppingCart.push(cartItem);
+
+    localStorage.setItem('shoppingCartItem' + productIdToGet, JSON.stringify(shoppingCart));
+
+    if (shoppingCart.length > 0) {
+        window.location.href = '../../../../views/u/orders/orderNow/component';
+    } else {
+        shoppingCart = [];
     }
 }

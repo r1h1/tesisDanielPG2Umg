@@ -791,11 +791,11 @@ const convertImgToBase64 = () => {
             let imageRoute = reader.result;
             let sizeImage = file.size;
 
-            if (sizeImage > 100000) {
+            if (sizeImage > 70000) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Advertencia',
-                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar (MAX 100 KB)',
+                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar (MAX 70 KB)',
                     footer: '<a href="https://tinyjpg.com/" target="_blank">Presione acá para ser redirigido al compresor de imágenes</a>',
                     confirmButtonText: 'Entendido'
                 });
@@ -825,11 +825,11 @@ const convertImgToBase64EditModal = () => {
             let imageRoute = reader.result;
             let sizeImage = file.size;
 
-            if (sizeImage > 100000) {
+            if (sizeImage > 70000) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Advertencia',
-                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar (MAX 100 KB)',
+                    text: 'La imagen supera el peso permitido, comprimala con la herramienta que se muestra abajo, intente de nuevo o seleccione otra imagen para continuar (MAX 70 KB)',
                     footer: '<a href="https://tinyjpg.com/" target="_blank">Presione acá para ser redirigido al compresor de imágenes</a>',
                     confirmButtonText: 'Entendido'
                 });
