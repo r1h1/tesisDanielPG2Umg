@@ -8,6 +8,31 @@ CREATE TABLE rol (
     name VARCHAR(50) NOT NULL
 );
 
+INSERT INTO
+    `rol`(`id`, `name`)
+VALUES
+    (1, 'Super Administrador');
+
+INSERT INTO
+    `rol`(`id`, `name`)
+VALUES
+    (2, 'Administrador');
+
+INSERT INTO
+    `rol`(`id`, `name`)
+VALUES
+    (3, 'Cliente');
+
+INSERT INTO
+    `rol`(`id`, `name`)
+VALUES
+    (4, 'Cocinero');
+
+INSERT INTO
+    `rol`(`id`, `name`)
+VALUES
+    (5, 'Contabilidad');
+
 -- CREACION DE TABLA MÓDULOS
 CREATE TABLE modules (
     id INT PRIMARY KEY NOT NULL auto_increment,
@@ -16,6 +41,140 @@ CREATE TABLE modules (
     idrol INT,
     FOREIGN KEY (idrol) REFERENCES rol(id)
 );
+
+-- MODULOS PARA ROL SUPER ADMINISTRADOR
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        1,
+        'Dashboard',
+        '<li class="activo shadow mt-2"><a href="../dashboard/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gauge me-3"></i> Dashboard</a></li>',
+        1
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        2,
+        'Administracion',
+        '<li class="mt-2"><a href="../administrative/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-lock me-3"></i> Administrativo</a></li>',
+        1
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        3,
+        'Productos',
+        '<li class="mt-2"><a href="../products/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-box me-3"></i> Productos</a></li>',
+        1
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        4,
+        'Pedidos',
+        '<li class="mt-2"><a href="../orders/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-truck me-3"></i> Pedidos</a></li>',
+        1
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        5,
+        'Reporteria',
+        '<li class="mt-2"><a href="../reports/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-chart-pie me-3"></i> Reportería</a></li>',
+        1
+    );
+
+-- MODULOS PARA ROL ADMINISTRADOR
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        6,
+        'Dashboard',
+        '<li class="activo shadow mt-2"><a href="../dashboard/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gauge me-3"></i> Dashboard</a></li>',
+        2
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        7,
+        'Administracion',
+        '<li class="mt-2"><a href="../administrative/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-lock me-3"></i> Administrativo</a></li>',
+        2
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        8,
+        'Productos',
+        '<li class="mt-2"><a href="../products/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-box me-3"></i> Productos</a></li>',
+        2
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        9,
+        'Pedidos',
+        '<li class="mt-2"><a href="../orders/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-truck me-3"></i> Pedidos</a></li>',
+        2
+    );
+
+-- MODULOS PARA ROL COCINERO
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        10,
+        'Productos',
+        '<li class="mt-2"><a href="../products/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-box me-3"></i> Productos</a></li>',
+        4
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        11,
+        'Pedidos',
+        '<li class="mt-2"><a href="../orders/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-truck me-3"></i> Pedidos</a></li>',
+        4
+    );
+
+-- MODULO PARA ROL CONTABILIDAD
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        12,
+        'Dashboard',
+        '<li class="activo shadow mt-2"><a href="../dashboard/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gauge me-3"></i> Dashboard</a></li>',
+        5
+    );
+
+INSERT INTO
+    `modules`(`id`, `name`, `route`, `idrol`)
+VALUES
+    (
+        13,
+        'Reporteria',
+        '<li class="mt-2"><a href="../reports/component" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-chart-pie me-3"></i> Reportería</a></li>',
+        5
+    );
 
 -- CREACION DE TABLA USUARIO
 CREATE TABLE users (
@@ -42,7 +201,7 @@ CREATE TABLE auth (
 CREATE TABLE products (
     id INT PRIMARY KEY NOT NULL auto_increment,
     name VARCHAR(100),
-    price NUMERIC(10,2),
+    price NUMERIC(10, 2),
     base64img MEDIUMTEXT,
     baseingredients VARCHAR(600),
     allergyinformation VARCHAR(250),
@@ -59,19 +218,6 @@ CREATE TABLE product_extra_ingredients (
     FOREIGN KEY (idproduct) REFERENCES products(id)
 );
 
--- CREACION DE TABLA DOCUMENTOS DE PAGO
-CREATE TABLE payfiles (
-    id INT PRIMARY KEY NOT NULL auto_increment,
-    base64imgreference MEDIUMTEXT
-);
-
--- CREACION DE TABLA OPCIONES DE PAGO
-CREATE TABLE payoptions (
-    id INT PRIMARY KEY NOT NULL auto_increment,
-    name VARCHAR(50),
-    route VARCHAR(500)
-);
-
 -- CREACION DE TABLA ORDENES
 CREATE TABLE orders (
     id INT PRIMARY KEY NOT NULL auto_increment,
@@ -79,24 +225,28 @@ CREATE TABLE orders (
     status INT,
     totalpay NUMERIC(10, 2),
     idpayoption INT,
-    idpayfile INT,
     idclient INT,
-    idproduct INT,
-    address VARCHAR(250),
-    description VARCHAR(250),
+    nameorder varchar(50),
+    nitorder varchar(50),
+    addressorder VARCHAR(250),
+    phoneorder VARCHAR(20),
+    bankorpaypalauthnumber VARCHAR(250),
+    bankdateofpay VARCHAR(50),
     createdDate VARCHAR(50),
     finishDate VARCHAR(50),
-    base64imgreference MEDIUMTEXT,
-    FOREIGN KEY (idpayoption) REFERENCES payoptions(id),
-    FOREIGN KEY (idpayfile) REFERENCES payfiles(id),
-    FOREIGN KEY (idclient) REFERENCES users(id),
-    FOREIGN KEY (idproduct) REFERENCES products(id)
+    base64payfile TEXT,
+    FOREIGN KEY (idclient) REFERENCES users(id)
 );
 
 -- CREACION DE TABLA PRODUCTOS POR ORDEN
 CREATE TABLE product_per_order (
     id INT PRIMARY KEY NOT NULL auto_increment,
     idproduct INT,
+    quantity INT,
+    priceproduct NUMERIC(10, 2),
+    baseingredientsselected VARCHAR(250),
+    idextraingredients VARCHAR(100),
+    description VARCHAR(250),
     idorder INT,
     FOREIGN KEY (idproduct) REFERENCES products(id),
     FOREIGN KEY (idorder) REFERENCES orders(id)

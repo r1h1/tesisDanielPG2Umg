@@ -18,7 +18,15 @@ const validateToken = () => {
         //CORRECT ACCESS
     }
 }
-validateToken();
+
+//CLEAR LOCALSTORAGE
+const clearLocalStorage = () => {
+    localStorage.clear();
+}
+
+//EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN AND DROP LOCAL STORAGE
+setInterval(validateToken, 60000);
+setInterval(clearLocalStorage, 3000);
 
 
 

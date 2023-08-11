@@ -20,6 +20,9 @@
     <!-- ICONO EN EL TAB -->
     <link rel="icon" href="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png">
 
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -108,7 +111,7 @@
                     <div class="shoppingCartArticles">
                         <p class="mt-2 mb-5 text-muted text-center">Elige una opción</p>
 
-                        <div class="row container-fluid text-center mt-3">
+                        <div class="row container-fluid mt-3">
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -143,9 +146,41 @@
 
                         <div class="row">
 
+                            <!-- NUMBER ORDER GENERATED -->
+                            <input type="text" id="orderNumber" hidden>
+
+                            <!-- ORDER TOTAL PAYMENT -->
+                            <input type="text" id="totalPayment" hidden>
+
                             <!-- EFECTIVO DIV -->
                             <div id="paymentCash" class="row">
                                 <div class="col-md-12 col-lg-12">
+
+                                    <div class="card bg-light border-0 shadow mb-4">
+                                        <div class="card-body">
+                                            <h5 class="mb-4 mt-3">Resumen</h5>
+                                            <ul class="list-group">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                    Ítems en el carrito de compras
+                                                    <span id="productQuantityPayCash">{quantity}</span>
+                                                </li>
+                                                <hr>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                                    <div>
+                                                        <strong>Total</strong>
+                                                        <strong>
+                                                            <p class="mb-0">(Incluye IVA)</p>
+                                                        </strong>
+                                                    </div>
+                                                    <span id="productTotalPayCash"
+                                                        class="fw-bold h4"><strong>{total}</strong></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
                                     <div class="card bg-light border-0 shadow mb-4">
                                         <div class="card-body">
 
@@ -198,32 +233,36 @@
                                                 </div>
                                             </div>
 
-                                            <div class="actionButton1 text-center mt-4 mb-2">
-                                                <a href="../payConfirmed/component">
-                                                    <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
+                                            <div class="actionButton1 text-center mt-4 mb-2" onclick="setCashDataAfterCreatedOrder(1)">
+                                                <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
                                                         <p class="mt-3">Continuar <i
                                                                 class="fa-solid fa-arrow-right ms-3"></i></p>
                                                     </div>
-                                                </a>
                                             </div>
 
                                             </form>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <!-- FIN CASH PAYMENT -->
+
+
+
+                            <!-- TRANSFERENCIA BANCARIA DIV -->
+                            <div id="paymentBankTransfer" class="row">
+                                <div class="col-md-12 col-lg-12 mb-4">
+
                                     <div class="card bg-light border-0 shadow mb-4">
                                         <div class="card-body">
                                             <h5 class="mb-4 mt-3">Resumen</h5>
                                             <ul class="list-group">
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                                    Cantidad de Producto
-                                                    <span>4</span>
+                                                    Ítems en el carrito de compras
+                                                    <span id="productQuantityPaymentBank">{quantity}</span>
                                                 </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                                    Total a Pagar
-                                                    <span>Q212.00</span>
-                                                </li>
+                                                <hr>
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                                     <div>
@@ -232,19 +271,169 @@
                                                             <p class="mb-0">(Incluye IVA)</p>
                                                         </strong>
                                                     </div>
-                                                    <span><strong>Q212.00</strong></span>
+                                                    <span id="productTotalPaymentBank"
+                                                        class="fw-bold h4"><strong>{total}</strong></span>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
+
+                                    <div class="card bg-light border-0 shadow mb-4">
+                                        <div class="card-body">
+
+                                            <h5 class="mb-4 mt-3">Transferencia Bancaria</h5>
+
+                                            <div class="row mb-4">
+
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-user text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input class="form-control" type="file"
+                                                                accept="image/png, image/jpeg"
+                                                                id="userVoucherPhotoPaymentBank">
+                                                            <label for="floatingInput text-muted">Comprobante
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- PHOTO BASE 64 CONVERTED TO TEXT -->
+                                                <input type="text" id="photoBase64Product" hidden>
+
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-file-invoice text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input type="datetime-local" class="form-control text-muted"
+                                                                id="userVoucherDatePaymentBank" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha y Hora
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-file-invoice text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control text-muted"
+                                                                id="userVoucherNumberAuthorizationPaymentBank"
+                                                                placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">No. de Autorización
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-user text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control text-muted"
+                                                                id="userNamePaymentBank" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Nombre *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-user text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control text-muted"
+                                                                id="userAddressPaymentBank" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Dirección *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-user text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control text-muted"
+                                                                id="userNitPaymentBank" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">NIT *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-phone text-secondary"></i></span>
+                                                        <div class="form-floating">
+                                                            <input type="number" class="form-control text-muted"
+                                                                id="userPhonePaymentBank" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Teléfono *</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="actionButton1 text-center mt-4 mb-2">
+                                                        <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5"
+                                                            data-bs-toggle="modal" data-bs-target="#bankAccountsModal">
+                                                            <p class="mt-3">Ver Cuentas Bancarias <i
+                                                                    class="fa-solid fa-arrow-right ms-3"></i></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="actionButton1 text-center mt-4 mb-2" onclick="setBankDataAfterCreatedOrder(2)">
+                                                        <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
+                                                                <p class="mt-3">Continuar <i
+                                                                        class="fa-solid fa-arrow-right ms-3"></i></p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            <!-- FIN BANK TRANSFER -->
+
+
 
                             <!-- PAYPAL DIV -->
                             <div id="paymentPayPal" class="row">
                                 <div class="col-md-12 col-lg-12 mb-4">
+
                                     <div class="card bg-light border-0 shadow mb-4">
                                         <div class="card-body">
+                                            <h5 class="mb-4 mt-3">Resumen</h5>
+                                            <ul class="list-group">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                    Ítems en el carrito de compras
+                                                    <span id="productQuantityPayPal">{quantity}</span>
+                                                </li>
+                                                <hr>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                                    <div>
+                                                        <strong>Total</strong>
+                                                        <strong>
+                                                            <p class="mb-0">(Incluye IVA)</p>
+                                                        </strong>
+                                                    </div>
+                                                    <span id="productTotalPayPal"
+                                                        class="fw-bold h4"><strong>{total}</strong></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="card bg-light border-0 shadow mb-4">
+                                        <div class="card-body mt-3">
 
                                             <h5 class="mb-4 mt-3">PayPal y Tarjeta Crédito / Débito</h5>
 
@@ -326,14 +515,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="actionButton1 text-center mt-4 mb-2">
-                                                        <a href="../payConfirmed/component">
-                                                            <div
-                                                                class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
-                                                                <p class="mt-3">Confirmar Pago <i
+                                                    <div class="actionButton1 text-center mt-4 mb-2" onclick="setPayPalDataAfterCreatedOrder(3)">
+                                                        <div class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
+                                                                <p class="mt-3">Continuar <i
                                                                         class="fa-solid fa-arrow-right ms-3"></i></p>
                                                             </div>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -341,187 +527,13 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="card bg-light border-0 shadow mb-4">
-                                        <div class="card-body">
-                                            <h5 class="mb-4 mt-3">Resumen</h5>
-                                            <ul class="list-group">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                                    Cantidad de Producto
-                                                    <span>4</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                                    Total a Pagar
-                                                    <span>$27.15</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                                    <div>
-                                                        <strong>Total</strong>
-                                                        <strong>
-                                                            <p class="mb-0">(Incluye IVA)</p>
-                                                        </strong>
-                                                    </div>
-                                                    <span><strong>$27.15</strong></span>
-                                                </li>
-                                            </ul>
-                                            <p class="text-muted text-center fw-bold">NO INCLUYE COMISIONES ESTAS DEBES
-                                                AGREGARLAS EN EL SITIO WEB</p>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
+                            <!-- FIN PAYPAL DIV -->
 
-                            <!-- TRANSFERENCIA BANCARIA DIV -->
-                            <div id="paymentBankTransfer" class="row">
-                                <div class="col-md-12 col-lg-12 mb-4">
-                                    <div class="card bg-light border-0 shadow mb-4">
-                                        <div class="card-body">
-
-                                            <h5 class="mb-4 mt-3">Transferencia Bancaria</h5>
-
-                                            <div class="row mb-4">
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-user text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input class="form-control" type="file"
-                                                                accept="image/png, image/jpeg" id="userVoucherPhotoPaymentBank">
-                                                            <label for="floatingInput text-muted">Comprobante
-                                                                *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-file-invoice text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control text-muted"
-                                                                id="userVoucherNumberPaymentBank" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">No. de Comprobante
-                                                                *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-file-invoice text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control text-muted"
-                                                                id="userVoucherNumberAuthorizationPaymentBank" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">No. de Autorización
-                                                                *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-user text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control text-muted"
-                                                                id="userNamePaymentBank" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Nombre *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-user text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control text-muted"
-                                                                id="userAddressPaymentBank" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Dirección *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-user text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control text-muted"
-                                                                id="userNitPaymentBank" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">NIT *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text"><i
-                                                                class="fa-solid fa-phone text-secondary"></i></span>
-                                                        <div class="form-floating">
-                                                            <input type="number" class="form-control text-muted"
-                                                                id="userPhonePaymentBank" placeholder="ejemplo1">
-                                                            <label for="floatingInput text-muted">Teléfono *</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="actionButton1 text-center mt-4 mb-2">
-                                                        <a href="https://www.paypal.com/donate/?hosted_button_id=72EFFQK5DEBEU"
-                                                            target="_blank">
-                                                            <div
-                                                                class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
-                                                                <p class="mt-3">Ver Cuentas Bancarias <i
-                                                                        class="fa-solid fa-arrow-right ms-3"></i></p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="actionButton1 text-center mt-4 mb-2">
-                                                        <a href="../payConfirmed/component">
-                                                            <div
-                                                                class="buttonAskForNow btn btn-dark px-5 text-start rounded-5">
-                                                                <p class="mt-3">Confirmar Pago <i
-                                                                        class="fa-solid fa-arrow-right ms-3"></i></p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="card bg-light border-0 shadow mb-4">
-                                        <div class="card-body">
-                                            <h5 class="mb-4 mt-3">Resumen</h5>
-                                            <ul class="list-group">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                                    Cantidad de Producto
-                                                    <span>4</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                                    Total a Pagar
-                                                    <span>Q212.00</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                                    <div>
-                                                        <strong>Total</strong>
-                                                        <strong>
-                                                            <p class="mb-0">(Incluye IVA)</p>
-                                                        </strong>
-                                                    </div>
-                                                    <span><strong>Q212.00</strong></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- PAYMENT TYPE FLAG -->
+                            <input type="text" id="paymentType" hidden>
 
                         </div>
                     </div>
@@ -531,7 +543,7 @@
 
             </div>
 
-            <!-- INFORMACIÓN DEL PERFIL BÁSICA -->
+            <!-- INFORMACIÓN DEL CARRITO DE COMPRAS -->
             <div class="col userActions bg-light">
                 <div class="actionButton1 text-center mt-5">
                     <a href="../../../u/orders/orderNow/component">
@@ -541,7 +553,7 @@
                     </a>
                 </div>
                 <div class="storedProducts mt-2 text-center">
-                    <i class="fa-solid fa-shopping-cart fs-1 mt-2"></i>
+                    <i class="fa-solid fa-shopping-cart fs-1"></i>
                     <div class="text-center mt-3">
                         <h1 class="h4"><span id="nameVisit">Carrito de Compras</span></h1>
                     </div>
@@ -550,11 +562,48 @@
                     </div>
 
                     <!-- PRODUCTOS QUE SE VAN A COMPRAR -->
-                    <div class="row container-fluid" id="articlesForShopping">
+                    <div class="row container-fluid mb-5" id="articlesForShopping">
                     </div>
                     <!-- FIN PEDIDOS -->
                 </div>
             </div>
+
+
+            <!-- MODAL PARA VER CUENTAS DE BANCO TRANSFERIR -->
+            <div class="modal fade" id="bankAccountsModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light">
+                            <h1 class="modal-title fs-5 text-muted">Cuentas de Banco</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card bg-light border-0 shadow mb-3">
+                                <div class="card-body">
+                                    <p class="card-text text-start text-muted fw-bold h5">1270150442</p>
+                                    <h5 class="card-title text-start text-muted">Daniel Rivas</h5>
+                                    <p class="card-text text-start text-muted fw-bold h5">Cuenta Monetaria</p>
+                                </div>
+                            </div>
+                            <div class="card bg-light border-0 shadow mb-3">
+                                <div class="card-body">
+                                    <p class="card-text text-start text-muted fw-bold h5">1270150442</p>
+                                    <h5 class="card-title text-start text-muted">Daniel Rivas</h5>
+                                    <p class="card-text text-start text-muted fw-bold h5">Cuenta Monetaria</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-center text-muted">Todas las cuentas de banco aquí listadas son verídicas,
+                                recuerda guardar comprobante, fecha con hora
+                                y su respectivo número de autorización o similar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN DEL MODAL PARA VER CUENTAS DE BANCO TRANSFERIR -->
+
         </div>
 
         <!-- SCRIPT PARA BOOTSTRAP -->

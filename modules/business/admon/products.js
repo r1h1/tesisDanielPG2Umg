@@ -132,15 +132,12 @@ const addDataToDataTable = (dataObtained) => {
         });
     }
     else if (dataObtained.body.length == 0) {
-        if (dataObtained.body === 'invalid token') {
-            //NO DATA OBTAINED
-            Swal.fire({
-                icon: 'error',
-                title: '¡Lo Sentimos!',
-                text: 'No se pudo concretar la extracción de los datos',
-                footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error. ' + dataObtained.body.toUpperCase()
-            });
-        }
+        Swal.fire({
+            icon: 'error',
+            title: '¡Lo Sentimos!',
+            text: 'No se pudo concretar la extracción de los datos',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error. ' + dataObtained.body.toUpperCase()
+        });
     }
     else {
         for (let i = 0; i < dataObtained.body.length; i++) {
@@ -149,10 +146,11 @@ const addDataToDataTable = (dataObtained) => {
                 `<img src="${dataObtained.body[i].base64img}" alt="img-producto" width="60"/>`,
                 dataObtained.body[i].baseingredients ?? 'Sin Datos',
                 dataObtained.body[i].description ?? 'Sin Datos',
+                dataObtained.body[i].price ?? 'Sin Datos',
                 dataObtained.body[i].allergyinformation ?? 'Sin Datos',
                 `<button class="btn btn-primary text-white" onclick="viewExtraIngredientsAndPrice(${dataObtained.body[i].id}, '${dataObtained.body[i].name}')"><i class="fa-solid fa-eye"></i></button>`,
                 `<button class="btn btn-warning" onclick="setInfoEditProduct(${dataObtained.body[i].id}, '${dataObtained.body[i].name}', '${dataObtained.body[i].base64img}', 
-                '${dataObtained.body[i].baseingredients}', '${dataObtained.body[i].description}', '${dataObtained.body[i].allergyinformation}')">
+                '${dataObtained.body[i].baseingredients}', '${dataObtained.body[i].description}', '${dataObtained.body[i].allergyinformation}', ${dataObtained.body[i].price})">
                 <i class="fa-solid fa-pen-to-square"></i></button>`,
                 `<button class="btn btn-danger" onclick="deleteProduct(${dataObtained.body[i].id})"><i class="fa-solid fa-trash"></i></button>`
             ]);
@@ -163,10 +161,11 @@ const addDataToDataTable = (dataObtained) => {
         columns: [
             { title: 'Nombre' },
             { title: 'Imagen' },
-            { title: 'Ingredientes Base' },
+            { title: 'Ingre. Base' },
             { title: 'Descripción' },
-            { title: 'Información Alérgica' },
-            { title: 'Ingredientes Extra' },
+            { title: 'Precio' },
+            { title: 'Info. Alérgica' },
+            { title: 'Ingre. Extra' },
             { title: 'Edicion' },
             { title: 'Eliminación' }
         ],
@@ -252,7 +251,7 @@ const viewExtraIngredientsAndPrice = (idProduct, nameProduct) => {
 
 //SET INFO BEFORE EDIT PRODUCT
 //AND SHOW EXTRA INGREDIENTS FOR PRICE AND INGREDIENTS TABLE
-const setInfoEditProduct = (idProductToEdit, productName, base64Img, baseIngredients, description, allergyInformation) => {
+const setInfoEditProduct = (idProductToEdit, productName, base64Img, baseIngredients, description, allergyInformation, price) => {
 
     document.getElementById('idProductToEdit').value = idProductToEdit;
     document.getElementById('productNameEdit').value = productName;
@@ -260,6 +259,7 @@ const setInfoEditProduct = (idProductToEdit, productName, base64Img, baseIngredi
     document.getElementById('baseIngredientsEdit').value = baseIngredients;
     document.getElementById('productDescriptionEdit').value = description;
     document.getElementById('allergyInformationEdit').value = allergyInformation;
+    document.getElementById('productPriceEdit').value = price;
 
     let imgToInner = `<img src="${base64Img}" alt="img-producto" width="150"/>`;
     document.getElementById('productPhoto').innerHTML = imgToInner;
@@ -473,6 +473,7 @@ const editProduct = () => {
     let baseIngredients = document.getElementById('baseIngredientsEdit').value;
     let allergyInformation = document.getElementById('allergyInformationEdit').value;
     let productDescription = document.getElementById('productDescriptionEdit').value;
+    let price = document.getElementById('productPriceEdit').value;
     let applyExtraIngredientsEdit;
 
     //IF THE TEMPORARY ARRAY OF EXTRA INGREDIENTS HAVE A DATA, AUTOMATICALLY PRODUCT APPLY EXTRA INGREDIENTS
@@ -483,12 +484,13 @@ const editProduct = () => {
         applyExtraIngredientsEdit = 0;
     }
 
-    if (productName === '' || baseIngredients === '' || allergyInformation === '' || productDescription === '') {
+    if (productName === '' || baseIngredients === '' || allergyInformation === '' || productDescription === '' || price === '') {
         Swal.fire({
             icon: 'warning',
             title: 'Advertencia',
             text: 'Llena todos los datos que se te solicitan',
-            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+            confirmButtonText: 'Entendido'
         });
     }
     else if (base64ImgProduct === '') {
@@ -496,7 +498,8 @@ const editProduct = () => {
             icon: 'warning',
             title: 'Advertencia',
             text: 'La imagen no se ha subido o no ha sido validada, por favor intenta de nuevo',
-            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+            confirmButtonText: 'Entendido'
         });
     }
     else {
@@ -512,6 +515,7 @@ const editProduct = () => {
             "baseingredients": baseIngredients,
             "allergyinformation": allergyInformation,
             "description": productDescription,
+            "price": price,
             "applyextraingredients": applyExtraIngredientsEdit
         });
 
@@ -918,6 +922,7 @@ const createProduct = () => {
     let baseIngredients = document.getElementById('baseIngredients').value;
     let allergyInformation = document.getElementById('allergyInformation').value;
     let productDescription = document.getElementById('productDescription').value;
+    let productPrice = document.getElementById('productPrice').value;
     let applyExtraIngredients;
 
     //IF THE TEMPORARY ARRAY OF EXTRA INGREDIENTS HAVE A DATA, AUTOMATICALLY PRODUCT APPLY EXTRA INGREDIENTS
@@ -928,7 +933,7 @@ const createProduct = () => {
         applyExtraIngredients = 0;
     }
 
-    if (productName === '' || baseIngredients === '' || allergyInformation === '' || productDescription === '') {
+    if (productName === '' || baseIngredients === '' || allergyInformation === '' || productDescription === '' || productPrice === '') {
         Swal.fire({
             icon: 'warning',
             title: 'Advertencia',
@@ -956,6 +961,7 @@ const createProduct = () => {
             "baseingredients": baseIngredients,
             "allergyinformation": allergyInformation,
             "description": productDescription,
+            "price": productPrice,
             "applyextraingredients": applyExtraIngredients
         });
 

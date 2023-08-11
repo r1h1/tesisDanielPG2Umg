@@ -64,7 +64,7 @@ const getProductByIdObtained = () => {
 
     const showData = (dataObtained) => {
         try {
-            
+
             document.getElementById('productNameDisplay').innerHTML = dataObtained.body[0].name;
             document.getElementById('nameProductObtained').innerHTML = dataObtained.body[0].name;
             document.getElementById('productDescriptionDisplay').innerHTML = dataObtained.body[0].description;
@@ -150,6 +150,7 @@ const addProductToShoppingCartLocalStorage = () => {
     //GET ID
     const productIdToGet = urlParams.get('q');
 
+    let idProductSelected = productIdToGet;
     let productName = document.getElementById('nameProductObtained').innerHTML;
     let productDescription = document.getElementById('productDescriptionDisplay').innerHTML;
     let productAllergyInformation = document.getElementById('allergyInformation').innerHTML;
@@ -161,7 +162,10 @@ const addProductToShoppingCartLocalStorage = () => {
     let newPriceProduct = parseFloat(basePriceProduct) * parseFloat(productQuantity);
     let baseIngredients = document.getElementById('baseIngredients').value;
 
+    newPriceProduct = newPriceProduct.toFixed(2);
+
     let cartItem = {
+        idProductSelected,
         productName,
         productDescription,
         productAllergyInformation,

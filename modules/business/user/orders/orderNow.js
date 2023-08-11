@@ -35,6 +35,13 @@ const closeSession = () => {
 //EXECUTE LOOP 1 MINUTE FUNCTION VALIDATE TOKEN
 setInterval(validateToken, 60000);
 
+//EXECUTE LOOP 1 MINUTE CLEAR LOCAL STORAGE AND REDIRECT
+const clearLocalStorageAndRedirect = () => {
+    localStorage.clear();
+    window.location.href = '../../../../views/u/start/component';
+}
+setInterval(clearLocalStorageAndRedirect, 60000);
+
 
 
 //GET PRODUCTS FOR SALE IN USER VIEW
@@ -60,24 +67,36 @@ const getProductsForSale = () => {
         const showData = (dataObtained) => {
             try {
                 let productsForSale = '';
-                for (let i = 0; i < dataObtained.body.length; i++) {
-                    productsForSale += `
-                        <div class="col-md-6 col-lg-4 mt-4 mb-3">
-                            <a href="../selectedProduct/component?q=${dataObtained.body[i].id}" class="text-decoration-none">
-                                <div class="card bg-light border-0 shadow rounded-3 placeholder-glow">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img src="${dataObtained.body[i].base64img}" alt="pedido"
-                                                width="100%" height="250" class="mb-3 rounded-3 placeholder-glow">
-                                        </div>
-                                        <h5 class="card-title text-muted placeholder-glow fw-bold">${dataObtained.body[i].name}</h5>
-                                        <p class="text-muted placeholder-glow">${dataObtained.body[i].description}</p>
-                                        <p class="card-text text-muted fw-bold h4 text-end placeholder-glow">Q${dataObtained.body[i].price}</p>
-                                    </div>
+                if (dataObtained.body.length === 0 || dataObtained.body == '[]' || dataObtained.body == '') {
+                    for (let i = 0; i < 1; i++) {
+                        productsForSale += `
+                        <div class="col-sm-12 col-md-12 col-lg-12 mt-4 mb-3 h-100">
+                            <div class="card bg-light border-0 shadow rounded-3">
+                                <div class="card-body">
+                                    <p class="text-muted text-center h5">No hay productos disponibles para su compra, intente en otra ocasión</p>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                         `;
+                    }
+                }
+                else {
+                    for (let i = 0; i < dataObtained.body.length; i++) {
+                        productsForSale += `
+                            <div class="col-sm-6 col-md-4 col-lg-3 mt-4 mb-3">
+                                <a href="../selectedProduct/component?q=${dataObtained.body[i].id}" class="text-decoration-none">
+                                    <div class="card bg-light border-0 shadow rounded-3 placeholder-glow">
+                                        <img src="${dataObtained.body[i].base64img}" alt="pedido" width="100%" height="270" class="mb-3 placeholder-glow rounded-top-3">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-muted placeholder-glow fw-bold">${dataObtained.body[i].name}</h5>
+                                            <p class="text-muted placeholder-glow">${dataObtained.body[i].description}</p>
+                                            <p class="card-text text-muted fw-bold h4 text-end placeholder-glow">Q${dataObtained.body[i].price}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            `;
+                    }
                 }
                 document.getElementById('productsForSale').innerHTML = productsForSale;
             }
@@ -94,11 +113,11 @@ const getProductsForSale = () => {
 
         const showData = (dataObtained) => {
             try {
-                if (dataObtained.body.length === 0 || dataObtained.body == '[]') {
+                if (dataObtained.body.length === 0 || dataObtained.body == '[]' || dataObtained.body == '') {
                     let productsForSale = '';
                     for (let i = 0; i < 1; i++) {
                         productsForSale += `
-                        <div class="col-md-12 col-lg-12 mt-4 mb-3 h-100">
+                        <div class="col-sm-12 col-md-12 col-lg-12 mt-4 mb-3 h-100">
                             <div class="card bg-light border-0 shadow rounded-3">
                                 <div class="card-body">
                                     <p class="text-muted text-center h5">No se encontraron datos, intente con otro nombre</p>
@@ -113,14 +132,11 @@ const getProductsForSale = () => {
                     let productsForSale = '';
                     for (let i = 0; i < dataObtained.body.length; i++) {
                         productsForSale += `
-                        <div class="col-md-6 col-lg-4 mt-4 mb-3">
+                        <div class="col-sm-6 col-md-4 col-lg-3 mt-4 mb-3">
                             <a href="../selectedProduct/component?q=${dataObtained.body[i].id}" class="text-decoration-none">
                                 <div class="card bg-light border-0 shadow rounded-3 placeholder-glow">
+                                    <img src="${dataObtained.body[i].base64img}" alt="pedido" width="100%" height="270" class="mb-3 placeholder-glow rounded-top-3">
                                     <div class="card-body">
-                                        <div class="text-center">
-                                            <img src="${dataObtained.body[i].base64img}" alt="pedido"
-                                                width="100%" height="250" class="mb-3 rounded-3 placeholder-glow">
-                                        </div>
                                         <h5 class="card-title text-muted placeholder-glow fw-bold">${dataObtained.body[i].name}</h5>
                                         <p class="text-muted placeholder-glow">${dataObtained.body[i].description}</p>
                                         <p class="card-text text-muted fw-bold h4 text-end placeholder-glow">Q${dataObtained.body[i].price}</p>
@@ -149,7 +165,8 @@ const getShoppingCart = () => {
     const keys = Object.keys(localStorage);
     const values = [];
 
-    document.getElementById('quantityShoppingCart').innerHTML = '-- ' + keys.length + ' Articulo(s) -- <br> Selecciona artículos para tu compra y presiona continuar';
+    document.getElementById('quantityShoppingCart').innerHTML = '-- ' + keys.length + ' Articulo(s) -- <br> Selecciona artículos del menú' +
+    '<br> Tienes 1 minuto para completar tu compra';
 
     keys.forEach(key => {
         values[key] = localStorage.getItem(key);
@@ -184,8 +201,8 @@ const getShoppingCart = () => {
                                                     <h5 class="card-title text-start text-muted">${parsedValue[0].productName}</h5>
                                                     <p class="card-text text-start text-muted fw-bold h5">Q${parsedValue[0].newPriceProduct}</p>
                                                 </div>
-                                                <div class="col text-end">
-                                                    <p class="btn btn-secondary">Pendiente Pago</p>
+                                                <div class="col text-end mt-3 mb-3">
+                                                    <p class="btn btn-secondary">Pendiente del pago correspondiente</p>
                                                 </div>
                                             </div>
                                         </div>
