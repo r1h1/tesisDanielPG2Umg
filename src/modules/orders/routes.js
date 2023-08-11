@@ -8,11 +8,13 @@ const controller = require('./index');
 //RUTAS PARA CONSULTAR
 router.get('/', security(), data);
 router.get('/:id', security(), oneData);
-router.post('/', security(), addData);
-router.put('/', security(), deleteData);//RUTAS PARA CONSULTAR
 router.get('/:createdDate/:finishDate', security(), dataWithDates);
 router.get('/salesClient/:createdDate/:finishDate', security(), dataWithDatesAndClients);
 router.get('/salesProduct/:createdDate/:finishDate', security(), dataWithDatesAndProducts);
+router.get('/orderFilter/:idclient/:ordernumber', security(), dataWithIdClientAndOrderNumberFilter);
+router.get('/clientFilter/:idclient/all', security(), dataWithIdClientFilter);
+router.post('/', security(), addData);
+router.put('/', security(), deleteData);//RUTAS PARA CONSULTAR
 
 
 //CONSULTAR UN SOLO ÍTEM POR FECHAS
@@ -39,6 +41,35 @@ async function dataWithDatesAndClients(req, res, next) {
         next(err);
     }
 };
+
+
+
+//CONSULTAR TODAS LAS ORDENES POR CLIENTE Y NUMERO DE ORDEN
+async function dataWithIdClientAndOrderNumberFilter(req, res, next) {
+    try {
+        const items = await controller.dataWithIdClientAndOrderNumberFilter(req.params.idclient, req.params.ordernumber).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
+
+
+//CONSULTAR TODAS LAS ORDENES POR CLIENTE Y NUMERO DE ORDEN
+async function dataWithIdClientFilter(req, res, next) {
+    try {
+        const items = await controller.dataWithIdClientFilter(req.params.idclient).then((items) => {
+            responses.success(req, res, items, 200);
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+};
+
 
 
 //CONSULTAR UN SOLO ÍTEM POR FECHAS AÑADIENDO PRODUCTOS

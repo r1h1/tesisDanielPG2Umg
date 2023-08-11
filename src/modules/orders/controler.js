@@ -24,6 +24,14 @@ module.exports = function (dbInjected) {
         return db.dataWithDatesAndClients(dataTable, createdDate, finishDate);
     }
 
+    const dataWithIdClientAndOrderNumberFilter = (idclient, ordernumber) => {
+        return db.dataWithIdClientAndOrderNumberFilter(dataTable, idclient, ordernumber);
+    }
+
+    const dataWithIdClientFilter = (idclient) => {
+        return db.dataWithIdClientFilter(dataTable, idclient);
+    }
+
     const dataWithDatesAndProducts = (createdDate, finishDate) => {
         return db.dataWithDatesAndProducts(dataTable, createdDate, finishDate);
     }
@@ -43,6 +51,8 @@ module.exports = function (dbInjected) {
         addData,
         dataWithDates,
         dataWithDatesAndClients,
-        dataWithDatesAndProducts
+        dataWithDatesAndProducts,
+        dataWithIdClientAndOrderNumberFilter,
+        dataWithIdClientFilter
     }
 }

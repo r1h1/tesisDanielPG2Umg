@@ -121,119 +121,16 @@
 
                     <div class="col-lg-12 justify-content-center mt-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control text-muted rounded rounded-5 text-center" id="orderNumberSearch"
-                                placeholder="ejemplo1">
+                            <input type="text" class="form-control text-muted rounded rounded-5 text-center"
+                                id="orderNumberSearch" placeholder="ejemplo1" maxlength="15"
+                                style="text-transform:uppercase;" onchange="getOrdersPerClientId()">
                             <label for="floatingInput text-muted"><i
                                     class="fa-solid fa-magnifying-glass me-2 ms-2 text-muted"></i>Buscar Orden</label>
                         </div>
                     </div>
 
-                    <div class="col-md-12 col-lg-6 mt-4 mb-3">
-                        <a href="../orderInfo/component?q=45024363" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-danger">Finalizado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mt-4 mb-3">
-                        <a href="../orderInfo/component?q=45024363" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-danger">Finalizado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mt-4 mb-3">
-                        <a href="../orderInfo/component?q=45024363" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-danger">Finalizado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mt-4 mb-3">
-                        <a href="../orderInfo/component?q=45024363" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-danger">Finalizado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mt-4 mb-3">
-                        <a href="../orderInfo/component?q=45024363" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-danger">Finalizado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mt-4 mb-3">
-                        <a href="../orderInfo/component?q=45024363" class="text-decoration-none">
-                            <div class="card bg-light border-0 shadow">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-muted">Pedido #45024363</h5>
-                                            <p class="card-text text-muted fw-bold h5">Q53</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <p class="btn btn-danger">Finalizado</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                    <div id="ordersObtained" class="row">
+                        <!-- ORDERS -->
                     </div>
 
                 </div>
@@ -250,6 +147,7 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="../../../../business/user/history/history.js"></script>
 </body>
 
 </html>

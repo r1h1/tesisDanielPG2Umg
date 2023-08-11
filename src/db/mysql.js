@@ -115,6 +115,30 @@ const dataWithDatesAndProducts = (table, createdDate, finishDate) => {
 }
 
 
+
+//DEVOLVER TODAS LAS ÓRDENES QUE TENGA UN CLIENTE POR SU NUMERO DE ÓRDEN
+const dataWithIdClientAndOrderNumberFilter = (table, idclient, ordernumber) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE idclient=${idclient} AND ordernumber='${ordernumber}'`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
+
+//DEVOLVER TODAS LAS ÓRDENES QUE TENGA UN CLIENTE
+const dataWithIdClientFilter = (table, idclient) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE idclient=${idclient}`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
+
+
 //DEVOLVER UN SOLO DATO POR ID
 const oneData = (table, id) => {
     return new Promise((resolve, reject) => {
@@ -185,5 +209,7 @@ module.exports = {
     dataWithDatesAndClients,
     dataWithDatesAndProducts,
     dataModulesWithIdRol,
-    dataProductWithName
+    dataProductWithName,
+    dataWithIdClientFilter,
+    dataWithIdClientAndOrderNumberFilter
 }
