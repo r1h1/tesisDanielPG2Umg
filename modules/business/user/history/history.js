@@ -54,7 +54,6 @@ userInformation = JSON.parse(userInformation);
 let idClientLogged = userInformation[0].id;
 
 
-
 //GET PRODUCTS FOR SALE IN USER VIEW
 const getOrdersPerClientId = () => {
 

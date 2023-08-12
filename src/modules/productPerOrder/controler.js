@@ -16,6 +16,10 @@ module.exports = function (dbInjected) {
         return db.oneData(dataTable, id);
     }
 
+    const dataWithProductsPerOrder = (idorder) => {
+        return db.dataWithProductsPerOrder(dataTable, idorder);
+    }
+
     const addData = (body) => {
         return db.addData(dataTable, body);
     }
@@ -28,6 +32,7 @@ module.exports = function (dbInjected) {
         data,
         oneData,
         deleteData,
-        addData
+        addData,
+        dataWithProductsPerOrder
     }
 }

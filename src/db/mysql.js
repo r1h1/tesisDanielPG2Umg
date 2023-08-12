@@ -138,6 +138,16 @@ const dataWithIdClientFilter = (table, idclient) => {
 
 
 
+//DEVOLVER TODOS LOS PRODUCTOS POR ORDENES
+const dataWithProductsPerOrder = (table, idorder) => {
+    return new Promise((resolve, reject) => {
+        stringConnection.query(`SELECT * FROM ${table} WHERE idorder=${idorder}`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
 
 //DEVOLVER UN SOLO DATO POR ID
 const oneData = (table, id) => {
@@ -211,5 +221,6 @@ module.exports = {
     dataModulesWithIdRol,
     dataProductWithName,
     dataWithIdClientFilter,
-    dataWithIdClientAndOrderNumberFilter
+    dataWithIdClientAndOrderNumberFilter,
+    dataWithProductsPerOrder
 }

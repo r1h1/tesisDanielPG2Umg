@@ -20,6 +20,9 @@
     <!-- ICONO EN EL TAB -->
     <link rel="icon" href="https://pasteleriaciro.com/image/catalog/logo_ciro_4.png">
 
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -105,7 +108,7 @@
                 </div>
                 <div class="storedProducts mt-2 text-center">
                     <div class="text-center mt-3 mb-5">
-                        <h1 class="h4">Pedido <span id="nameVisit">#45024363</span></h1>
+                        <h1 class="h4">Pedido <span id="orderNumber">{orderNumber}</span></h1>
                         <p class="mt-4 text-muted">Tu pedido ha sido procesado con éxito, <br>puedes verificar el
                             detalle a continuación.</p>
                     </div>
@@ -122,47 +125,38 @@
                             <div class="card-body">
                                 <h4 class="text-center mt-2 text-muted">Estado Actual</h4>
                                 <div class="text-center">
-                                    <p class="btn btn-danger">Finalizado</p>
+                                    <p class="btn btn-secondary" id="actualStatus">{actualStatus}</p>
                                 </div>
                                 <hr class="text-secondary p-3">
                                 <div class="detail text-start ms-4">
                                     <div class="icon text-center mb-4">
                                         <i class="fa-solid fa-cart-shopping fs-1"></i>
                                     </div>
-                                    <h5 class="mt-2 mb-2 text-muted fw-bold">Pastel De Tres Leches</h5>
-                                    <p class="text-muted">Sin maní</p>
-                                    <p class="text-muted">Sin crema</p>
-                                    <p class="text-muted">Sin frutas</p>
+                                    <div id="productsPerOrder">
+                                        <!-- PRODUCTS PER ORDER -->
+                                    </div>
                                 </div>
                                 <div class="totalPay mb-5">
-                                    <h5 class="text-center text-muted mt-3">Total a Pagar:</h5>
-                                    <p class="text-muted text-center fw-bold h4">Q53.00</p>
+                                    <h5 class="text-center text-muted mt-3">Total Pagado:</h5>
+                                    <p class="text-muted text-center fw-bold h4" id="totalPay">{totalPay}</p>
                                 </div>
-                                <hr class="text-secondary p-1">
+                                <hr class="text-secondary">
                                 <div class="totalPay mb-5 text-center mt-3">
                                     <i class="fa-solid fa-credit-card fs-1"></i>
                                     <i class="fa-brands fa-paypal fs-1 ms-2"></i>
                                     <i class="fa-solid fa-money-bill fs-1 ms-2"></i>
-                                    <p class="text-muted text-center mt-2 fw-bold">Pago Electrónico</p>
-                                    <p class="text-center">El pago fue realizado con éxito <a href="#"
-                                            class="text-black">ver imagen del pago</a></p>
+                                    <p class="text-muted text-center mt-2 fw-bold" id="paymentType">{paymentType}</p>
+                                    <div id="paymentVoucher">
+                                        <!-- PAYMENT VOUCHER IMG -->
+                                    </div>
                                 </div>
                                 <hr class="text-secondary p-1">
                                 <div class="totalPay mb-5 text-center mt-3">
                                     <i class="fa-solid fa-file-invoice fs-1"></i>
-                                    <p class="text-muted text-center mt-2 mt-3">NIT: <span>104223510</span></p>
-                                    <p class="text-muted text-center mt-2">Nombre: <span>104223510</span></p>
-                                    <p class="text-muted text-center mt-2">Dirección: <span>104223510</span></p>
-                                </div>
-                                <hr class="text-secondary p-1">
-                                <div class="totalPay mb-5 text-center mt-3">
-                                    <i class="fa-solid fa-circle-question fs-1"></i>
-                                    <p class="text-muted text-center mt-2 fw-bold">Descripción</p>
-                                    <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Aliquid
-                                        eos fugit ex, soluta esse minima voluptas architecto odit voluptatum, unde
-                                        numquam?
-                                        Libero, dolore! Cumque laborum molestiae laudantium dicta quas sint?</p>
+                                    <p class="text-muted text-center mt-2 fw-bold">Datos de Facturación</p>
+                                    <p class="text-muted text-center mt-2 mt-3">NIT: <span id="orderNit">{orderNit}</span></p>
+                                    <p class="text-muted text-center mt-2">Nombre: <span id="orderName">{orderName}</span></p>
+                                    <p class="text-muted text-center mt-2">Dirección: <span id="orderAddress">{orderAddress}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -180,6 +174,7 @@
             crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="../../../../business/user/orders/orderInfo.js"></script>
 </body>
 
 </html>
