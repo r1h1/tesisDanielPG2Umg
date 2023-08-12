@@ -141,7 +141,9 @@ const dataWithIdClientFilter = (table, idclient) => {
 //DEVOLVER TODOS LOS PRODUCTOS POR ORDENES
 const dataWithProductsPerOrder = (table, idorder) => {
     return new Promise((resolve, reject) => {
-        stringConnection.query(`SELECT * FROM ${table} WHERE idorder=${idorder}`, (error, result) => {
+        stringConnection.query(`SELECT product_per_order.id, product_per_order.idproduct,product_per_order.quantity,product_per_order.priceproduct,product_per_order.baseingredientsselected,product_per_order.idextraingredients,product_per_order.description, products.name FROM ${table} 
+        INNER JOIN products ON products.id = product_per_order.idproduct
+        WHERE product_per_order.idorder=${idorder}`, (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });

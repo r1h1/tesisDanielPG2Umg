@@ -125,11 +125,11 @@ const getProductsPerOrderByUrlId = () => {
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <p class="card-text text-start text-muted fw-bold h5">Cantidad: ${dataObtained.body[i].quantity}</p>
-                                                <h5 class="card-title text-start text-muted">Nombre: ${dataObtained.body[i].idproduct}</h5>
+                                                <h5 class="card-title text-start text-muted">Nombre: ${dataObtained.body[i].name}</h5>
                                                 <h6 class="card-title text-start text-muted">Ingredientes: ${dataObtained.body[i].baseingredientsselected}</h6>
                                                 <h6 class="card-title text-start text-muted">Ingredientes Extras: ${dataObtained.body[i].idextraingredients === '' ? 'Sin extras' : dataObtained.body[i].idextraingredients}</h6>
                                                 <h6 class="card-title text-start text-muted">Nota: ${dataObtained.body[i].description === '' ? 'Sin descripción' : dataObtained.body[i].description}</h6>
-                                                <p class="card-text text-start text-muted fw-bold h5">Q${dataObtained.body[i].priceproduct}</p>
+                                                <p class="card-text text-start text-muted fw-bold h5">Q${dataObtained.body[i].priceproduct.toFixed(2)}</p>
                                             </div>
                                         </div>
                                     </div>`;
