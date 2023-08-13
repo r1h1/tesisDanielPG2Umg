@@ -89,8 +89,8 @@ const dataWithDates = (table, createdDate, finishDate) => {
 const dataWithDatesAndClients = (table, createdDate, finishDate) => {
     return new Promise((resolve, reject) => {
         stringConnection.query(`SELECT DISTINCT ${table}.id,${table}.ordernumber,${table}.status,${table}.totalpay,
-        ${table}.idpayoption,${table}.idpayfile,${table}.idclient,${table}.address,
-        ${table}.description,${table}.createdDate,${table}.finishDate,users.fullname
+        ${table}.idpayoption,${table}.idclient,
+        ${table}.createdDate,${table}.finishDate,users.fullname
         FROM ${table} 
         INNER JOIN users ON ${table}.idclient = users.id
         WHERE createdDate >= '${createdDate}' AND finishDate <= '${finishDate}'`, (error, result) => {
@@ -104,10 +104,10 @@ const dataWithDatesAndClients = (table, createdDate, finishDate) => {
 const dataWithDatesAndProducts = (table, createdDate, finishDate) => {
     return new Promise((resolve, reject) => {
         stringConnection.query(`SELECT DISTINCT ${table}.id,${table}.ordernumber,${table}.status,${table}.totalpay,
-        ${table}.idpayoption,${table}.idpayfile,${table}.idclient,${table}.address,
-        ${table}.description,${table}.createdDate,${table}.finishDate,products.name
+        ${table}.idpayoption,${table}.idclient,${table}.createdDate,${table}.finishDate,products.name
         FROM ${table} 
-        INNER JOIN products ON ${table}.idproduct = products.id
+        INNER JOIN product_per_order ON ${table}.id = product_per_order.idorder
+        INNER JOIN products ON product_per_order.idproduct = products.id
         WHERE createdDate >= '${createdDate}' AND finishDate <= '${finishDate}'`, (error, result) => {
             return error ? reject(error) : resolve(result);
         });
