@@ -77,12 +77,16 @@ const getOrderInfoByUrlId = () => {
         try {
 
             document.getElementById('actualStatus').innerHTML = dataObtained.body[0].status === 1 ? 'Revisando Pago' : dataObtained.body[0].status === 2 ? 'En Proceso' : dataObtained.body[0].status === 3 ? 'Finalizado' : 'Finalizado';
-            document.getElementById('orderNumber').innerHTML = dataObtained.body[0].ordernumber;
-            document.getElementById('totalPay').innerHTML = 'Q' + dataObtained.body[0].totalpay;
+            document.getElementById('orderNumber').innerHTML = dataObtained.body[0].ordernumber ?? 'No aplica';
+            document.getElementById('totalPay').innerHTML = 'Q' + dataObtained.body[0].totalpay ?? 'No aplica';
             document.getElementById('paymentType').innerHTML = dataObtained.body[0].idpayoption === 1 ? 'Pago Efectivo' : dataObtained.body[0].idpayoption === 2 ? 'Pago Transferencia' : 'Pago Tarjeta/PayPal';
-            document.getElementById('orderNit').innerHTML = dataObtained.body[0].nitorder;
-            document.getElementById('orderAddress').innerHTML = dataObtained.body[0].addressorder;
-            document.getElementById('orderName').innerHTML = dataObtained.body[0].nameorder;
+            document.getElementById('orderNit').innerHTML = dataObtained.body[0].nitorder ?? 'No aplica';
+            document.getElementById('orderAddress').innerHTML = dataObtained.body[0].addressorder ?? 'No aplica';
+            document.getElementById('orderName').innerHTML = dataObtained.body[0].nameorder ?? 'No aplica';
+            document.getElementById('orderAuthNumber').innerHTML = dataObtained.body[0].bankorpaypalauthnumber === '' ? 'No aplica' : dataObtained.body[0].bankorpaypalauthnumber === null ? 'No aplica' : dataObtained.body[0].bankorpaypalauthnumber;
+            document.getElementById('orderDateOfPay').innerHTML = dataObtained.body[0].bankdateofpay ?? 'No aplica';
+            document.getElementById('orderCreated').innerHTML = dataObtained.body[0].createdDate ?? 'No aplica';
+            document.getElementById('orderPhone').innerHTML = dataObtained.body[0].phoneorder ?? 'No aplica';
 
             if (dataObtained.body[0].base64payfile === '') {
                 document.getElementById('paymentVoucher').innerHTML = 'Sin comprobante de pago';

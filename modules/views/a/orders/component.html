@@ -62,8 +62,8 @@
                                 <li><a class="dropdown-item" href="../../g/infoProblem/component"
                                         target="_blank">Reportar Problema</a>
                                 </li>
-                                <li><a class="dropdown-item" href="../../g/login/component"><i
-                                            class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                                <li onclick="closeSession()"><a class="dropdown-item"><i
+                                    class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -181,6 +181,9 @@
             </div>
             <!-- FIN CONTENIDO PAGINA -->
 
+            <!-- ID TO ORDER SELECTED -->
+            <input type="text" id="idOrderSelected" hidden>
+
             <!-- MODAL INFORMACIÓN DEL PEDIDO -->
             <div class="modal fade" id="modalOrderInfo" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -197,9 +200,9 @@
                                     <p class="text-center text-muted">Al presionar un estado, automáticamente
                                         recargará la página y la información, procede con precaución</p>
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="floatingSelect"
-                                            aria-label="Floating label select example">
-                                            <option selected>Selecciona uno...</option>
+                                        <select class="form-select" id="selectOrderStatus"
+                                            aria-label="Floating label select example" onchange="updateOrderStatus()">
+                                            <option value="">Selecciona uno...</option>
                                             <option value="1">Revisando Pago</option>
                                             <option value="2">En Proceso</option>
                                             <option value="3">Finalizado</option>
@@ -245,6 +248,14 @@
                                                     <div id="paymentVoucher">
                                                         <!-- PAYMENT VOUCHER IMG -->
                                                     </div>
+                                                    <div id="paymentData">
+                                                        <p class="text-muted text-center mt-2 mt-3">Autorización: <span
+                                                                id="orderAuthNumber">{orderAuth}</span></p>
+                                                        <p class="text-muted text-center mt-2 mt-3">Fecha de Pago: <span
+                                                                id="orderDateOfPay">{orderDateOfPay}</span></p>
+                                                        <p class="text-muted text-center mt-2 mt-3">Fecha de Creación:
+                                                            <span id="orderCreated">{orderCreatedDate}</span></p>
+                                                    </div>
                                                 </div>
                                                 <hr class="text-secondary p-1">
                                                 <div class="totalPay mb-5 text-center mt-3">
@@ -257,6 +268,8 @@
                                                             id="orderName">{orderName}</span></p>
                                                     <p class="text-muted text-center mt-2">Dirección: <span
                                                             id="orderAddress">{orderAddress}</span></p>
+                                                    <p class="text-muted text-center mt-2 mt-3">Teléfono: <span
+                                                            id="orderPhone">{orderPhone}</span></p>
                                                 </div>
                                             </div>
                                         </div>

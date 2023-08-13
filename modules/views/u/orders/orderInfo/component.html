@@ -77,12 +77,11 @@
                                         class="fa-solid fa-circle-info me-3"></i> Informar Sobre Un Problema</a>
                             </li>
                             <div class="text-center mt-5">
-                                <a href="../../../g/login/component">
-                                    <div class="buttonCloseSession btn btn-light px-5 text-start rounded-5">
-                                        <p class="mt-3"><i class="fa-solid fa-right-to-bracket me-3"></i> Cerrar Sesión
-                                        </p>
-                                    </div>
-                                </a>
+                                <div class="buttonCloseSession btn btn-light px-5 text-start rounded-5"
+                                    onclick="closeSession()">
+                                    <p class="mt-3"><i class="fa-solid fa-right-to-bracket me-3"></i> Cerrar Sesión
+                                    </p>
+                                </div>
                             </div>
                         </ul>
                     </div>
@@ -145,18 +144,34 @@
                                     <i class="fa-solid fa-credit-card fs-1"></i>
                                     <i class="fa-brands fa-paypal fs-1 ms-2"></i>
                                     <i class="fa-solid fa-money-bill fs-1 ms-2"></i>
-                                    <p class="text-muted text-center mt-2 fw-bold" id="paymentType">{paymentType}</p>
+                                    <p class="text-muted text-center mt-2 fw-bold" id="paymentType">
+                                        {paymentType}</p>
                                     <div id="paymentVoucher">
                                         <!-- PAYMENT VOUCHER IMG -->
+                                    </div>
+                                    <div id="paymentData">
+                                        <p class="text-muted text-center mt-2 mt-3">Autorización: <span
+                                                id="orderAuthNumber">{orderAuth}</span></p>
+                                        <p class="text-muted text-center mt-2 mt-3">Fecha de Pago: <span
+                                                id="orderDateOfPay">{orderDateOfPay}</span></p>
+                                        <p class="text-muted text-center mt-2 mt-3">Fecha de Creación:
+                                            <span id="orderCreated">{orderCreatedDate}</span>
+                                        </p>
                                     </div>
                                 </div>
                                 <hr class="text-secondary p-1">
                                 <div class="totalPay mb-5 text-center mt-3">
                                     <i class="fa-solid fa-file-invoice fs-1"></i>
-                                    <p class="text-muted text-center mt-2 fw-bold">Datos de Facturación</p>
-                                    <p class="text-muted text-center mt-2 mt-3">NIT: <span id="orderNit">{orderNit}</span></p>
-                                    <p class="text-muted text-center mt-2">Nombre: <span id="orderName">{orderName}</span></p>
-                                    <p class="text-muted text-center mt-2">Dirección: <span id="orderAddress">{orderAddress}</span></p>
+                                    <p class="text-muted text-center mt-2 fw-bold">Datos de
+                                        Facturación</p>
+                                    <p class="text-muted text-center mt-2 mt-3">NIT: <span
+                                            id="orderNit">{orderNit}</span></p>
+                                    <p class="text-muted text-center mt-2">Nombre: <span
+                                            id="orderName">{orderName}</span></p>
+                                    <p class="text-muted text-center mt-2">Dirección: <span
+                                            id="orderAddress">{orderAddress}</span></p>
+                                    <p class="text-muted text-center mt-2 mt-3">Teléfono: <span
+                                            id="orderPhone">{orderPhone}</span></p>
                                 </div>
                             </div>
                         </div>

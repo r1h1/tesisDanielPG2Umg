@@ -286,7 +286,7 @@ const getOneFinishOrder = () => {
                     </div>
                 </div>`;
                 }
-                else if(searchOrderFinish === '' && dataObtained.body[i].status === 3) {
+                else if (searchOrderFinish === '' && dataObtained.body[i].status === 3) {
                     finishOrders += `<div class="col-md-12 col-lg-6 mt-4 mb-3">
                     <div class="card bg-light border-0 shadow" data-bs-toggle="modal"
                         data-bs-target="#modalOrderInfo" onclick="getOrderInfoByUrlId(${dataObtained.body[i].id})">
@@ -337,12 +337,17 @@ const getOrderInfoByUrlId = (idToGet) => {
 
     const showData = (dataObtained) => {
         try {
+            document.getElementById('idOrderSelected').value = idToGet;
             document.getElementById('actualStatus').innerHTML = dataObtained.body[0].status === 1 ? 'Revisando Pago' : dataObtained.body[0].status === 2 ? 'En Proceso' : dataObtained.body[0].status === 3 ? 'Finalizado' : 'Finalizado';
             document.getElementById('totalPay').innerHTML = 'Q' + dataObtained.body[0].totalpay;
             document.getElementById('paymentType').innerHTML = dataObtained.body[0].idpayoption === 1 ? 'Pago Efectivo' : dataObtained.body[0].idpayoption === 2 ? 'Pago Transferencia' : 'Pago Tarjeta/PayPal';
-            document.getElementById('orderNit').innerHTML = dataObtained.body[0].nitorder;
-            document.getElementById('orderAddress').innerHTML = dataObtained.body[0].addressorder;
-            document.getElementById('orderName').innerHTML = dataObtained.body[0].nameorder;
+            document.getElementById('orderNit').innerHTML = dataObtained.body[0].nitorder ?? 'No aplica';
+            document.getElementById('orderAddress').innerHTML = dataObtained.body[0].addressorder ?? 'No aplica';
+            document.getElementById('orderName').innerHTML = dataObtained.body[0].nameorder ?? 'No aplica';
+            document.getElementById('orderAuthNumber').innerHTML = dataObtained.body[0].bankorpaypalauthnumber === '' ? 'No aplica' : dataObtained.body[0].bankorpaypalauthnumber === null ? 'No aplica' : dataObtained.body[0].bankorpaypalauthnumber;
+            document.getElementById('orderDateOfPay').innerHTML = dataObtained.body[0].bankdateofpay ?? 'No aplica';
+            document.getElementById('orderCreated').innerHTML = dataObtained.body[0].createdDate ?? 'No aplica';
+            document.getElementById('orderPhone').innerHTML = dataObtained.body[0].phoneorder ?? 'No aplica';
 
             if (dataObtained.body[0].base64payfile === '') {
                 document.getElementById('paymentVoucher').innerHTML = 'Sin comprobante de pago';
@@ -401,3 +406,85 @@ const getProductsPerOrderByUrlId = () => {
     }
 }
 getProductsPerOrderByUrlId();
+
+
+
+
+//UPDATE STATUS OF ORDER
+const updateOrderStatus = () => {
+
+    let orderIdSelected = document.getElementById('idOrderSelected').value;
+    let selectStatus = document.getElementById('selectOrderStatus').value;
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    var raw = JSON.stringify({
+        "id": orderIdSelected,
+        "status": selectStatus
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch(globalApiGetOrders, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => err = error);
+
+    const showData = (dataObtained) => {
+        if (dataObtained.body === 'Error de Servidor') {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Lo Sentimos!',
+                text: 'No se pudo concretar la operación, intenta de nuevo',
+                footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                confirmButtonText: 'Entendido'
+            });
+        }
+        else {
+            if (dataObtained.status === 200 || dataObtained.status === 201 || dataObtained.status === 304) {
+                try {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Correcto!',
+                        text: 'La operación se completó con éxito',
+                        footer: '',
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'Entendido',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '../../../views/a/orders/component';
+                        } else if (result.isDenied) {
+                            window.location.href = '../../../views/a/orders/component';
+                        }
+                    });
+                }
+                catch (err) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'Sa ha generado un error interno',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Lo Sentimos!',
+                    text: 'Sa ha generado un error interno',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+        }
+    }
+}
