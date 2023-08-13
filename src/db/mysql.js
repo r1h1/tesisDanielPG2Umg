@@ -48,7 +48,7 @@ mysqlConnection();
 //DEVOLVER TODOS LOS DATOS
 const data = (table) => {
     return new Promise((resolve, reject) => {
-        stringConnection.query(`SELECT DISTINCT * FROM ${table}`, (error, result) => {
+        stringConnection.query(`SELECT DISTINCT * FROM ${table} ORDER BY id ASC`, (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });
