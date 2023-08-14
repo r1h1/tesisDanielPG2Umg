@@ -132,7 +132,7 @@
                                             class="fa-solid fa-user text-secondary"></i></span>
                                     <div class="form-floating">
                                         <input type="text" class="form-control text-muted" id="userName"
-                                            placeholder="ejemplo1" value="{userName}">
+                                            placeholder="ejemplo1" value="{userName}" maxlength="50">
                                         <label for="floatingInput text-muted">Nombre(s) y Apellido(s) *</label>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                             class="fa-solid fa-phone text-secondary"></i></span>
                                     <div class="form-floating">
                                         <input type="number" class="form-control text-muted" id="cellPhone"
-                                            placeholder="ejemplo1" value="">
+                                            placeholder="ejemplo1" value="" min="1" max="99999999999999999999">
                                         <label for="floatingInput text-muted">Teléfono (+Extensión) *</label>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                                             class="fa-solid fa-address-book text-secondary"></i></span>
                                     <div class="form-floating">
                                         <input type="text" class="form-control text-muted" id="address"
-                                            placeholder="ejemplo1" value="{address}">
+                                            placeholder="ejemplo1" value="{address}" maxlength="75">
                                         <label for="floatingInput text-muted">Dirección de Residencia *</label>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@
                                             class="fa-solid fa-envelope text-secondary"></i></span>
                                     <div class="form-floating">
                                         <input type="email" class="form-control text-muted" id="email"
-                                            placeholder="ejemplo1" value="{email}">
+                                            placeholder="ejemplo1" value="{email}" maxlength="50">
                                         <label for="floatingInput text-muted">Correo Electrónico</label>
                                     </div>
                                 </div>
@@ -179,7 +179,7 @@
                                     <span class="input-group-text"><i
                                             class="fa-solid fa-envelope text-secondary"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control text-muted" id="nit" value="{nit}">
+                                        <input type="text" class="form-control text-muted" id="nit" value="{nit}" maxlength="17">
                                         <label for="floatingInput text-muted">NIT</label>
                                     </div>
                                 </div>
@@ -203,7 +203,8 @@
                     <div class="buttonLogin">
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6">
-                                <button type="button" class="btn btn-light w-100 py-3 mt-2" onclick="updateUserData()">Guardar Datos
+                                <button type="button" class="btn btn-light w-100 py-3 mt-2"
+                                    onclick="updateUserData()">Guardar Datos
                                     <i class="fa-solid fa-floppy-disk ms-2 fs-5"></i></button>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6">
@@ -241,8 +242,8 @@
                                             <span class="input-group-text"><i
                                                     class="fa-solid fa-key text-secondary"></i></span>
                                             <div class="form-floating">
-                                                <input type="password" class="form-control text-muted"
-                                                    id="newPassword" value="">
+                                                <input type="password" class="form-control text-muted" id="newPassword"
+                                                    value="" maxlength="50">
                                                 <label for="floatingInput text-muted">Nueva Contraseña *</label>
                                             </div>
                                         </div>
@@ -253,13 +254,14 @@
                                                     class="fa-solid fa-key text-secondary"></i></span>
                                             <div class="form-floating">
                                                 <input type="password" class="form-control text-muted"
-                                                    id="repeatPassword" value="">
+                                                    id="repeatPassword" value="" maxlength="50">
                                                 <label for="floatingInput text-muted">Repita Contraseña *</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-light w-100 py-3" onclick="updatePasswordUser()">Validar y
+                                        <button type="button" class="btn btn-light w-100 py-3"
+                                            onclick="updatePasswordUser()">Validar y
                                             Guardar
                                             <i class="fa-solid fa-floppy-disk ms-2 fs-5"></i></button>
                                     </div>
@@ -300,7 +302,8 @@
                             <form>
                                 <div class="row">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-danger w-100 py-3" onclick="updateStatusUser()">Aceptar
+                                        <button type="button" class="btn btn-danger w-100 py-3"
+                                            onclick="updateStatusUser()">Aceptar
                                             Términos y Continuar
                                             <i class="fa-solid fa-trash ms-2 fs-5"></i></button>
                                     </div>

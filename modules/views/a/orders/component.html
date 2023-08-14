@@ -63,7 +63,7 @@
                                         target="_blank">Reportar Problema</a>
                                 </li>
                                 <li onclick="closeSession()"><a class="dropdown-item"><i
-                                    class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                                            class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
             <!-- MODAL INFORMACIÓN DEL PEDIDO -->
             <div class="modal fade" id="modalOrderInfo" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Información del Pedido</h1>
@@ -254,7 +254,8 @@
                                                         <p class="text-muted text-center mt-2 mt-3">Fecha de Pago: <span
                                                                 id="orderDateOfPay">{orderDateOfPay}</span></p>
                                                         <p class="text-muted text-center mt-2 mt-3">Fecha de Creación:
-                                                            <span id="orderCreated">{orderCreatedDate}</span></p>
+                                                            <span id="orderCreated">{orderCreatedDate}</span>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <hr class="text-secondary p-1">
@@ -273,6 +274,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="text-center mt-5 mb-4" id="generatedInvoice">
+                                        <!-- BUTTON TO PDF -->
                                     </div>
 
                                 </div>

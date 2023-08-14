@@ -6,6 +6,7 @@ const globalApiClientFilterById = 'http://localhost:3000/api/v1/orders/clientFil
 
 
 
+
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
 const validateToken = () => {
     let token = sessionStorage.getItem('signInToken');
@@ -106,6 +107,7 @@ getOrderInfoByUrlId();
 
 
 const getProductsPerOrderByUrlId = () => {
+
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
@@ -146,3 +148,50 @@ const getProductsPerOrderByUrlId = () => {
     }
 }
 getProductsPerOrderByUrlId();
+
+
+
+//GENERATED PRINT PDF INVOICE BUTTON BY URL ID
+const generatedPDFInvoice = () => {
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(globalApiGetOrders + '/' + productOrderToGet, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => console.log('Error: ' + error))
+
+    const showData = (dataObtained) => {
+        try {
+            let buttonGeneratedPDFInvoice = '';
+            if (dataObtained.body[0].status != 1) {
+                for (let i = 0; i < 1; i++) {
+                    buttonGeneratedPDFInvoice += `<a href="../../invoice/component?q=${productOrderToGet}" target="about:blank">
+                                <div class="buttonAskForNow btn btn-danger px-5 text-center rounded-5">
+                                    <p class="mt-3">Generar Factura <i class="fa-solid fa-file-invoice ms-3"></i>
+                                    </p>
+                                </div>
+                            </a>`;
+                }
+            }
+            else {
+                for (let i = 0; i < 1; i++) {
+                    buttonGeneratedPDFInvoice += `<p class="fw-bold">La factura se podrá generar cuando el pago sea revisado.</p>`;
+                }
+            }
+            document.getElementById('generatedInvoice').innerHTML = buttonGeneratedPDFInvoice;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
+generatedPDFInvoice();

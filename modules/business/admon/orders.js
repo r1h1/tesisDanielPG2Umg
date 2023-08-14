@@ -355,6 +355,8 @@ const getOrderInfoByUrlId = (idToGet) => {
             else {
                 document.getElementById('paymentVoucher').innerHTML = `<img src="${dataObtained.body[0].base64payfile}" alt='payment-img' width="80%">`;
             }
+
+            getProductsPerOrderByUrlId();
         }
         catch (err) {
             console.log(err);
@@ -366,6 +368,9 @@ const getOrderInfoByUrlId = (idToGet) => {
 
 //GET PRODUCTS PER ORDEN ID
 const getProductsPerOrderByUrlId = () => {
+
+    let idToGet = document.getElementById('idOrderSelected').value;
+
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
@@ -376,7 +381,7 @@ const getProductsPerOrderByUrlId = () => {
         redirect: 'follow'
     };
 
-    fetch(globalApiGetProductPerOrder + 1, requestOptions)
+    fetch(globalApiGetProductPerOrder + idToGet, requestOptions)
         .then(response => response.json())
         .then(dataObtained => showData(dataObtained))
         .catch(error => console.log('Error: ' + error))
@@ -399,13 +404,13 @@ const getProductsPerOrderByUrlId = () => {
                                     </div>`;
             }
             document.getElementById('productsPerOrder').innerHTML = productsPerOrder;
+            generatedPDFInvoice(idToGet);
         }
         catch (err) {
             console.log(err);
         }
     }
 }
-getProductsPerOrderByUrlId();
 
 
 
@@ -487,4 +492,22 @@ const updateOrderStatus = () => {
             }
         }
     }
+}
+
+
+//GENERATED PRINT PDF INVOICE BUTTON BY URL ID
+const generatedPDFInvoice = (idToGet) => {
+
+    let buttonGeneratedPDFInvoice = '';
+    let route = '../../../views/u/invoice/component?q=' + idToGet;
+
+    for (let i = 0; i < 1; i++) {
+        buttonGeneratedPDFInvoice += `<a href="${route}" target="about:blank">
+                                        <div class="buttonAskForNow btn btn-danger px-5 text-center rounded-5">
+                                            <p class="mt-3">Generar Factura <i class="fa-solid fa-file-invoice ms-3"></i>
+                                            </p>
+                                        </div>
+                                    </a>`;
+    }
+    document.getElementById('generatedInvoice').innerHTML = buttonGeneratedPDFInvoice;
 }

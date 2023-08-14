@@ -96,7 +96,7 @@
                                     <div class="col-md-12 col-lg-12 mb-2">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-muted" id="userName"
-                                                placeholder="ejemplo1">
+                                                placeholder="ejemplo1" maxlength="50">
                                             <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
                                                 *</label>
                                         </div>
@@ -105,7 +105,7 @@
                                     <div class="col-md-12 col-lg-12 mb-2">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-muted" id="address"
-                                                placeholder="ejemplo1">
+                                                placeholder="ejemplo1" maxlength="150">
                                             <label for="floatingInput text-muted">Dirección
                                                 *</label>
                                         </div>
@@ -113,8 +113,9 @@
 
                                     <div class="col-md-12 col-lg-6 mb-2">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control text-muted" id="cellPhone"
-                                                placeholder="ejemplo1">
+                                            <input type="number" class="form-control text-muted" id="cellPhone"
+                                                placeholder="ejemplo1" maxlength="15" min="1"
+                                                max="99999999999999999999">
                                             <label for="floatingInput text-muted">Teléfono
                                                 *</label>
                                         </div>
@@ -123,7 +124,7 @@
                                     <div class="col-md-12 col-lg-6 mb-2">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-muted" id="email"
-                                                placeholder="ejemplo1">
+                                                placeholder="ejemplo1"  maxlength="50">
                                             <label for="floatingInput text-muted">Correo Electrónico
                                                 *</label>
                                         </div>
@@ -132,7 +133,7 @@
                                     <div class="col-md-12 col-lg-6 mb-2">
                                         <div class="form-floating">
                                             <input type="text" class="form-control text-muted" id="nit"
-                                                placeholder="ejemplo1">
+                                                placeholder="ejemplo1"  maxlength="15">
                                             <label for="floatingInput text-muted">NIT
                                                 *</label>
                                         </div>
@@ -154,7 +155,8 @@
                                             onclick="updateUserData()">Guardar</button>
                                     </div>
                                     <div class="col-lg-6 mb-2 text-center mt-3 mb-4">
-                                        <button type="button" class="btn btn-warning py-3 w-100" data-bs-toggle="modal" data-bs-target="#passwordRestore">Cambiar
+                                        <button type="button" class="btn btn-warning py-3 w-100" data-bs-toggle="modal"
+                                            data-bs-target="#passwordRestore">Cambiar
                                             Contraseña</button>
                                     </div>
 
@@ -188,7 +190,8 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fa-solid fa-key text-secondary"></i></span>
                                     <div class="form-floating">
-                                        <input type="password" class="form-control text-muted" id="newPassword" placeholder="">
+                                        <input type="password" class="form-control text-muted" id="newPassword"
+                                            placeholder=""  maxlength="20">
                                         <label for="floatingInput text-muted">Nueva Contraseña *</label>
                                     </div>
                                 </div>
@@ -197,7 +200,8 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fa-solid fa-key text-secondary"></i></span>
                                     <div class="form-floating">
-                                        <input type="password" class="form-control text-muted" id="repeatPassword" placeholder="">
+                                        <input type="password" class="form-control text-muted" id="repeatPassword"
+                                            placeholder=""  maxlength="20">
                                         <label for="floatingInput text-muted">Repita Contraseña *</label>
                                     </div>
                                 </div>
