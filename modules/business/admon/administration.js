@@ -3,6 +3,7 @@ const globalApiUrl = 'http://localhost:3000/api/v1/users';
 const globalRolApiUrl = 'http://localhost:3000/api/v1/rol';
 const globalModuleApiUrl = 'http://localhost:3000/api/v1/modules';
 const globalApiGetModulesPerRol = 'http://localhost:3000/api/v1/modules/rol/';
+const globalBankApiUrl = 'http://localhost:3000/api/v1/banks';
 
 
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
@@ -323,7 +324,6 @@ const saveInfoBeforeEdit = () => {
 }
 
 
-
 //DELETE USER INFO
 const deleteAdminUser = (idUserToEliminate) => {
 
@@ -420,7 +420,6 @@ const deleteAdminUser = (idUserToEliminate) => {
 }
 
 
-
 //GET ROL INFO
 const getRolInfo = () => {
 
@@ -455,7 +454,6 @@ const getRolInfo = () => {
     }
 }
 getRolInfo();
-
 
 
 //PRINT ROLS TO ROL DATATABLE
@@ -624,7 +622,6 @@ const deleteRol = (idRol) => {
 }
 
 
-
 //GET MODULES TO SELECT ITEM
 const getModuleInfo = () => {
 
@@ -657,7 +654,6 @@ const getModuleInfo = () => {
     }
 }
 getModuleInfo();
-
 
 
 //CREATE NEW USER
@@ -767,7 +763,6 @@ const createAdminUser = () => {
 }
 
 
-
 //CREATE NEW CLIENTS
 const createClientUser = () => {
 
@@ -873,8 +868,6 @@ const createClientUser = () => {
         }
     }
 }
-
-
 
 //PRINT CLIENTS TO CLIENT DATATABLE
 const addDataToClientTable = (dataObtained) => {
@@ -1176,7 +1169,6 @@ const deleteClients = (idUser) => {
 }
 
 
-
 //ADD TEMPORALY USER MODULES FOR CREATE NEW ROL
 //TEMPORALY ARRAY CONTAINS MODULE ID AND NAME
 let modulesArray = [];
@@ -1260,9 +1252,7 @@ const addModuleToRolTemporaly = (selectModule) => {
 }
 
 
-
 //CREATE ROL AND CREATE MODULES BEFORE
-//CREATE NEW CLIENTS
 const createRol = () => {
 
     let rolName = document.getElementById('rolName').value;
@@ -1429,4 +1419,298 @@ const createModuleWithRolId = (idCreateRol) => {
             }
         }
     }
+}
+
+
+
+//GET BANK ACCOUNT
+const getBanks = () => {
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(globalBankApiUrl, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => console.log('Error: ' + error))
+
+    const showData = (dataObtained) => {
+        try {
+            addDataToBanksTable(dataObtained);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
+getBanks();
+
+
+
+//PRINT USERS (NOT CLIENTS) IN USER DATATABLE
+const addDataToBanksTable = (dataObtained) => {
+    let dataSet = [];
+
+    if (dataObtained.body === 'invalid token') {
+        //NO DATA OBTAINED
+        Swal.fire({
+            icon: 'error',
+            title: '¡Lo Sentimos!',
+            text: 'No tienes permisos para ver los datos, por favor cierra sesión e inicia sesión nuevamente',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.'
+        });
+    }
+    else if (dataObtained.body.length == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Lo Sentimos!',
+            text: 'No se pudo concretar la extracción de los datos',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error. ' + dataObtained.body.toUpperCase()
+        });
+    }
+    else {
+        for (let i = 0; i < dataObtained.body.length; i++) {
+            dataSet.push([
+                dataObtained.body[i].bankname ?? 'Sin Datos',
+                dataObtained.body[i].userbankname ?? 'Sin Datos',
+                dataObtained.body[i].accountType ?? 'Sin Datos',
+                dataObtained.body[i].accountNumber ?? 'Sin Datos',
+                `<button class="btn btn-danger" onclick="deleteBanks(${dataObtained.body[i].id})"><i class="fa-solid fa-trash"></i></button>`
+            ]);
+        }
+    }
+
+    new DataTable('#banksTable', {
+        columns: [
+            { title: 'Nombre Banco' },
+            { title: 'Nombre Cuenta' },
+            { title: 'Tipo de Cuenta' },
+            { title: 'No. de Cuenta' },
+            { title: 'Eliminar' }
+        ],
+        data: dataSet,
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        select: true
+    });
+}
+
+
+//CREATE BANKS
+const createBanks = () => {
+
+    let bankname = document.getElementById('accountBankName').value;
+    let userbankname = document.getElementById('accountName').value;
+    let accountType = document.getElementById('accountType').value;
+    let accountNumber = document.getElementById('accountNumber').value;
+
+    if (bankname === '' || userbankname === '' || accountNumber === '' || accountType === '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'Llena todos los datos que se te solicitan',
+            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+            confirmButtonText: 'Entendido'
+        });
+    }
+    else {
+
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+        var raw = JSON.stringify({
+            "id": 0,
+            "bankname": bankname,
+            "userbankname": userbankname,
+            "accountType": accountType,
+            "accountNumber": accountNumber
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(globalBankApiUrl, requestOptions)
+            .then(response => response.json())
+            .then(dataObtained => showData(dataObtained))
+            .catch(error => err = error);
+
+        const showData = (dataObtained) => {
+            if (dataObtained.body === 'Error de Servidor') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Lo Sentimos!',
+                    text: 'No se pudo concretar la operación, intenta de nuevo',
+                    footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+            else {
+                if (dataObtained.status === 200 || dataObtained.status === 201 || dataObtained.status === 304) {
+                    try {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Correcto!',
+                            text: 'La operación se completó con éxito',
+                            footer: '',
+                            showDenyButton: false,
+                            showCancelButton: false,
+                            confirmButtonText: 'Entendido',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '../../../views/a/administrative/component';
+                            } else if (result.isDenied) {
+                                window.location.href = '../../../views/a/administrative/component';
+                            }
+                        });
+                    }
+                    catch (err) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Lo Sentimos!',
+                            text: 'Sa ha generado un error interno',
+                            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'Sa ha generado un error interno',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            }
+        }
+    }
+}
+
+
+//DELETE BANKS INFO
+const deleteBanks = (idUser) => {
+
+    Swal.fire({
+        icon: 'info',
+        title: '¿Seguro?',
+        text: 'Los cambios no se podrán recuperar',
+        showDenyButton: true,
+        confirmButtonText: 'Continuar',
+        denyButtonText: `Cancelar`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+            var bodyToDelete = JSON.stringify({
+                "id": idUser
+            });
+
+            var requestOptions = {
+                method: 'PUT',
+                headers: myHeaders,
+                body: bodyToDelete,
+                redirect: 'follow'
+            };
+
+            console.log(bodyToDelete);
+
+            fetch(globalBankApiUrl, requestOptions)
+                .then(response => response.json())
+                .then(dataObtained => showData(dataObtained))
+                .catch(error => console.log('Error: ' + error))
+
+            const showData = (dataObtained) => {
+                if (dataObtained.body === 'Error de Servidor') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Lo Sentimos!',
+                        text: 'No se pudo concretar la operación, intenta de nuevo',
+                        footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+                else {
+                    if (dataObtained.status === 200 || dataObtained.status === 201 || dataObtained.status === 304) {
+                        try {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Correcto!',
+                                text: 'La operación se completó con éxito',
+                                footer: '',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Entendido',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '../../../views/a/administrative/component';
+                                } else if (result.isDenied) {
+                                    window.location.href = '../../../views/a/administrative/component';
+                                }
+                            });
+                        }
+                        catch (err) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '¡Lo Sentimos!',
+                                text: 'Sa ha generado un error interno',
+                                footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                                confirmButtonText: 'Entendido'
+                            });
+                        }
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Lo Sentimos!',
+                            text: 'Sa ha generado un error interno',
+                            footer: 'Si el problema persiste, por favor comunicarse con el administrador o enviar un mensaje usando la opción de soporte indicando el error.',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
+                }
+            }
+        } else if (result.isDenied) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'info',
+                title: '¡No te preocupes!',
+                text: 'No se modificó nada',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    });
 }

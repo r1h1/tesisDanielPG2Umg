@@ -260,3 +260,14 @@ CREATE TABLE invoice (
     createdDate VARCHAR(50),
     finishDate VARCHAR(50)
 );
+
+
+-- CREATE TABLE BANKS
+CREATE TABLE banks(
+    id INT PRIMARY KEY NOT NULL auto_increment,
+    bankname VARCHAR(50),
+    userbankname varchar(50),
+    accountType VARCHAR(60),
+    accountNumber VARCHAR(50)
+);
+

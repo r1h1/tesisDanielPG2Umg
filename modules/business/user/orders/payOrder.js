@@ -1,6 +1,7 @@
 //GLOBAL CONST FOR API ROUTES
 const globalApiOrders = 'http://localhost:3000/api/v1/orders';
 const globalApiProductsPerOrder = 'http://localhost:3000/api/v1/productPerOrder';
+const globalApiBank = 'http://localhost:3000/api/v1/banks';
 
 
 //VALIDATE EXIST TOKEN IN SESSION STORAGE
@@ -555,6 +556,48 @@ const insertProductsPerOrder = (idOrder, orderNumber) => {
         }
     }
 }
+
+
+
+//GET BANKS
+const getBanks = () => {
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem('signInToken'));
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(globalApiBank, requestOptions)
+        .then(response => response.json())
+        .then(dataObtained => showData(dataObtained))
+        .catch(error => console.log('Error: ' + error))
+
+    const showData = (dataObtained) => {
+        try {
+            let bankAccounts = '';
+            for (let i = 0; i < dataObtained.body.length; i++) {
+                bankAccounts += `<div class="card bg-light border-0 shadow mb-3">
+                                    <div class="card-body">
+                                        <p class="card-text text-start text-muted fw-bold h5">${dataObtained.body[i].accountNumber}</p>
+                                        <p class="card-text text-start text-muted fw-bold h5">${dataObtained.body[i].bankname}</p>
+                                        <h5 class="card-title text-start text-muted">${dataObtained.body[i].userbankname}</h5>
+                                        <p class="card-text text-start text-muted fw-bold h5">${dataObtained.body[i].accountType}</p>
+                                    </div>
+                                </div>`;
+            }
+            document.getElementById('bankAccounts').innerHTML = bankAccounts;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
+getBanks();
 
 
 

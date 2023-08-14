@@ -35,7 +35,7 @@ const closeSession = () => {
     sessionStorage.removeItem('signInToken');
     sessionStorage.removeItem('sessionInfo');
     localStorage.clear();
-    window.location.href = '../../../../views/g/login/component';
+    window.location.href = '../../../views/g/login/component';
 }
 
 
