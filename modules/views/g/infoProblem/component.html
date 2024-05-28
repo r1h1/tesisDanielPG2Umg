@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Informar Problema | PG2</title>
+
+    <!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- HOJA DE ESTILOS PROPIA -->
+    <link rel="stylesheet" href="component.css">
+
+    <!-- ICONOS -->
+    <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+    <!-- ICONO EN EL TAB -->
+    <link rel="icon" href="../../../../assets/img/images.png">
+
+</head>
+
+<body>
+
+    <!-- HTML BASICO PARA LA PÁGINA -->
+    <div class="contenedorTotalPagina">
+
+        <div class="container-sm">
+
+            <div class="loginBox">
+
+                <div class="logo text-center">
+                    <img src="../../../../assets/img/images.png" alt="logo" width="130">
+                </div>
+
+                <h1 class="h5 title text-center mt-3">Gracias por reportar un problema, llena el formulario y procede a
+                    enviarlo, tus comentarios se tomarán en cuenta</h1>
+
+                <form class="text-center mt-4" action="mailto:de.rivasherrera@gmail.com" method="POST">
+
+                    <div class="row">
+
+                        <div class="col-md-12 col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fa-solid fa-user text-secondary"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control text-muted" id="floatingInput"
+                                        placeholder="ejemplo1" required>
+                                    <label for="floatingInput text-muted">Correo Registrado *</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i
+                                        class="fa-solid fa-calendar text-secondary"></i></span>
+                                <div class="form-floating">
+                                    <input type="datetime-local" class="form-control text-muted" id="floatingInput"
+                                        placeholder="ejemplo1" required>
+                                    <label for="floatingInput text-muted">Fecha y Hora Reporte *</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i
+                                        class="fa-solid fa-envelope text-secondary"></i></span>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control text-muted" id="floatingInput"
+                                        placeholder="ejemplo1" required>
+                                    <label for="floatingInput text-muted">Asunto *</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Deja una descripción acá del problema..."
+                                    id="floatingTextarea2" style="height: 200px" required></textarea>
+                                <label for="floatingTextarea2">Descripción del Problema *</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="buttonLogin">
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-light w-100 py-3">Validar y Enviar <i
+                                        class="fa-solid fa-paper-plane ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="termsAndConditions mt-5">
+                    <p class="text-center text-muted">Gracias por tomarte el tiempo de reportar problemas, gracias a ti,
+                        podemos mejorar.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT PARA BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | PG2</title>
+
+    <!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- HOJA DE ESTILOS PROPIA -->
+    <link rel="stylesheet" href="../dashboard/component.css">
+
+    <!-- ICONOS -->
+    <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+    <!-- ICONO EN EL TAB -->
+    <link rel="icon" href="../../../../assets/img/images.png">
+
+    <!-- CSS DATATABLE -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- SHEET JS FOR IMPORT DATA TO EXCEL -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- loader page -->
+    <div class="preloader-wrapper">
+        <div class="spinner-border text-dark" style="width: 3rem;height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="main-container d-flex">
+        <div class="sidebar border border-3" id="side_nav">
+            <button class="btn d-md-none d-block close-btn px-1 py-0"><i
+                    class="fa-solid fa-close fs-4 mt-3"></i></button>
+            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-center mb-5 mt-5">
+                <h1 class="fs-4 text-center mt-4"><img src="../../../../assets/img/images.png"
+                        alt="icono" width="120px"></h1>
+            </div>
+            <ul class="list-unstyled px-2" id="menuModules">
+            </ul>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-expand-lg bg-white py-3 mb-5 border border-1">
+                <div class="container-fluid">
+                    <div class="d-flex d-block">
+                        <button class="btn d-md-none px-1 py-0 open-btn px-1 py-0"><i
+                                class="fa-solid fa-bars fs-4 mt-3"></i></button>
+                    </div>
+                    </button>
+                    <div class="justify-content-end">
+                        <div class="dropdown me-3">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-user me-3"></i><span id="fullName">{userName}</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component"
+                                        target="_blank">Reportar Problema</a>
+                                </li>
+                                <li onclick="closeSession()"><a class="dropdown-item"><i
+                                    class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="contenido container-fluid px-3 mt-5 px-1">
+                <h2 class="h3 fw-bold">Reportería</h2>
+                <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
+                    cada opción.</p>
+                <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="reporte-productos-vendidos-tab" data-bs-toggle="tab"
+                        data-bs-target="#reporte-productos-vendidos" role="tab"
+                        aria-controls="reporte-productos-vendidos-tab-pane" aria-selected="true">Productos
+                        Vendidos</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="reporte-ventas-tab" data-bs-toggle="tab" data-bs-target="#reporte-ventas" role="tab"
+                        aria-controls="reporte-ventas-tab-pane" aria-selected="true">Ventas por Cliente</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="reporte-cantidad-dinero-tab" data-bs-toggle="tab" data-bs-target="#reporte-cantidad-dinero"
+                        role="tab" aria-controls="reporte-cantidad-dinero-tab-pane" aria-selected="true">Cantidad de
+                        Dinero</button>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show" id="reporte-productos-vendidos" role="tabpanel"
+                        aria-labelledby="reporte-productos-vendidos-tab">
+
+                        <!-- FILTRO REPORTE PRODUCTOS VENDIDOS -->
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Productos Vendidos</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-5">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="startDateSalesProduct" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="endDateSalesProduct" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"
+                                                            onclick="getSalesProductWithRangeOfDates()"><i
+                                                                class="fa-solid fa-search me-3"></i> Generar reporte</button>
+                                                        <button class="btn btn-success py-2 px-5" onclick="exportSalesProductReport()"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>
+                                                            Exportar a excel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 mb-2">
+
+                                                <div class="row">
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 w-100" id="salesProductTable">
+                                                        <div class="table-responsive w-100">
+                                                            <table class="table table-striped text-center w-100" id="reportTableSalesProduct">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Número de órden</th>
+                                                                        <th scope="col">Total de Pago</th>
+                                                                        <th scope="col">Fecha de Creación</th>
+                                                                        <th scope="col">Fecha de Finalización</th>
+                                                                        <th scope="col">Producto</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="salesProductReport">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- INPUT FLAG FOR DATA REPORT TABLE MONEY IS COMPLETE  -->
+                                                    <input type="text" id="dataCompleteReportSalesProduct" hidden>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END FILTRO REPORTE PRODUCTOS VENDIDOS -->
+
+                    </div>
+
+                    <div class="tab-pane fade" id="reporte-ventas" role="tabpanel" aria-labelledby="reporte-ventas-tab">
+
+                        <!-- FILTRO REPORTE VENTAS POR CLIENTE -->
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Ventas por Cliente</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-5">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="startDateSalesClient" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="endDateSalesClient" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"
+                                                            onclick="getSalesClientWithRangeOfDates()"><i
+                                                                class="fa-solid fa-search me-3"></i> Generar reporte</button>
+                                                        <button class="btn btn-success py-2 px-5" onclick="exportSalesClientReport()"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>
+                                                            Exportar a excel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 mb-2">
+
+                                                <div class="row">
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 w-100" id="salesClientTable">
+                                                        <div class="table-responsive w-100">
+                                                            <table class="table table-striped text-center w-100" id="reportTableSalesClient">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Número de órden</th>
+                                                                        <th scope="col">Total de Pago</th>
+                                                                        <th scope="col">Fecha de Creación</th>
+                                                                        <th scope="col">Fecha de Finalización</th>
+                                                                        <th scope="col">Nombre Cliente</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="salesClientReport">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- INPUT FLAG FOR DATA REPORT TABLE MONEY IS COMPLETE  -->
+                                                    <input type="text" id="dataCompleteReportSalesClient" hidden>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END FILTRO REPORTE VENTAS POR CLIENTE -->
+                    </div>
+
+                    <div class="tab-pane fade" id="reporte-cantidad-dinero" role="tabpanel"
+                        aria-labelledby="reporte-cantidad-dinero-tab">
+
+                        <!-- FILTRO REPORTE CANTIDAD DE DINERO -->
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-12">
+                                        <p class="h5 fw-bold mb-4 text-muted">Reporte Dinero</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-5">
+                                                <p class="fw-bold text-muted mt-4 h5 mb-2">Filtros</p>
+                                                <div class="row g-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="startDateMoney" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha de Inicio
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control text-muted"
+                                                                id="endDateMoney" placeholder="ejemplo1">
+                                                            <label for="floatingInput text-muted">Fecha Fin
+                                                                *</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 text-center">
+                                                        <button type="button" class="btn btn-primary py-2 px-5"
+                                                            onclick="getMoneyWithRangeOfDates()"><i
+                                                                class="fa-solid fa-search me-3"></i> Generar reporte</button>
+                                                        <button class="btn btn-success py-2 px-5" onclick="exportMoneyQuantityReport()"><i
+                                                                class="fa-solid fa-file-excel me-2"></i>
+                                                            Exportar a excel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 mb-2">
+
+                                                <div class="row">
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mt-3 w-100" id="moneyQuantityTable">
+                                                        <div class="table-responsive w-100">
+                                                            <table class="table table-striped text-center w-100" id="reportTableMoneyQuantity">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Número de órden</th>
+                                                                        <th scope="col">Total de Pago</th>
+                                                                        <th scope="col">Fecha de Creación</th>
+                                                                        <th scope="col">Fecha de Finalización</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="moneyQuantityOrderReport">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- INPUT FLAG FOR DATA REPORT TABLE MONEY IS COMPLETE  -->
+                                                    <input type="text" id="dataCompleteReportMoneyQuantity" hidden>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END FILTRO REPORTE CANTIDAD DE DINERO -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <!-- SCRIPT DE JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <!-- SCRIPT DE DATATABLES -->
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="../../../business/admon/reports.js"></script>
+    <script>
+        $(".sidebar ul li").on('click', function () {
+            $(".activo").removeClass('activo');
+            $(".shadow").removeClass('shadow');
+            $(this).addClass('activo');
+            $(this).addClass('shadow');
+        });
+
+        $(".open-btn").on('click', function () {
+            $(".sidebar").addClass('activo');
+        });
+
+        $(".close-btn").on('click', function () {
+            $(".sidebar").removeClass('activo');
+        });
+
+        // Loading spinner
+        const preloaderWrapper = document.querySelector('.preloader-wrapper');
+
+        window.addEventListener('load', function () {
+            preloaderWrapper.classList.add('fade-out-animation');
+        });
+
+        document.getElementById('moneyQuantityTable').style.display = 'none';
+        document.getElementById('salesClientTable').style.display = 'none';
+        document.getElementById('salesProductTable').style.display = 'none';
+    </script>
+</body>
+
+</html>

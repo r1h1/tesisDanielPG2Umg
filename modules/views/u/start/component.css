@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+}
+
+.container-fluid .buttonsAndWelcomeText{
+    background-color: #eeeeee;
+}
+
+.container-fluid .row .col .userActions{
+    height: 100vh;
+}
+
+.container-fluid .row .col .welcomeBanner {
+    margin-top: 27vh;
+}
+
+.contenedorTotalPagina .rightMenu .optionMenu ul li{
+    list-style: none;
+}
+
+.contenedorTotalPagina .rightMenu .optionMenu ul li a{
+    color: #e2e2e2;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.container-fluid .row #backgroundImage {
+    background-image: url(../../../../assets/img/cake-strawberries.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 93.6vh;
+}
+
+
+@media only screen and (max-width: 990px) {
+    .container-fluid .row #backgroundImage {
+        height: 94.1vh;
+    }
+
+    .container-fluid .row .col .userActions{
+        height: 100vh;
+    }
+
+    .container-fluid .row #backgroundImage {
+        background-image: none;
+        background-color: #F5F5F5;
+        height: 41vh;
+    }
+
+    .container-fluid .row .col .welcomeBanner {
+        margin-top: 15vh;
+    }
+}
+
+/* COLORES */
+
+.grayLight {
+    background-color: #2D2D2D;
+}
+
+.btn-light{
+    background-color: #e2e2e2;
+}

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | PG2</title>
+
+    <!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- HOJA DE ESTILOS PROPIA -->
+    <link rel="stylesheet" href="../dashboard/component.css">
+
+    <!-- ICONOS -->
+    <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+    <!-- ICONO EN EL TAB -->
+    <link rel="icon" href="../../../../assets/img/images.png">
+
+    <!-- CSS DATATABLE -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+    <!-- loader page -->
+    <div class="preloader-wrapper">
+        <div class="spinner-border text-dark" style="width: 3rem;height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="main-container d-flex">
+        <div class="sidebar border border-3" id="side_nav">
+            <button class="btn d-md-none d-block close-btn px-1 py-0"><i
+                    class="fa-solid fa-close fs-4 mt-3"></i></button>
+            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-center mb-5 mt-5">
+                <h1 class="fs-4 text-center mt-4"><img src="../../../../assets/img/images.png"
+                        alt="icono" width="120px"></h1>
+            </div>
+            <ul class="list-unstyled px-2" id="menuModules">
+            </ul>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-expand-lg bg-white py-3 mb-5 border border-1">
+                <div class="container-fluid">
+                    <div class="d-flex d-block">
+                        <button class="btn d-md-none px-1 py-0 open-btn px-1 py-0"><i
+                                class="fa-solid fa-bars fs-4 mt-3"></i></button>
+                    </div>
+                    </button>
+                    <div class="justify-content-end">
+                        <div class="dropdown me-3">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-user me-3"></i><span id="fullName">{userName}</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../account/component">Mi Cuenta</a></li>
+                                <li><a class="dropdown-item" href="../../g/infoProblem/component"
+                                        target="_blank">Reportar Problema</a>
+                                </li>
+                                <li onclick="closeSession()"><a class="dropdown-item"><i
+                                            class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="contenido container-fluid px-3 mt-5 px-1">
+                <h2 class="h3 fw-bold">Administración</h2>
+                <p>Puedes consultar diferente información en los sub menú que se te muestran en pantalla presionando
+                    cada opción.</p>
+                <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" role="tab"
+                        aria-controls="usuarios-tab-pane" aria-selected="true">Usuarios</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="roles-tab" data-bs-toggle="tab" data-bs-target="#roles" role="tab" aria-controls="roles"
+                        aria-selected="false">Roles</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" role="tab"
+                        aria-controls="clientes" aria-selected="false">Clientes</button>
+                    <button type="button"
+                        class="px-5 py-2 shadow border border-2 text-decoration-none text-dark me-1 bg-light"
+                        id="bancos-tab" data-bs-toggle="tab" data-bs-target="#bancos" role="tab" aria-controls="bancos"
+                        aria-selected="false">Bancos</button>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show" id="usuarios" role="tabpanel" aria-labelledby="usuarios-tab">
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="userNameAdmin" placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="addressAdmin"
+                                                        placeholder="ejemplo1" maxlength="150">
+                                                    <label for="floatingInput text-muted">Dirección
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="number" class="form-control text-muted"
+                                                        id="cellPhoneAdmin" placeholder="ejemplo1" min="1"
+                                                        max="999999999999999999999">
+                                                    <label for="floatingInput text-muted">Teléfono
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="emailAdmin"
+                                                        placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Correo Electrónico
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="selectRols">
+                                                    </select>
+                                                    <label for="floatingSelect">Rol *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="nitAdmin"
+                                                        placeholder="ejemplo1" maxlength="16">
+                                                    <label for="floatingInput text-muted">NIT
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control text-muted"
+                                                        id="passwordAdmin" placeholder="ejemplo1" maxlength="18">
+                                                    <label for="floatingInput text-muted">Contraseña
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="genderSelect"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="1">Hombre</option>
+                                                        <option value="0">Mujer</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Género *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createAdminUser()">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Usuarios Registrados</p>
+
+                                        <div class="table-responsive">
+                                            <table id="userTable" class="display" width="100%"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDIT USER ADMIN MODAL -->
+                    <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">Editar Usuario</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                        <input type="text" id="idUserAdminEdit" hidden>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="userNameAdminEdit" maxlength="50">
+                                                <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="addressAdminEdit"
+                                                    placeholder="ejemplo1" maxlength="150">
+                                                <label for="floatingInput text-muted">Dirección
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <input type="number" class="form-control text-muted"
+                                                    id="cellPhoneAdminEdit" placeholder="ejemplo1" min="1"
+                                                    max="99999999999999999">
+                                                <label for="floatingInput text-muted">Teléfono
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2" hidden>
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="emailAdminEdit"
+                                                    placeholder="ejemplo1" maxlength="50">
+                                                <label for="floatingInput text-muted">Correo Electrónico
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="selectRolsEdit">
+                                                </select>
+                                                <label for="floatingSelect">Rol *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="nitAdminEdit"
+                                                    placeholder="ejemplo1" maxlength="16">
+                                                <label for="floatingInput text-muted">NIT
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="genderSelectEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="1">Hombre</option>
+                                                    <option value="0">Mujer</option>
+                                                </select>
+                                                <label for="floatingSelect">Género *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="statusAdminEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="1">Activo</option>
+                                                    <option value="0">Inactivo</option>
+                                                </select>
+                                                <label for="floatingSelect">Estado *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                            <button type="button" class="btn btn-success py-3 w-100"
+                                                onclick="saveInfoBeforeEdit()">Guardar</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EDIT USER ADMIN MODAL -->
+
+
+                    <!-- TAB POR ROLE -->
+                    <div class="tab-pane fade" id="roles" role="tabpanel" aria-labelledby="clientes-tab">
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold text-muted">Mantenimiento</p>
+                                        <p class="text-muted mb-4">Al asignar un módulo, presiona enter luego de
+                                            seleccionar.</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="rolName"
+                                                        placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Nombre Rol
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="selectModules"
+                                                        onkeypress="addModuleToRolTemporaly(this)">
+                                                        <!-- DATA OBTAINED JS -->
+                                                    </select>
+                                                    <label for="floatingSelect">Módulos Acceso *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2" id="accessibleModules">
+                                                <p class="fw-bold text-muted mt-4 h5">Módulos Accesibles</p>
+                                                <p class="text-muted">Los datos que ingreses se guardan de manera
+                                                    temporal, si refrescas la página se perderán.</p>
+                                                <table class="table table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col" hidden>ID</th>
+                                                            <th scope="col">Nombre Módulo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="moduleTemporalyTable">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createRol()">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Roles Actuales</p>
+                                        <div class="table-responsive">
+                                            <table id="rolTable" class="display" width="100%"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB FOR CLIENTS -->
+                    <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="userNameClient" placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="addressClient" placeholder="ejemplo1" maxlength="150">
+                                                    <label for="floatingInput text-muted">Dirección
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="number" class="form-control text-muted"
+                                                        id="cellPhoneClient" placeholder="ejemplo1" min="1"
+                                                        max="9999999999999999999">
+                                                    <label for="floatingInput text-muted">Teléfono
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="emailClient"
+                                                        placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Correo Electrónico
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="nitClient"
+                                                        placeholder="ejemplo1" maxlength="17">
+                                                    <label for="floatingInput text-muted">NIT
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control text-muted"
+                                                        id="passwordClient" placeholder="ejemplo" maxlength="17">
+                                                    <label for="floatingInput text-muted">Contraseña
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="genderSelectClient"
+                                                        aria-label="Floating label select example">
+                                                        <option value="">Selecciona uno</option>
+                                                        <option value="1">Hombre</option>
+                                                        <option value="0">Mujer</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Género *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createClientUser()">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Clientes Registrados</p>
+
+                                        <div class="table-responsive">
+                                            <table id="clientsTable" class="display" width="100%"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB FOR BANKS -->
+                    <div class="tab-pane fade" id="bancos" role="tabpanel" aria-labelledby="bancos-tab">
+                        <div class="card shadow mb-5">
+                            <div class="card-body">
+                                <p class="card-text mt-4 mb-4">
+
+                                <div class="row g-4 mb-5">
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Mantenimiento</p>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted"
+                                                        id="accountBankName" placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Nombre del Banco
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-12 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="accountName"
+                                                        placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Nombre del Cuenta Habiente
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control text-muted" id="accountType"
+                                                        placeholder="ejemplo1" maxlength="50">
+                                                    <label for="floatingInput text-muted">Tipo de Cuenta
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-6 mb-2">
+                                                <div class="form-floating">
+                                                    <input type="number" class="form-control text-muted"
+                                                        id="accountNumber" placeholder="ejemplo1" min="1"
+                                                        max="99999999999999999">
+                                                    <label for="floatingInput text-muted">Número de Cuenta
+                                                        *</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                                <button type="button" class="btn btn-success py-3 w-100"
+                                                    onclick="createBanks()">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="h5 fw-bold mb-4 text-muted">Bancos Registrados</p>
+
+                                        <div class="table-responsive">
+                                            <table id="banksTable" class="display" width="100%"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDIT CLIENT MODAL -->
+                    <div class="modal fade" id="editClientModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">Editar Cliente</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                        <input type="text" id="idClientEdit" hidden>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="userNameClienteEdit" placeholder="ejemplo1" maxlength="50">
+                                                <label for="floatingInput text-muted">Nombre(s) y Apellido(s)
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted"
+                                                    id="addressClientEdit" placeholder="ejemplo1" maxlength="150">
+                                                <label for="floatingInput text-muted">Dirección
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <input type="number" class="form-control text-muted"
+                                                    id="cellPhoneClientEdit" placeholder="ejemplo1" min="1"
+                                                    max="9999999999999999">
+                                                <label for="floatingInput text-muted">Teléfono
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2" hidden>
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="emailClientEdit"
+                                                    placeholder="ejemplo1" maxlength="50">
+                                                <label for="floatingInput text-muted">Correo Electrónico
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control text-muted" id="nitClientEdit"
+                                                    placeholder="ejemplo1" maxlength="17">
+                                                <label for="floatingInput text-muted">NIT
+                                                    *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="genderSelectClientEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="">Selecciona uno</option>
+                                                    <option value="1">Hombre</option>
+                                                    <option value="0">Mujer</option>
+                                                </select>
+                                                <label for="floatingSelect">Género *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-lg-12 mb-2">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="statusClientEdit"
+                                                    aria-label="Floating label select example">
+                                                    <option value="1">Activo</option>
+                                                    <option value="0">Inactivo</option>
+                                                </select>
+                                                <label for="floatingSelect">Estado *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-2 text-center mt-3 mb-4">
+                                            <button type="button" class="btn btn-success py-3 w-100"
+                                                onclick="saveInfoBeforeEditClient()">Guardar</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EDIT CLIENT MODAL -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <!-- SCRIPT DE JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <!-- SCRIPT DE DATATABLES -->
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="../../../business/admon/administration.js"></script>
+    <script>
+        $(".sidebar ul li").on('click', function () {
+            $(".activo").removeClass('activo');
+            $(".shadow").removeClass('shadow');
+            $(this).addClass('activo');
+            $(this).addClass('shadow');
+        });
+
+        $(".open-btn").on('click', function () {
+            $(".sidebar").addClass('activo');
+        });
+
+        $(".close-btn").on('click', function () {
+            $(".sidebar").removeClass('activo');
+        });
+
+        // Loading spinner
+        const preloaderWrapper = document.querySelector('.preloader-wrapper');
+
+        window.addEventListener('load', function () {
+            preloaderWrapper.classList.add('fade-out-animation');
+        });
+    </script>
+</body>
+
+</html>

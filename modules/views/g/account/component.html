@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Compras | PG2</title>
+
+    <!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- HOJA DE ESTILOS PROPIA -->
+    <link rel="stylesheet" href="component.css">
+
+    <!-- ICONOS -->
+    <script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+    <!-- ICONO EN EL TAB -->
+    <link rel="icon" href="../../../../assets/img/images.png">
+
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+    <!-- HTML BASICO PARA LA PÁGINA -->
+    <div class="contenedorTotalPagina">
+        <div class="navBar w-100 bg-light">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand">
+                        <img src="../../../../assets/img/images.png" alt="Bootstrap" width="80"
+                            loading="lazy">
+                    </a>
+                    <form class="d-flex" role="search">
+                        <a><i class="fa-solid fa-bars fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                aria-controls="offcanvasRight"></i></a>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <!-- MENU DE OPCIONES EXTRAS -->
+        <div class="rightMenu">
+            <div class="offcanvas offcanvas-end grayLight" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body text-white">
+                    <div class="optionMenu">
+                        <p class="fw-bold h5 mb-4 mt-5">Menú de Opciones</p>
+                        <ul>
+                            <li><a href="../../g/account/component"><i class="fa-solid fa-user me-3"></i> Mi Cuenta</a>
+                            </li>
+                            <li><a href="../../g/ubications/component"><i
+                                        class="fa-solid fa-location-crosshairs me-3"></i> Ubicaciones</a></li>
+                            <li><a href="../../u/termsAndConditions/component" target="_blank"><i
+                                        class="fa-brands fa-readme me-3"></i>
+                                    Términos y Condiciones</a></li>
+                            <li><a href="https://wa.me/50245024363" target="_blank"><i
+                                        class="fa-brands fa-whatsapp me-3"></i> Chatea con Nosotros</a></li>
+                        </ul>
+                        <div class="mt-5 mb-5">
+                            <hr class="bg-light">
+                        </div>
+                        <p class="fw-bold h5 mb-4">Opciones</p>
+                        <ul>
+                            <li><a href="../../g/infoProblem/component" target="_blank"><i
+                                        class="fa-solid fa-circle-info me-3"></i> Informar Sobre Un Problema</a>
+                            </li>
+                            <div class="text-center mt-5">
+                                <a onclick="closeSession()">
+                                    <div class="buttonCloseSession btn btn-light px-5 text-start rounded-5">
+                                        <p class="mt-3"><i class="fa-solid fa-right-to-bracket me-3"></i> Cerrar Sesión
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN MENU EXTRA -->
+    </div>
+
+    <!-- PEDIDOS Y DEMAS -->
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- INFORMACIÓN DEL PERFIL BÁSICA -->
+            <div class="col userActions bg-light">
+                <div class="imagenLogo text-center">
+                    <img src="../../../../assets/img/cake-strawberries.webp" alt="logoCuenta" width="160" height="150"
+                        class="rounded-circle" loading="lazy">
+                </div>
+                <div class="text-center mt-3">
+                    <h1 class="h3"><span id="userNameDisplay">{userName}</span></h1>
+                    <p class="text-muted">¡Bienvenido a tu perfil!, manten al día tus datos.</p>
+                </div>
+                <div class="actionButton1 text-center mt-2">
+                    <a href="../../u/start/component">
+                        <div class="buttonSignUp btn btn-light px-5 text-start rounded-5">
+                            <p class="mt-3"><i class="fa-solid fa-arrow-left fs-4"></i></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FORMULARIO PARA DATOS DE USUARIO -->
+            <div class="col-lg-7 px-4 userInformation buttonsAndWelcomeText">
+
+                <form class="text-center">
+
+                    <div class="row">
+
+                        <div class="informationDiv">
+
+                            <p class="h5 text-start mb-4 text-muted">Edita tus datos, tu contraseña o elimina tu
+                                usuario.</p>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3 rounded-circle">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-user text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control text-muted" id="userName"
+                                            placeholder="ejemplo1" value="{userName}" maxlength="50">
+                                        <label for="floatingInput text-muted">Nombre(s) y Apellido(s) *</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-phone text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control text-muted" id="cellPhone"
+                                            placeholder="ejemplo1" value="" min="1" max="99999999999999999999">
+                                        <label for="floatingInput text-muted">Teléfono (+Extensión) *</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-address-book text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control text-muted" id="address"
+                                            placeholder="ejemplo1" value="{address}" maxlength="75">
+                                        <label for="floatingInput text-muted">Dirección de Residencia *</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-envelope text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control text-muted" id="email"
+                                            placeholder="ejemplo1" value="{email}" maxlength="50">
+                                        <label for="floatingInput text-muted">Correo Electrónico</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-envelope text-secondary"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control text-muted" id="nit" value="{nit}" maxlength="17">
+                                        <label for="floatingInput text-muted">NIT</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-person text-secondary px-1"></i></span>
+                                    <div class="form-floating">
+                                        <select class="form-select" id="genderSelect" disabled>
+                                        </select>
+                                        <label for="floatingSelect">Género *</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="buttonLogin">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <button type="button" class="btn btn-light w-100 py-3 mt-2"
+                                    onclick="updateUserData()">Guardar Datos
+                                    <i class="fa-solid fa-floppy-disk ms-2 fs-5"></i></button>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <button type="button" class="btn btn-light w-100 py-3 mt-2" data-bs-toggle="modal"
+                                    data-bs-target="#deleteUser">Eliminar Usuario <i
+                                        class="fa-solid fa-trash ms-2 fs-5"></i></button>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <button type="button" class="btn btn-light w-100 py-3 mt-2" data-bs-toggle="modal"
+                                    data-bs-target="#passwordRestore">Restablecer
+                                    Contraseña <i class="fa-solid fa-unlock ms-2 fs-5"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- MODAL PARA RESTABLECER CONTRASEÑA DEL USUARIO -->
+            <div class="modal fade" id="passwordRestore" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light">
+                            <h1 class="modal-title fs-5 text-muted">Restablecer Contraseña</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning text-center fw-bold">
+                                <i class="fa-solid fa-circle-info me-2"></i>Al restablecer la contraseña tu sesión se
+                                cerrará y se borrará todo lo que no se haya guardado.
+                            </div>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i
+                                                    class="fa-solid fa-key text-secondary"></i></span>
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control text-muted" id="newPassword"
+                                                    value="" maxlength="50">
+                                                <label for="floatingInput text-muted">Nueva Contraseña *</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i
+                                                    class="fa-solid fa-key text-secondary"></i></span>
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control text-muted"
+                                                    id="repeatPassword" value="" maxlength="50">
+                                                <label for="floatingInput text-muted">Repita Contraseña *</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-light w-100 py-3"
+                                            onclick="updatePasswordUser()">Validar y
+                                            Guardar
+                                            <i class="fa-solid fa-floppy-disk ms-2 fs-5"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-center text-muted">Recuerda que las contraseñas deben ser seguras y de
+                                preferencia que contenga una letra
+                                mayúscula, letras minúsculas,
+                                un número y un caracter especial.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN DEL MODAL PARA RESTABLECER CONTRASEÑA -->
+
+            <!-- INICIO DE MODAL PARA BORRAR EL USUARIO -->
+            <div class="modal fade" id="deleteUser" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light">
+                            <h1 class="modal-title fs-5 text-muted">Eliminar Usuario</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning text-center fw-bold">
+                                <i class="fa-solid fa-circle-info me-2"></i>Al eliminar el usuario de los registros,
+                                acepta los <a href="../../u/termsAndConditions/component" class="text-dark fw-bold"
+                                    target="_blank">términos y
+                                    condiciones en todo su aspecto y el apartado de generalidades</a>; además de esto
+                                no tendrá acceso alguno a la plataforma con el usuario que eliminará, sus pedidos ya no
+                                estarán disponibles para su visualización y si
+                                hubiese deuda por pedidos pendientes se estará realizando el respectivo cobro y entrega
+                                de igual manera en la modalidad elegida.
+                            </div>
+                            <form>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-danger w-100 py-3"
+                                            onclick="updateStatusUser()">Aceptar
+                                            Términos y Continuar
+                                            <i class="fa-solid fa-trash ms-2 fs-5"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer text-center">
+                            <p class="text-center text-muted">Recuerda que al eliminar tu usuario perderás acceso a
+                                todas las funciones, pedidos, información sobre tus compras, personal y demás utilidades
+                                anteriores.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN DEL MODAL PARA RESTABLECER CONTRASEÑA -->
+
+        </div>
+    </div>
+
+    <!-- SCRIPT PARA BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="../../../business/global/account.js"></script>
+</body>
+
+</html>

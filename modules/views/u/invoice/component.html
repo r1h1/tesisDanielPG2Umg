@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+	<title>Factura | PG2</title>
+
+	<!-- HOJA DE ESTILOS CSS BOOTSTRAP -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+	<!-- HOJA DE ESTILOS PROPIA -->
+	<link rel="stylesheet" href="component.css">
+
+	<!-- ICONOS -->
+	<script src="https://kit.fontawesome.com/be221c52b4.js" crossorigin="anonymous"></script>
+
+	<!-- ICONO EN EL TAB -->
+	<link rel="icon" href="../../../../assets/img/images.png">
+
+	<!-- SweetAlert2 Library -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!-- HTML TO PDF JS LIBRARY -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+	<!-- QR JAVASCRIPT -->
+	<script src="https://unpkg.com/qrious@4.0.2/dist/qrious.js"></script>
+</head>
+
+<body>
+	<div class="invoice container">
+		<div class="invoice-header">
+			<div class="row">
+				<div class="col-lg-6 text-start">
+					<h4><strong>BakeryGO - Factura</strong></h4>
+					<p>Fecha de generación: <span id="generationDate">{generationDate}</span></p>
+					<p>No. de orden: <span id="orderNumber">{orderNumber}</span></p>
+				</div>
+				<div class="col-lg-6 text-end">
+					<img alt="qrcode" id="codigoQR">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="invoice-details">
+					<p>NIT: <span id="orderNit">{nit}</span></p>
+					<p>Cliente: <span id="orderName">{client}</span></p>
+					<p>Dirección: <span id="orderAddress">{address}</span></p>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="invoice-details">
+					<p>Método de Pago: <span id="orderPaymentMethod" class="fw-bold">{paymentMethod}</span></p>
+					<p>Autorización: <span id="orderAuth">{orderAuth}</span></p>
+					<p>Fecha de Pago: <span id="orderPaymentDate">{orderPaymentDate}</span></p>
+					<p>Fecha de Orden: <span id="orderDate">{orderDate}</span></p>
+				</div>
+			</div>
+		</div>
+		<div class="invoice-title-items mt-4">
+			<p class="fw-bold">Resumen</p>
+		</div>
+		<div class="invoice-items" id="invoiceProducts">
+
+		</div>
+		<div class="total-row">
+			<p class="fw-bold h4">Total: <span id="totalPay">{totalPay}</span></p>
+		</div>
+		<div class="text-center mt-4">
+			<i>"Gracias por tu compra, ¡que tengas un dulce día como un pastel!"</i>
+		</div>
+	</div>
+	<script src="../../../business/global/invoice.js"></script>
+</body>
+
+</html>
